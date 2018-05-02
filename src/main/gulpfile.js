@@ -11,7 +11,7 @@ var ngAnnotate = require('gulp-ng-annotate');//安装   cnpm install gulp-ng-ann
 var concat = require('gulp-concat');//安装    cnpm install gulp-concat --save-dev
 var uglify = require('gulp-uglify');//安装    cnpm install gulp-uglify --save-dev
 var rename = require('gulp-rename');//安装    cnpm install gulp-rename --save-dev
-var minifyCss = require('gulp-minify-css');//安装     cnpm install gulp-minify-css --save-dev
+  var minifyCss = require('gulp-minify-css');//安装     cnpm install gulp-minify-css --save-dev
 
 
 
