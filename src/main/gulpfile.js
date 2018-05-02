@@ -1,7 +1,7 @@
 // 引入 gulp
 var gulp = require('gulp');
 
-//（1）淘宝镜像：npm install -g cnpm --registry=https://registry.npm.taobao.org
+  //（1）淘宝镜像：npm install -g cnpm --registry=https://registry.npm.taobao.org
 //（2）安装gulp: cnpm install -g gulp
 //（3）gulp安装到项目本地：cnpm install --save-dev gulp
 //（4）安装依赖：cnpm install gulp-jshint gulp-sass gulp-concat gulp-uglify gulp-rename --save-dev
