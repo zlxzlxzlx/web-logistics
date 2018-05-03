@@ -1,0 +1,123 @@
+<script type="text/ng-template" id="courseForm.html" >
+    <form name="submit_form" ng-submit="submitForm()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="code">课程编码：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="课程编码"  ng-model="code" required unique_verify="/web-risk/user/codeCUnique">
+                        </label>
+                        <div ng-messages="submit_form.code.$error" ng-show="submit_form.code.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入编码</span>
+                            <span class="ng-message" ng-message="uniqueVerify">编码已存在</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="name">课程名：</label>
+                        <label class="cbr-inline">
+                            <input type="text"  class="form-control" id="name" name="name" placeholder="课程名"  ng-model="name" required>
+                        </label>
+                        <div ng-messages="submit_form.name.$error" ng-show="submit_form.name.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入课程名</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="class_hour">课时：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="class_hour" name="class_hour" placeholder="课时"  ng-model="class_hour" required >
+                        </label>
+                        <div ng-messages="submit_form.class_hour.$error" ng-show="submit_form.class_hour.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入课时</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" >
+                        <label class="control-label" for="type" >类型:</label>
+                        <label class="cbr-inline">
+                            <input id="type" type="radio" ng-value=0 ng-model="type" name="type" class="cbr"/>
+                            必修
+                        </label>
+                        <label class="cbr-inline" >
+                            <input type="radio" ng-value=1 ng-model="type" name="type" class="cbr" checked/>
+                            选修
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="teacher_name">教师名：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="teacher_name" name="teacher_name" placeholder="教师名"  ng-model="teacher_name" required >
+                        </label>
+                        <div ng-messages="submit_form.teacher_name.$error" ng-show="submit_form.teacher_name.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入教师名</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="class_time">上课时间：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="class_time" name="class_time" placeholder="上课时间"  ng-model="class_time" required >
+                        </label>
+                        <div ng-messages="submit_form.class_time.$error" ng-show="submit_form.class_time.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入上课时间</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="start_time">开课时间：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="start_time" name="start_time" placeholder="开课时间"  ng-model="start_time" required >
+                        </label>
+                        <div ng-messages="submit_form.start_time.$error" ng-show="submit_form.start_time.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入上课时间</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="end_time">结课时间：</label>
+                        <label class="cbr-inline">
+                            <input type="text" class="form-control" id="end_time" name="end_time" placeholder="结课时间"  ng-model="end_time" required >
+                        </label>
+                        <div ng-messages="submit_form.end_time.$error" ng-show="submit_form.end_time.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请输入结课时间</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <input class="btn btn-info" type="submit" value="提交" ng-disabled="submit_form.$invalid" />
+            <span class="btn btn-primary" ng-click="cancel()">取消</span>
+        </div>
+
+    </form>
+</script>
