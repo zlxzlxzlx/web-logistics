@@ -68,6 +68,13 @@ $stateProvider
        /* controller: 'indexController',
         params:{args:{}}*/
     })
+    //系统管理/用户管理
+    .state('managerUserInfo', {
+        url: '/managerUserInfo',
+        templateUrl: 'views/userInfoManger/userInfo.html',
+       controller: 'UserInfoController',
+        params:{args:{}}
+    })
     
     
 });
