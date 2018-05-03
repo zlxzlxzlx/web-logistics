@@ -1,7 +1,9 @@
 package com.fzu.edu.dao;
 
 import com.fzu.edu.model.purviewType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface purviewTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
