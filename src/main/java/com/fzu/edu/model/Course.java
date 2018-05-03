@@ -1,6 +1,6 @@
 package com.fzu.edu.model;
 
-public class course {
+public class Course {
     private Integer id;
 
     private String code;

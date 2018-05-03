@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/course",produces = {"application/json;charset=UTF-8"})
-public class courseController {
+public class CourseController {
     @RequestMapping(value = "/addCourse",method = RequestMethod.POST)
     @ResponseBody
     public String addUser(
+            @RequestParam(value = "code")String code,
             @RequestParam(value = "name")String name,
-            @RequestParam(value = "score")Float score){
+            @RequestParam(value = "class_hour")String class_hour,
+            @RequestParam(value = "type")Integer type,
+            @RequestParam(value = "teacher_name")String teacher_name,
+            @RequestParam(value = "class_time")String class_time,
+            @RequestParam(value = "start_time")String start_time,
+            @RequestParam(value = "end_time")String end_time
+            ){
 
         try{
            // accidentResultService.addRow(name,score);

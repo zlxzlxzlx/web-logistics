@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fzu.edu.dao.courseMapper">
-  <resultMap id="BaseResultMap" type="com.fzu.edu.model.course">
+<mapper namespace="com.fzu.edu.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Course">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -27,7 +27,7 @@
     delete from course
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fzu.edu.model.course">
+  <insert id="insert" parameterType="com.fzu.edu.model.Course">
     insert into course (id, code, name, 
       class_hour, type, taecher_name, 
       start_time, end_time, class_time, 
@@ -37,7 +37,7 @@
       #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{classTime,jdbcType=VARCHAR}, 
       #{flag,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.fzu.edu.model.course">
+  <insert id="insertSelective" parameterType="com.fzu.edu.model.Course">
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fzu.edu.model.course">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzu.edu.model.Course">
     update course
     <set>
       <if test="code != null">
@@ -137,7 +137,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fzu.edu.model.course">
+  <update id="updateByPrimaryKey" parameterType="com.fzu.edu.model.Course">
     update course
     set code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
