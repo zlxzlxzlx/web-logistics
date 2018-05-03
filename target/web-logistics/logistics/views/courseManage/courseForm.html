@@ -11,11 +11,13 @@
                     <div class="form-group">
                         <label class="control-label" for="code">课程编码：</label>
                         <label class="cbr-inline">
-                            <input type="text" class="form-control" id="code" name="code" placeholder="课程编码"  ng-model="code" required unique_verify="/web-risk/user/codeCUnique">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="课程编码"  ng-model="code" required >
                         </label>
                         <div ng-messages="submit_form.code.$error" ng-show="submit_form.code.$touched || submit_form.$submitted">
                             <span class="ng-message" ng-message="required">请输入编码</span>
-                            <span class="ng-message" ng-message="uniqueVerify">编码已存在</span>
+<!--
+                            <span class="ng-message" ng-message="uniqueVerify">编码已存在</span> unique_verify="/web-risk/user/codeCUnique"
+-->
                         </div>
                     </div>
                 </div>

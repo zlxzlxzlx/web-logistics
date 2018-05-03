@@ -11,7 +11,7 @@ public class Course {
 
     private Integer type;
 
-    private String taecherName;
+    private String teacherName;
 
     private String startTime;
 
@@ -61,12 +61,12 @@ public class Course {
         this.type = type;
     }
 
-    public String getTaecherName() {
-        return taecherName;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTaecherName(String taecherName) {
-        this.taecherName = taecherName == null ? null : taecherName.trim();
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getStartTime() {

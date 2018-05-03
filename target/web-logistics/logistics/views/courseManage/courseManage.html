@@ -6,17 +6,17 @@
         <div class="btn-toolbar">
             <div class="btn-group focus-btn-group">
                 <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="addCourse()">新增</button>
-                <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="delCourse()">删除</button>
-                <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="importExcel()">导入</button>
-                <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="exportExcel()">导出</button>
+                <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="delRows()">删除</button>
+               <!-- <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="importExcel()">导入</button>
+                <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="exportExcel()">导出</button>-->
             </div>
             <div class="searchBox" style="position: relative;float: right">
                 <div class="form-inline">
                     <div class="form-group">
-                        <input type="text" ng-model="username" class="form-control" size="20" placeholder="课程名关键词">
+                        <input type="text" ng-model="name" class="form-control" size="20" placeholder="课程名关键词">
                     </div>
                     <div class="form-group">
-                        <input type="text" ng-model="user_code" class="form-control" size="20" placeholder="课程编号关键词">
+                        <input type="text" ng-model="code" class="form-control" size="20" placeholder="课程编号关键词">
                     </div>
                     <div class="form-group">
                         <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="queryList()">查询</button>
@@ -39,7 +39,7 @@
                 <th width="200">课程名</th>
                 <th width="200">授课教师</th>
                 <th width="200">课时</th>
-                <th width="200">操作</th>
+                <th width="90">操作</th>
             </tr>
             </thead>
 
@@ -48,16 +48,24 @@
                 <td>
                     <input type="checkbox" class="cbr" ng-model="row.checked" ng-change="selectOne()">
                 </td>
-                <td>{{row.user_code}}</td>
-                <td>{{row.username}}</td>
+                <td>{{row.code}}</td>
+                <td>{{row.name}}</td>
+                <td>{{row.teacherName}}</td>
+                <td>{{row.classHour}}</td>
                 <td>
                     <a href="javascript:;"  ng-click="editRow($index)" auto-title title="编辑">
-                        <i class="linecons-pencil"></i>
+                        <i class="glyphicon glyphicon-pencil"></i>
                     </a>
-
+                    &nbsp;&nbsp;
                     <a href="javascript:;"  ng-click="delRow(row.id)" auto-title title="删除">
-                        <i class="linecons-trash"></i>
+                        <i class="glyphicon glyphicon-trash"></i>
                     </a>
+                   <!-- <div class="form-group">
+                        <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="editRow($index)">编辑</button>
+                    </div>
+                    <div class="form-group">
+                        <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="delRow(row.id)">删除</button>
+                    </div>-->
                 </td>
             </tr>
             </tbody>

@@ -7,14 +7,14 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="class_hour" jdbcType="VARCHAR" property="classHour" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="taecher_name" jdbcType="VARCHAR" property="taecherName" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
     <result column="start_time" jdbcType="VARCHAR" property="startTime" />
     <result column="end_time" jdbcType="VARCHAR" property="endTime" />
     <result column="class_time" jdbcType="VARCHAR" property="classTime" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, code, name, class_hour, type, taecher_name, start_time, end_time, class_time, 
+    id, code, name, class_hour, type, teacher_name, start_time, end_time, class_time, 
     flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -27,13 +27,13 @@
     delete from course
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fzu.edu.model.Course">
-    insert into course (id, code, name, 
-      class_hour, type, taecher_name, 
+  <insert id="insert1" parameterType="com.fzu.edu.model.Course">
+    insert into course (code, name,
+      class_hour, type, teacher_name, 
       start_time, end_time, class_time, 
       flag)
-    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{classHour,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{taecherName,jdbcType=VARCHAR}, 
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{classHour,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{classTime,jdbcType=VARCHAR}, 
       #{flag,jdbcType=INTEGER})
   </insert>
@@ -55,8 +55,8 @@
       <if test="type != null">
         type,
       </if>
-      <if test="taecherName != null">
-        taecher_name,
+      <if test="teacherName != null">
+        teacher_name,
       </if>
       <if test="startTime != null">
         start_time,
@@ -87,8 +87,8 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="taecherName != null">
-        #{taecherName,jdbcType=VARCHAR},
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=VARCHAR},
@@ -119,8 +119,8 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="taecherName != null">
-        taecher_name = #{taecherName,jdbcType=VARCHAR},
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=VARCHAR},
@@ -143,13 +143,29 @@
       name = #{name,jdbcType=VARCHAR},
       class_hour = #{classHour,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      taecher_name = #{taecherName,jdbcType=VARCHAR},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=VARCHAR},
       end_time = #{endTime,jdbcType=VARCHAR},
       class_time = #{classTime,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-
+  <select id="getAllCourse" parameterType="hashmap" resultMap="BaseResultMap">
+     SELECT * FROM course WHERE flag=0
+    <if test="name != null and name !='' ">
+      and  name LIKE '%'+#{name}+'%'
+    </if>
+    <if test="code != null and code !='' ">
+      and  code LIKE '%'+#{code}+'%'
+    </if>
+  </select>
+  <update id="delCourses" parameterType="java.util.List">
+    <foreach close="" collection="list" index="index" item="item" open="" separator=";">
+      update course
+      <set>
+        flag = 1
+      </set>
+      where id = ${item}
+    </foreach>
+  </update>
 </mapper>

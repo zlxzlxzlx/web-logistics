@@ -19,16 +19,14 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
             $scope.pagination.currentPage = 1;
             $scope.queryList();
         };
-       /* $scope.queryList = function () {
+        $scope.queryList = function () {
             var params = {
-                username:$scope.username,
-                user_code:$scope.user_code,
-                mark:mark=3,
-                adminid:adminid,
+                code:$scope.code,
+                name:$scope.name,
                 pageNo:$scope.pagination.currentPage,
                 pageSize:$scope.pagination.pageSize
             };
-            httpService.getAll(params,'user/showCUser').then(
+            httpService.getAll(params,'course/showCourse').then(
                 function (result) {
                     $scope.pagination.totalCount = result.totalCount;
                     $scope.pagination.totalPage = result.totalPage;
@@ -40,16 +38,30 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
             );
         };
         $scope.queryList();
+        //添加课程
+        $scope.addCourse = function () {
+            var modalInstance = $uibModal.open({
+                size:'lg',
+                backdrop:'static',
+                keyboard:false,
+                animation:true,
+                templateUrl:'courseForm.html',
+                controller:'addCourseCtrl'
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.queryList();
+            });
+        };
 
-        /!*编辑人员信息*!/
+        /*编辑人员信息*/
         $scope.editRow = function (id) {
             var modalInstance = $uibModal.open({
                 size:'lg',
                 backdrop:'static',
                 keyboard:false,
                 animation:true,
-                templateUrl:'cuserForm.html',
-                controller:'updateCUserModalCtrl',
+                templateUrl:'courseForm.html',
+                controller:'updateCourseCtrl',
                 resolve:{
                     data:$scope.root.data[id]
                 }
@@ -58,13 +70,12 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
                 $scope.queryList();
             });
         };
-        /!*重置*!/
         $scope.reset = function () {
-            $scope.username=null;
-            $scope.user_code=null;
+            $scope.name=null;
+            $scope.code=null;
             $scope.queryList();
         };
-        /!*单条删除*!/
+        /*单条删除*/
         $scope.delRow = function (id) {
             var params={
                 id:id
@@ -79,11 +90,17 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
                     closeOnConfirm: false
                 },function (isconfirm) {
                     if (isconfirm){
-                        httpService.delRow(params,'user/delUser').then(
+                        httpService.delRow(params,'course/delCourse').then(
                             function (result) {
                                 $scope.result = result;
                                 $scope.queryList();
-                                SweetAlert.swal("删除成功","","success");
+                                if (result==1){
+                                    SweetAlert.swal("删除成功","","success");
+                                }else
+                                {
+                                    SweetAlert.swal("删除失败","","error");
+                                }
+
                             },function () {
                                 SweetAlert.swal("删除失败","","error");
                             }
@@ -145,11 +162,16 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
                     closeOnConfirm:false
                 },function (isConfirm) {
                     if(isConfirm){
-                        httpService.delRows(params,'user/delUsers').then(
+                        httpService.delRows(params,'course/delCourses').then(
                             function (result) {
                                 $scope.result=result;
                                 $scope.queryList();
-                                SweetAlert.swal("删除成功","","success");
+                                if (result==1){
+                                    SweetAlert.swal("删除成功","","success");
+                                }else
+                                {
+                                    SweetAlert.swal("删除失败","","error");
+                                }
                             },function () {
                                 SweetAlert.swal("删除失败","","error");
                             }
@@ -159,6 +181,12 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
             }
 
         };
+       /*
+
+
+
+
+
         /!*导入文件*!/
         $scope.importExcel = function () {
             var modalInstance = $uibModal.open({
@@ -177,18 +205,5 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
         $scope.exportExcel = function () {
             httpService.exportExcel('user/exportExcelC',adminid);
         };*/
-        //添加课程
-        $scope.addCourse = function () {
-            var modalInstance = $uibModal.open({
-                size:'lg',
-                backdrop:'static',
-                keyboard:false,
-                animation:true,
-                templateUrl:'courseForm.html',
-                controller:'addCourseCtrl'
-            });
-            modalInstance.result.then(function (result) {},function (reason) {
-                $scope.queryList();
-            });
-        };
+
     }]);

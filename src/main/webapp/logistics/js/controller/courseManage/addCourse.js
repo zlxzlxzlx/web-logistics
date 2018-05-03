@@ -6,7 +6,7 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.title='课程信息';
+        $scope.title='添加课程信息';
         $scope.type=0;
         $scope.disabled = true;
         $scope.submitForm=function () {
@@ -22,7 +22,7 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
                     start_time:$scope.start_time,
                     end_time:$scope.end_time,
                 };
-                httpService.addRow(params,'user/addCUser').then(
+                httpService.addRow(params,'course/addCourse').then(
                     function(result){
                         $scope.result=result;
                         $scope.cancel();
