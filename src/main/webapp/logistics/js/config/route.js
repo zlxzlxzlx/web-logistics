@@ -85,6 +85,30 @@ $stateProvider
          params:{args:{}}
 
     })
+    //学校管理页面
+    .state('managerSchool', {
+        url: '/managerSchool',
+        templateUrl: 'views/SchoolManage/schoolManage.html',
+         controller: 'schoolManageCtrl',
+         params:{args:{}}
+
+    })
+    //学院管理页面
+    .state('managerCollege', {
+        url: '/managerCollege',
+        templateUrl: 'views/SchoolManage/collegeManage.html',
+         controller: 'collegeManageCtrl',
+         params:{args:{}}
+
+    })
+    //专业管理页面
+    .state('managerMajor', {
+        url: '/managerMajor',
+        templateUrl: 'views/SchoolManage/majorManage.html',
+         controller: 'majorManageCtrl',
+         params:{args:{}}
+
+    })
     
     
 })
