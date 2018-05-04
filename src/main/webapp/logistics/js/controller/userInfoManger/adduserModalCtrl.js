@@ -2,8 +2,8 @@
  * Created by Administrator on 2018/5/2.
  */
 
-app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService',
-    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService) {
+app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService','Upload',
+    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService,Upload) {
 
         $scope.title="添加用户";
         $scope.Marks = [{ id: 1, name: '学生' }, { id: 2, name: '教师' }];
@@ -29,10 +29,16 @@ app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$statePa
                   mark:$scope.mark
                 };
                 httpService.addRow(params,'user/addUser').then(function (result) {
+                    Upload.upload({
+                        //服务端接收
+                        url: '/web-logistics/user/uploadImage',
+                        data:{'id':result.id},
+                        file: $scope.file
+                    });
                     $uibModalInstance.dismiss('ok');
                     SweetAlert.swal("操作成功", "", "success");
                 },function () {
-                })
+                });
             }
 
         };
