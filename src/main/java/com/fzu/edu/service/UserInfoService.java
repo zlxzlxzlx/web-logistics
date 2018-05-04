@@ -12,7 +12,9 @@ import java.util.Map;
 public interface UserInfoService extends IService<Userinfo> {
     List<Map<Object, Object>> getAllUser(String username);
     int userNameUnique(String username);
-    void addUser(String username,Integer mark)throws Exception;
+    Userinfo addUser(String username,Integer mark)throws Exception;
     void delUser(Integer id);
     void delUsers(List ids);
+    void uploadImage(String url,Integer id);
+    Userinfo login(String account, String pwd)throws Exception;
 }

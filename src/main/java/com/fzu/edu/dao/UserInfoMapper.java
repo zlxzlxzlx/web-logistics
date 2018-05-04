@@ -13,4 +13,5 @@ public interface UserInfoMapper extends BaseMapper<Userinfo>{
     List<Map<Object, Object>> getAllUser(Map<String,  Object> params);
     Userinfo queryObjByUsername(String username);
     void delUsers(List ids);
+    Userinfo selectByUsername(String account);
 }

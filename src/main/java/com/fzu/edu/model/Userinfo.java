@@ -8,12 +8,30 @@ public class Userinfo {
     private Integer mark;
 
     private String imageUrl;
+    private String passwd;
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
 
     private Long registDate;
 
     private Long lastLoginDate;
 
     private Integer flag;
+    private Integer login_method;
+
+    public void setLogin_method(Integer login_method) {
+        this.login_method = login_method;
+    }
+
+    public Integer getLogin_method() {
+        return login_method;
+    }
 
     public Integer getId() {
         return id;

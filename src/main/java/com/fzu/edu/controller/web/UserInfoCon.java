@@ -2,15 +2,22 @@ package com.fzu.edu.controller.web;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.UserInfoService;
+import com.fzu.edu.utils.MemoryData;
 import com.fzu.edu.utils.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -48,8 +55,8 @@ public class UserInfoCon {
             @RequestParam(value = "mark") Integer mark
     ) {
         try {
-            userInfoService.addUser(username, mark);
-            return JSON.toJSONString(1);
+            Userinfo userinfo=userInfoService.addUser(username, mark);
+            return JSON.toJSONString(userinfo,SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){
             return JSON.toJSONString(0);
         }
@@ -78,6 +85,67 @@ public class UserInfoCon {
         try {
             userInfoService.delUsers(ids);
             return JSON.toJSONString(1);
+        } catch (Exception e) {
+            return JSON.toJSONString(0);
+        }
+    }
+
+    //图片上传
+    @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
+    @ResponseBody
+    public String  upload(HttpSession session, @RequestParam MultipartFile file , @RequestParam(value = "id") Integer id)
+            throws IllegalStateException ,IOException {
+
+        if(!file.isEmpty())
+        {
+
+            String location=session.getServletContext().getRealPath("logistics/upload/userImage");
+            String originalFileName = file.getOriginalFilename();//获得当前文件的名称
+            int i = originalFileName.lastIndexOf('.');
+            String suffix = originalFileName.substring(i);
+            String fileName = System.currentTimeMillis()+suffix;
+            String url=location+"/"+fileName;
+            String url1="upload/userImage"+"/"+fileName;
+            file.transferTo(new File(url));
+            userInfoService.uploadImage(url1,id);
+        }
+        return null;
+    }
+    //登录检查
+    @RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public String loginCheck(@RequestParam(value = "account") String account,
+                             HttpServletRequest request) {
+        String user = account + "";
+        String sessionID = request.getRequestedSessionId();
+        if (!MemoryData.getSessionIDMap().containsKey(user)) {
+            return JSON.toJSONString(0);//不存在，首次登陆
+        }else {
+            return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
+        }
+    }
+    //登录
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @ResponseBody
+    public String login(@RequestParam(value = "account") String account,
+                        @RequestParam(value = "pwd") String pwd,
+                        HttpServletRequest request) {
+        try {
+            Userinfo userinfo = userInfoService.login(account, pwd) ;
+            if (userinfo == null) {
+                return JSON.toJSONString(-1);
+            } else {
+                request.getSession().setAttribute("loginAccount", userinfo);
+                String sessionID = request.getSession().getId();//request.getRequestedSessionId();
+                String user = userinfo.getUserName() + "";
+                if (!MemoryData.getSessionIDMap().containsKey(user)) { //不存在，首次登陆，放入Map
+                    MemoryData.getSessionIDMap().put(user, sessionID);
+                } else{
+                    MemoryData.getSessionIDMap().remove(user);
+                    MemoryData.getSessionIDMap().put(user, sessionID);
+                }
+                return JSON.toJSONString(userinfo);
+            }
         } catch (Exception e) {
             return JSON.toJSONString(0);
         }
