@@ -27,8 +27,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
        Map<String ,Object> map=new HashMap<String, Object>();
        map.put("username",username);
        return userInfoMapper.getAllUser(map);
-   }
-    public int userNameUnique(String username){
+   }public int userNameUnique(String username){
         int result = -1;
         Userinfo userinfo =  userInfoMapper.queryObjByUsername(username);
         if(userinfo!=null){
@@ -36,6 +35,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
         }
         return result;
     }
+
     public Userinfo addUser(String username,Integer mark)throws Exception{
         Userinfo userInfo=new Userinfo();
         userInfo.setUserName(username);
