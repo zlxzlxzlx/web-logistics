@@ -9,9 +9,11 @@
     <result column="regist_date" property="registDate" jdbcType="BIGINT" />
     <result column="last_login_date" property="lastLoginDate" jdbcType="BIGINT" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="passwd" property="passwd" jdbcType="INTEGER" />
+    <result column="login_method" property="loginMethod" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, mark, image_url, regist_date, last_login_date, flag
+    id, user_name, mark, image_url, regist_date, last_login_date, flag,passwd,login_method
   </sql>
   <select id="getAllUser"  parameterType="hashmap" resultType="java.util.HashMap">
     select u.*
@@ -26,6 +28,7 @@
     from userinfo u
     where u.flag=0  and u.user_name= #{userName,jdbcType=VARCHAR}
   </select>
+
   <update id="delUsers" parameterType="java.util.List">
     <foreach close="" collection="list" index="index" item="item" open="" separator=";">
       update userinfo
@@ -35,4 +38,9 @@
       where id = ${item}
     </foreach>
   </update>
+  <select id="selectByUsername"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select u.*
+    from userinfo u
+    where u.flag=0  and u.user_name= #{account,jdbcType=VARCHAR}
+  </select>
 </mapper>
