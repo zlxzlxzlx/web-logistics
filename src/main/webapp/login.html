@@ -52,7 +52,7 @@
                 <div class="form-group mb-lg">
                     <label>用户名</label>
                     <div class="input-group input-group-icon">
-                        <input name="username" type="text" class="form-control input-lg" />
+                        <input name="username" type="text" class="form-control input-lg" ng-model="account"/>
 									<span class="input-group-addon">
 										<span class="icon icon-lg">
 											<i class="fa fa-user"></i>
@@ -67,7 +67,7 @@
                         <a href="#recoverPassword" class="pull-right" >忘记密码?</a>
                     </div>
                     <div class="input-group input-group-icon">
-                        <input name="pwd" type="password" class="form-control input-lg" />
+                        <input name="pwd" type="password" class="form-control input-lg" ng-model="pwd"/>
 									<span class="input-group-addon">
 										<span class="icon icon-lg">
 											<i class="fa fa-lock"></i>
@@ -76,16 +76,16 @@
                     </div>
                 </div>
 
-                <div class="row">
+
+                <div class="row" style="margin-top: auto">
                     <div class="col-sm-8">
                         <div class="checkbox-custom checkbox-default">
                             <input id="RememberMe" name="rememberme" type="checkbox"/>
                             <label for="RememberMe">记住密码</label>
                         </div>
                     </div>
-                    <div class="col-sm-4 text-right" ng-click="loginSys()">
-                        <button type="submit" class="btn btn-primary hidden-xs" >登录</button>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">登录</button>
+                    <div class="col-sm-4 text-right" >
+                        <button type="submit" class="btn btn-primary hidden-xs" ng-click="loginSystem()">登录</button>
                     </div>
                 </div>
 
