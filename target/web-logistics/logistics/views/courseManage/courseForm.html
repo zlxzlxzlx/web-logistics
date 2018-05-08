@@ -67,12 +67,45 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label" for="teacher_name">教师名：</label>
+                        <label class="control-label" for="school_id">学校：</label>
                         <label class="cbr-inline">
-                            <input type="text" class="form-control" id="teacher_name" name="teacher_name" placeholder="教师名"  ng-model="teacher_name" required >
+                            <select select2 id="school_id" name="school_id" placeholder="请选择学校" style=" width:200px" ng-options="i.id as i.school_name for i in schoolInfo" ng-model="school_id" required ng-change="change()" >
+                                <option value="">请选择学校</option>
+                            </select>
                         </label>
-                        <div ng-messages="submit_form.teacher_name.$error" ng-show="submit_form.teacher_name.$touched || submit_form.$submitted">
-                            <span class="ng-message" ng-message="required">请输入教师名</span>
+                        <div ng-messages="submit_form.school_id.$error" ng-show="submit_form.school_id.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择学校</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="element_id">学院：</label>
+                        <label class="cbr-inline">
+                            <select select2 id="element_id" name="element_id" placeholder="请选择开课单位" style=" width:200px" ng-options="i.id as i.college_name for i in majorInfo" ng-model="element_id" required ng-change="changeCollege()">
+                                <option value="">请选择学院</option>
+                            </select>
+                        </label>
+                        <div ng-messages="submit_form.element_id.$error" ng-show="submit_form.element_id.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择学院</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="teacher_id">教师选择：</label>
+                        <label class="cbr-inline">
+                            <select select2 id="teacher_id" name="teacher_id" placeholder="请选择教师" style=" width:200px;" ng-options="i.id as i.user_name for i in teacherInfo" ng-model="teacher_id" required >
+                                <option value="">请选择教师</option>
+                            </select>
+                        </label>
+                        <div ng-messages="submit_form.teacher_id.$error" ng-show="submit_form.teacher_id.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择教师</span>
                         </div>
                     </div>
                 </div>
@@ -88,6 +121,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -114,7 +148,6 @@
 
             </div>
 
-        </div>
 
         <div class="modal-footer">
             <input class="btn btn-info" type="submit" value="提交" ng-disabled="submit_form.$invalid" />

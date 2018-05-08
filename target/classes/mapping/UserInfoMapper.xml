@@ -43,4 +43,5 @@
     from userinfo u
     where u.flag=0  and u.user_name= #{account,jdbcType=VARCHAR}
   </select>
+
 </mapper>

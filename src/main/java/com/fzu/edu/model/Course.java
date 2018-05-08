@@ -11,7 +11,11 @@ public class Course {
 
     private Integer type;
 
-    private String teacherName;
+    private Integer teacherId;
+
+    private Integer collegeId;
+
+    private Integer schoolId;
 
     private String startTime;
 
@@ -61,13 +65,7 @@ public class Course {
         this.type = type;
     }
 
-    public String getTeacherName() {
-        return teacherName;
-    }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
 
     public String getStartTime() {
         return startTime;
@@ -99,5 +97,29 @@ public class Course {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public Integer getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(Integer collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
     }
 }

@@ -9,19 +9,72 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
         $scope.title='添加课程信息';
         $scope.type=0;
         $scope.disabled = true;
+        $scope.teacherInfo = [];
+        $scope.majorInfo = [];
+        //var re = "";
+        $scope.school_id="";
+        $scope.teacher_id="";
+        $scope.element_id="";
+       // $scope.re = [];
+        $scope.getTeacherAndMajor = function () {
+            httpService.getAll(null,'course/getAllTeacherAndMajor').then(
+                function (result) {
+                    $scope.re = result;
+                    $scope.schoolInfo = result[2];
+                },function () {
+                    console.log("获取教师(开课单位)失败");
+                }
+            );
+        };
+        $scope.getTeacherAndMajor();//同时获取教师和开课单位
+        $scope.change=function () {
+            $scope.majorInfo=[];
+            $scope.teacherInfo=[];
+            try {
+                if ($scope.school_id!=null){
+                    for(var i in $scope.re[1]){
+                        if($scope.school_id ==$scope.re[1][i].school_id){
+                            $scope.majorInfo.push($scope.re[1][i]);
+                        }
+                    }
+                }
+            }catch (e){
+                console.log("e",e);
+            }
+        }
+       $scope.changeCollege = function () {
+               $scope.teacherInfo=[];
+               try {
+                   if ($scope.element_id!=null){
+                       for(var i in $scope.re[0]){
+                           if($scope.element_id ==$scope.re[0][i].college_id){
+                               $scope.teacherInfo.push($scope.re[0][i]);
+                           }
+                       }
+                   }
+                   console.log(1,$scope.teacherInfo)
+               }catch (e){
+                   console.log("e",e);
+               }
+       }
+
         $scope.submitForm=function () {
            // LoadingService.show();
+            console.log(123);
             if ($scope.submit_form.$valid) {
                 var params = {
                     code:$scope.code,
                     name:$scope.name,
                     class_hour:$scope.class_hour,
                     type:$scope.type,
-                    teacher_name:$scope.teacher_name,
+                    teacher_id:$scope.teacher_id,
+                     major_id:$scope.element_id,
+                    school_id:$scope.school_id,
                     class_time:$scope.class_time,
                     start_time:$scope.start_time,
                     end_time:$scope.end_time,
                 };
+                console.log("op",params);
                 httpService.addRow(params,'course/addCourse').then(
                     function(result){
                         $scope.result=result;
