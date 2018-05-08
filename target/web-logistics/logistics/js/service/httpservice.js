@@ -1,7 +1,7 @@
 /**
  * Created by bianbian on 2017/8/4.
  */
-service.service('httpService', ['$rootScope','$q','$http', 'Upload',function($rootScope,$q,$http,Upload) {
+service.service('httpService', ['$rootScope','$q','$http', 'Upload','LoadingService','$timeout','SweetAlert',function($rootScope,$q,$http,Upload,LoadingService,$timeout,SweetAlert) {
     //请求参数处理------------------
     this.webroot = "/web-logistics/";
     this.handleParams = function(params) {
@@ -11,6 +11,11 @@ service.service('httpService', ['$rootScope','$q','$http', 'Upload',function($ro
 
     //创建post请求-------------
     this.c_post = function(url,params) {
+        var timer = $timeout(function () {
+            LoadingService.hide();
+            SweetAlert.swal("网络异常,请稍后再试...", "", "warning");
+        },5000);
+
         var deferred = $q.defer();
         var url = this.webroot+url;
         var params = this.handleParams(params);
@@ -25,14 +30,29 @@ service.service('httpService', ['$rootScope','$q','$http', 'Upload',function($ro
             // 通讯失败的处理
             function (error) {
                 // 可以先对失败的数据集做处理，再交由controller进行处理
+                LoadingService.hide();
                 error.status = false;
                 deferred.reject(error);
-            });
+            })
+            .finally(
+                function () {
+                    LoadingService.hide();
+                    $timeout.cancel(timer); // 移除定时器
+                }
+            );
         //返回promise对象，交由controller继续处理成功、失败的业务回调
         return deferred.promise;
     };
     //创建get请求-------------
     this.c_get = function(url,params){
+
+        var timer = $timeout(function () {
+            LoadingService.hide();
+            SweetAlert.swal("网络异常,请稍后再试...", "", "warning");
+        },5000);
+
+        LoadingService.show();
+
         var deferred = $q.defer();
         var url = this.webroot+url;
         var params = this.handleParams(params);
@@ -50,9 +70,16 @@ service.service('httpService', ['$rootScope','$q','$http', 'Upload',function($ro
             // 通讯失败的处理
             function (error) {
                 // 可以先对失败的数据集做处理，再交由controller进行处理
+                LoadingService.hide();
                 error.status = false;
                 deferred.reject(error);
-            });
+            })
+            .finally(
+                function () {
+                    LoadingService.hide();
+                    $timeout.cancel(timer); // 移除定时器
+                }
+            );
         //返回promise对象，交由controller继续处理成功、失败的业务回调
         return deferred.promise;
     };

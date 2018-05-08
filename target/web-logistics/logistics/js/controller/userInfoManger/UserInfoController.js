@@ -1,8 +1,8 @@
 /**
  * Created by zlx on 2018/5/2.
  */
-app.controller('UserInfoController',['$scope','$http','$filter','$state','$stateParams','$uibModal','httpService','SweetAlert','LoadingService',
-    function($scope, $http,$filter,$state,$stateParams,$uibModal,httpService,SweetAlert,LoadingService) {
+app.controller('UserInfoController',['$scope','$http','$filter','$state','$stateParams','$uibModal','httpService','SweetAlert','LoadingService','localStorageService',
+    function($scope, $http,$filter,$state,$stateParams,$uibModal,httpService,SweetAlert,LoadingService,localStorageService) {
 
     $scope.root=[];
         $scope.pagination = {
