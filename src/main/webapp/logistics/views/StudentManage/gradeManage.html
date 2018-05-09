@@ -2,7 +2,7 @@
 
 <div class="panel ">
     <div class="panel-heading">
-        <h3 class="panel-title">用户信息管理</h3>
+        <h3 class="panel-title">课程信息管理</h3>
     </div>
     <div class="panel-body ">
         <script type="text/javascript">
@@ -31,17 +31,19 @@
         </script>
 
         <div class="btn-toolbar">
-            <div class="btn-group focus-btn-group">
-             <!--   <button class="btn btn-default gridBtn" ng-click="addUserInfo()"></span> 新增</button>-->
-                <button class="btn btn-default gridBtn" ng-click="delRows()"> 删除</button>
-                <button class="btn btn-default gridBtn" ng-click="importExcel()"> 导入</button>
-                <button class="btn btn-default gridBtn"ng-click="exportExcel()"> 导出</button>
-
-            </div>
             <div class="btn-group focus-btn-group" style="margin-top:-5px">
                 <div  class="form-inline">
+                    <label class="control-label">开课单位：</label>
                     <div class="form-group">
-                        <input type="text" ng-model="username" class="form-control" size="25" placeholder="关键字" />
+                      <select ng-model="college" class="form-control" ng-options="college.id as college.college_name for college in colleges" ng-change="queryList()"></select>
+                    </div>
+                    <label class="control-label">分类查询：</label>
+                    <div class="form-group">
+                        <select ng-model="mark" class="form-control" ng-options="mark.id as mark.name for mark in marks"></select>
+                    </div>
+                    <label class="control-label">关键字：</label>
+                    <div class="form-group">
+                        <input type="text" ng-model="keyWord" class="form-control" size="25" placeholder="关键字" />
                     </div>
                     <div class="form-group">
                         <button class="mb-xs mt-xs mr-xs btn btn-primary" ng-click="queryList()">查询</button>
@@ -56,36 +58,37 @@
             <table class="table  table-bordered table-striped" id="drivergrid">
                 <thead>
                 <tr >
-                    <th width="100">
-                        <input type="checkbox" ng-model="select_all" ng-click="selectAll()"><i></i>
-                        <span ng-hide="select_all" style="white-space: nowrap;">全选</span>
-                        <span ng-show="select_all" style="white-space: nowrap;">取消全选</span>
-                    </th>
                     <th >序号</th>
-                    <th >用户名</th>
-                    <th >用户角色</th>
-                    <th >注册时间</th>
-                    <th >上次登录时间</th>
-                    <th >操作</th>
+                    <th >课程编号</th>
+                    <th >课程名称</th>
+                    <th >修读类型</th>
+                    <th >总学时</th>
+                    <th >开课单位</th>
+                    <th >开课时间</th>
+                    <th >课程负责人</th>
+                    <th >用户操作</th>
                 </tr>
                 </thead>
 
                 <tbody class="middle-align">
                 <tr ng-repeat="row in root.data">
-                    <td>
-                        <input type="checkbox" class="cbr" ng-model="row.checked"  ng-change="selectOne()" >
-                    </td>
+
                     <td>{{$index}}</td>
+                    <td>{{row.code}}</td>
+                    <td>{{row.name}}</td>
+                    <td ng-if="row.type==1">选修</td>
+                    <td ng-if="row.type==0">必修</td>
+                    <td>{{row.class_hour}}</td>
+                    <td>{{row.college_name}}</td>
+                    <td>{{row.start_time}}—{{row.end_time}}<br>{{row.class_time}}</td>
                     <td>{{row.user_name}}</td>
-                    <td ng-if="row.mark==0">系统管理员</td>
-                    <td ng-if="row.mark==1">学生</td>
-                    <td ng-if="row.mark==2">教师</td>
-                    <td>{{row.regist_date | date:'yyyy-MM-dd' }}</td>
-                   <td>{{row.last_login_date | date:'yyyy-MM-dd' }}</td>
                     <td style="white-space: nowrap;">
-                        <a href="" class="btn btn-danger btn-sm btn-icon icon-left" ng-click="delRow(row.id)">
-                            删除
+                        <a href="" class="btn btn-sm btn-icon icon-left" ng-click="elective(row)" ng-if="row.type==1">
+                            确认选课
                         </a>
+                        <a href="" class="btn btn-sm btn-icon icon-left"  ng-if="row.type==0">
+                        必修课程
+                    </a>
                     </td>
                 </tr>
                 </tbody>
