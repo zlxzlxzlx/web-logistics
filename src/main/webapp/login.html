@@ -78,9 +78,12 @@
 
                 <div class="row" style="margin-top: auto">
 
-                    <div class="col-sm-12 text-right" >
-                        <button type="submit" class="btn btn-primary hidden-xs" ng-click="loginSystem()">登录</button>
+                    <div class="col-sm-6" >
+                        <button type="submit" class="btn btn-primary hidden-xs" ng-click="register()">注册</button>
                     </div>
+                    <div class="col-sm-6 text-right" >
+                        <button type="submit" class="btn btn-primary hidden-xs" ng-click="loginSystem()">登录</button>
+                        </div>
                 </div>
 
                 <!--		<span class="mt-lg mb-lg line-thru text-center text-uppercase">
@@ -96,7 +99,6 @@
 
             </div>
         </div>
-
     </div>
 </section>
 <!-- end: page -->
@@ -105,4 +107,4 @@
     background-position-y: top;background-size: cover"></div>-->
 </body>
 </html>
-
+<div ng-include=" 'logistics/views/userInfoManger/registerForm.html'"></div>
