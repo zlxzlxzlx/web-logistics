@@ -109,6 +109,30 @@ $stateProvider
          params:{args:{}}
 
     })
+    //学生管理/课程信息
+    .state('manageGrade', {
+        url: '/manageGrade',
+        templateUrl: 'views/StudentManage/gradeManage.html',
+        controller: 'gradeManageCtrl',
+        params:{args:{}}
+
+    }) 
+    //学生管理/选课信息
+    .state('manageElective', {
+        url: '/manageElective',
+        templateUrl: 'views/StudentManage/electiveManage.html',
+        controller: 'electiveManageCtrl',
+        params:{args:{}}
+
+    })  
+    //学生管理/课表查询
+    .state('scheduleQuery', {
+        url: '/scheduleQuery',
+        templateUrl: 'views/StudentManage/scheduleQuery.html',
+        controller: 'scheduleQueryManageCtrl',
+        params:{args:{}}
+
+    })
     
     
 })
