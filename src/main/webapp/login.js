@@ -114,6 +114,7 @@ loginModule.config(function($httpProvider,$stateProvider,$uiViewScrollProvider,$
             controller:'recoverPwdController'
         })
 
+
 });
 
 
@@ -127,6 +128,7 @@ loginModule.controller('loginController',['$scope', '$http','localStorageService
             $http.get('user/login',{params})
                 .success(function(data,status,headers,config){
                     if (data !== -1) {
+                        console.log(111,data);
                         SweetAlert.swal("登录成功", "", "success");
                         localStorageService.set("userInfo", data);
                         $rootScope.user = data;
@@ -184,7 +186,21 @@ loginModule.controller('loginController',['$scope', '$http','localStorageService
 
             }
 
+    $scope.register=function () {
+        var modalInstance=$uibModal.open({
+            backdrop:'static',
+            size:'slg',
+            keyboard:false,
+            animation: true,
+            templateUrl:'registerForm.html',
+            controller:'registerModalCtrl'
 
+        });
+        modalInstance.result.then(function (result) {},function (reason) {
+            $scope.account=reason.userName;
+            $scope.pwd="";
+        });
+    };
     }]);
 
 
@@ -197,6 +213,67 @@ loginModule.controller('recoverPwdController',['$scope', '$http','localStorageSe
 
 
 
+    }]);
+loginModule.controller('registerModalCtrl',['$scope', '$http','localStorageService','$state','$rootScope','$location','$window','SweetAlert','$uibModal','$uibModalInstance',
+    function ($scope, $http, localStorageService,$state,$rootScope,$location,$window,SweetAlert,$uibModal,$uibModalInstance) {
+
+        $scope.title="注册";
+        $scope.Marks = [{ id: 1, name: '学生' }, { id: 2, name: '教师' }];
+        $scope.mark=1;
+        $scope.schools=[];
+        $scope.colleges=[];
+        $scope.cancel=function () {
+            $uibModalInstance.dismiss("cancel");
+        };
+
+       $scope.getAllSchool=function () {
+           $http.get('school/getAllSchoolForSelect')
+               .success(function(data,status,headers,config){
+               $scope.schools=data;
+               })
+               .error(function(data,status,headers,config){
+               })
+       };$scope.getAllSchool();
+    $scope.getAllCollege=function () {
+        var params={
+            school_id:$scope.school
+        }
+        $http.get('college/getAllCollegeForSelect',{params})
+            .success(function(data,status,headers,config){
+                $scope.colleges=data;
+            })
+            .error(function(data,status,headers,config){
+                
+            })
+    };
+
+        $scope.submitForm=function () {
+            if ($scope.submit_form.$valid) {
+                var params={
+                    username:$scope.username,
+                    passwd:$scope.passwd,
+                    mark:$scope.mark,
+                    school:$scope.school,
+                    college:$scope.college
+                };
+                $http({
+                    method : 'POST',
+                    url : 'user/addUser',
+                    data: params
+                }).success(function(data, status, headers, config) {
+                    if(data){
+                        SweetAlert.swal("注册成功", "", "success");
+                        $uibModalInstance.dismiss(data);
+                    }else{
+                        SweetAlert.swal("注册失败", "", "error");
+                    }
+                }).error(function(data, status, headers, config) {
+
+                });
+
+            }
+
+        };
     }]);
 
 
