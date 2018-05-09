@@ -36,15 +36,17 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
         return result;
     }
 
-    public Userinfo addUser(String username,Integer mark)throws Exception{
+    public Userinfo addUser(String username,Integer mark,String passwd,Integer school,Integer college)throws Exception{
         Userinfo userInfo=new Userinfo();
         userInfo.setUserName(username);
         userInfo.setFlag(0);
         userInfo.setMark(mark);
         userInfo.setRegistDate(System.currentTimeMillis());
-        String passwd="";
-        passwd= MD5Util.md5Encrypt("123456");
-        userInfo.setPasswd(passwd);
+        String pwd="";
+        pwd=MD5Util.md5Encrypt(passwd);
+        userInfo.setPasswd(pwd);
+        userInfo.setSchool_id(school);
+        userInfo.setCollege_id(college);
         userInfoMapper.insert(userInfo);
         return userInfo;
     }

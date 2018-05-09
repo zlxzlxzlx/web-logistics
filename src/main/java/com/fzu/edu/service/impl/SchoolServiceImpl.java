@@ -31,6 +31,9 @@ public class SchoolServiceImpl extends ServiceImpl<SchoolMapper,School> implemen
        map.put("school_name",school_name);
        return schoolMapper.getAllSchool(map);
     }
+    public List<Map<Object, Object>> getAllSchoolForSelect(){
+        return schoolMapper.getAllSchoolForSelect();
+    }
 
     public   void  delSchool(Integer id){
       School school=schoolMapper.selectById(id);

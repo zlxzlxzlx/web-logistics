@@ -51,11 +51,14 @@ public class UserInfoCon {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
     public String addUser(
-            @RequestParam(value = "username") String username,
-            @RequestParam(value = "mark") Integer mark
+            @RequestParam(value = "username",required = false) String  username,
+            @RequestParam(value = "mark",required = false) Integer mark,
+            @RequestParam(value = "passwd",required = false) String passwd,
+            @RequestParam(value = "school",required = false) Integer school,
+            @RequestParam(value = "college",required = false) Integer college
     ) {
         try {
-            Userinfo userinfo=userInfoService.addUser(username, mark);
+            Userinfo userinfo=userInfoService.addUser(username, mark,passwd,school,college);
             return JSON.toJSONString(userinfo,SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){
             return JSON.toJSONString(0);

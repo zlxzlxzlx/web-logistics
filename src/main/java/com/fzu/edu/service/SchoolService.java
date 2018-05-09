@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public interface SchoolService extends IService<School> {
     List<Map<Object, Object>> getAllSchool(String school_code,String school_name);
+    List<Map<Object, Object>> getAllSchoolForSelect();
     void delSchool(Integer id);
     void delSchools(List ids);
     int schoolCodeUnique(String school_code);

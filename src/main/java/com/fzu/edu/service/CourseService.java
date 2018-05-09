@@ -19,4 +19,6 @@ public interface CourseService extends IService<Course> {
    void delCourse(Integer id);
    void delCourses(List ids);
    List getAllTeacherAndMajor();
+   List<Map<Object, Object>> getAllCourseBySchoolId(Integer school_id,Integer college,String keyWord,Integer mark);
+  List<Map<Object, Object>> getAllCourseForStudent(Integer school_id,Integer college_id,Integer user_id,String keyWord,Integer mark);
 }

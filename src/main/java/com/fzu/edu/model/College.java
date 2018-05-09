@@ -9,6 +9,16 @@ public class College {
 
     private Integer flag;
 
+    public String  getSchool_id() {
+        return school_id;
+    }
+
+    public void setSchool_id(String school_id) {
+        this.school_id = school_id;
+    }
+
+    private String school_id;
+
     private String collegeDetail;
 
     public Integer getId() {

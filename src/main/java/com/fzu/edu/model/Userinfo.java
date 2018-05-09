@@ -25,6 +25,25 @@ public class Userinfo {
     private Integer flag;
     private Integer login_method;
 
+    public Integer getCollege_id() {
+        return college_id;
+    }
+
+    public Integer getSchool_id() {
+        return school_id;
+    }
+
+    public void setSchool_id(Integer school_id) {
+        this.school_id = school_id;
+    }
+
+    public void setCollege_id(Integer college_id) {
+        this.college_id = college_id;
+    }
+
+    private Integer school_id;
+    private Integer college_id;
+
     public void setLogin_method(Integer login_method) {
         this.login_method = login_method;
     }

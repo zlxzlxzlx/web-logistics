@@ -119,4 +119,33 @@ public class CourseController {
         }
 
     }
+    @RequestMapping(value = "/getAllCourseBySchoolId", method = RequestMethod.POST)
+    @ResponseBody
+    public String query(
+            @RequestParam(value = "school_id") Integer school_id,
+            @RequestParam(value = "pageNo") int pageNo,
+            @RequestParam(value = "pageSize") int pageSize,
+            @RequestParam(value = "college",required = false) int college,
+            @RequestParam(value = "keyWord",required = false) String keyWord,
+            @RequestParam(value = "mark",required = false) int mark
+    ) {
+        List<Map<Object, Object>> courseList = courseService.getAllCourseBySchoolId(school_id,college,keyWord,mark);
+        Page page = new Page(pageNo, pageSize, courseList);
+        return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+    }
+    @RequestMapping(value = "/getAllCourseForStudent", method = RequestMethod.POST)
+    @ResponseBody
+    public String getAllCourseForStudent(
+            @RequestParam(value = "school_id") Integer school_id,
+            @RequestParam(value = "pageNo") int pageNo,
+            @RequestParam(value = "pageSize") int pageSize,
+            @RequestParam(value = "college_id",required = false) Integer college_id,
+            @RequestParam(value = "user_id",required = false) Integer user_id,
+            @RequestParam(value = "keyWord",required = false) String keyWord,
+            @RequestParam(value = "mark",required = false) int mark
+    ) {
+        List<Map<Object, Object>> courseList = courseService.getAllCourseForStudent(school_id,college_id,user_id,keyWord,mark);
+        Page page = new Page(pageNo, pageSize, courseList);
+        return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+    }
 }

@@ -11,4 +11,5 @@ public interface SchoolMapper extends BaseMapper<School>{
    List<Map<Object,Object>> getAllSchool(Map<String,  Object> params);
     void delSchools(List ids);
     School schoolCodeUnique(String school_code);
+    List<Map<Object, Object>> getAllSchoolForSelect();
 }

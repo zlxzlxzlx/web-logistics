@@ -13,9 +13,6 @@ public class Course {
 
     private Integer teacherId;
 
-    private Integer collegeId;
-
-    private Integer schoolId;
 
     private String startTime;
 
@@ -24,6 +21,10 @@ public class Course {
     private String classTime;
 
     private Integer flag;
+
+
+    private Integer schoolId;
+    private Integer collegeId;
 
     public Integer getId() {
         return id;

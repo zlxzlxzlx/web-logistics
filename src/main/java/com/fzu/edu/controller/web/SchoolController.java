@@ -3,23 +3,15 @@ package com.fzu.edu.controller.web;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fzu.edu.model.School;
-import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.SchoolService;
-import com.fzu.edu.service.UserInfoService;
-import com.fzu.edu.utils.MemoryData;
 import com.fzu.edu.utils.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +34,13 @@ public class SchoolController {
         List<Map<Object, Object>> schoolList = schoolService.getAllSchool(school_code,school_name);
         Page page = new Page(pageNo, pageSize, schoolList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    @RequestMapping(value = "/getAllSchoolForSelect", method = RequestMethod.GET)
+    @ResponseBody
+    public String getAllSchoolForSelect() {
+        List<Map<Object, Object>> schoolList = schoolService.getAllSchoolForSelect();
+        return JSON.toJSONString(schoolList, SerializerFeature.DisableCircularReferenceDetect);
     }
    //删除学校
     @RequestMapping(value = "/delSchool", method = RequestMethod.POST)

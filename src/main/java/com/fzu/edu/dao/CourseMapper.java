@@ -28,4 +28,6 @@ public interface CourseMapper extends BaseMapper<Course> {
     List<HashMap> getAllTeacher();
     List<HashMap> getAllCollege();
     List<HashMap> getAllSchool();
+    List<Map<Object,Object>> getAllCourseBySchoolId(Map<String,Object> map);
+    List<Map<Object,Object>> getAllCourseForStudentFromCourse(Map<String,Object> map);
 }
