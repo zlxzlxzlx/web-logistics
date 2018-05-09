@@ -199,5 +199,33 @@
   </select>
   <select id="getAllSchool" resultType="hashmap">
     SELECT * FROM school WHERE flag=0
-  </select>
+</select>
+    <select id="getAllCourseBySchoolId" parameterType="hashmap"  resultType="java.util.HashMap">
+    SELECT c.*,e.college_name,s.user_name
+    FROM  course c LEFT JOIN  college e on c.college_id=e.id LEFT  JOIN userinfo s on c.teacher_id=s.id and s.mark=2
+    where c.flag=0 and c.college_id= #{college,jdbcType=INTEGER} and c.school_id= #{school_id,jdbcType=INTEGER}
+    <if test="mark==1 and keyWord!=null and keyWord!=''">
+        and c.name LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="mark==2 and keyWord!=null and keyWord!=''">
+        and c.code LIKE '%'+#{keyWord}+'%'
+     </if>
+     <if test="mark==3 and keyWord!=null and keyWord!=''">
+          and s.user_name LIKE '%'+#{keyWord}+'%'
+       </if>
+</select>
+    <select id="getAllCourseForStudentFromCourse" parameterType="hashmap"  resultType="java.util.HashMap">
+    SELECT c.*,e.college_name,s.user_name
+    FROM  course c LEFT JOIN  college e on c.college_id=e.id LEFT  JOIN userinfo s on c.teacher_id=s.id and s.mark=2
+    where c.flag=0 and c.college_id= #{college_id,jdbcType=INTEGER} and c.school_id= #{school_id,jdbcType=INTEGER} and c.type=0
+      <if test="mark==1 and keyWord!=null and keyWord!=''">
+        and c.name LIKE '%'+#{keyWord}+'%'
+      </if>
+      <if test="mark==2 and keyWord!=null and keyWord!=''">
+        and c.code LIKE '%'+#{keyWord}+'%'
+      </if>
+      <if test="mark==3 and keyWord!=null and keyWord!=''">
+        and s.user_name LIKE '%'+#{keyWord}+'%'
+      </if>
+</select>
 </mapper>

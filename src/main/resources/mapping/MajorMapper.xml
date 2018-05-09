@@ -16,5 +16,31 @@
   <sql id="Blob_Column_List" >
     major_detail
   </sql>
+  <select id="getAllMajor"  parameterType="hashmap" resultType="java.util.HashMap">
+    select m.*
+    from major m
+    where m.flag=0
+    <if test="major_code!=null and major_code!=''">
+      and m.major_code LIKE '%'+#{major_code}+'%'
+    </if>
+    <if test="major_name!=null and major_name!=''">
+      and m.major_name LIKE '%'+#{major_name}+'%'
+    </if>
+  </select>
 
+  <update id="delMajors" parameterType="java.util.List">
+    <foreach close="" collection="list" index="index" item="item" open="" separator=";">
+      update major
+      <set>
+        flag= 1
+      </set>
+      where id = ${item}
+    </foreach>
+  </update>
+
+  <select id="majorCodeUnique"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select m.*
+    from major m
+    where m.flag=0  and m.major_code= #{major_code,jdbcType=VARCHAR}
+  </select>
 </mapper>

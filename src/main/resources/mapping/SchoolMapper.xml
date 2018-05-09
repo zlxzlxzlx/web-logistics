@@ -28,6 +28,11 @@
       and s.school_name LIKE '%'+#{school_name}+'%'
     </if>
   </select>
+  <select id="getAllSchoolForSelect"   resultType="java.util.HashMap">
+    select s.*
+    from school s
+    where s.flag=0
+  </select>
   <update id="delSchools" parameterType="java.util.List">
     <foreach close="" collection="list" index="index" item="item" open="" separator=";">
       update school

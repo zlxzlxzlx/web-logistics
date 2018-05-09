@@ -9,11 +9,13 @@
     <result column="regist_date" property="registDate" jdbcType="BIGINT" />
     <result column="last_login_date" property="lastLoginDate" jdbcType="BIGINT" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
-    <result column="passwd" property="passwd" jdbcType="INTEGER" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
     <result column="login_method" property="loginMethod" jdbcType="VARCHAR" />
+    <result column="school_id" property="school_id" jdbcType="VARCHAR" />
+    <result column="college_id" property="college_id" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, mark, image_url, regist_date, last_login_date, flag,passwd,login_method
+    id, user_name, mark, image_url, regist_date, last_login_date, flag,passwd,login_method,school_id,college_id
   </sql>
   <select id="getAllUser"  parameterType="hashmap" resultType="java.util.HashMap">
     select u.*

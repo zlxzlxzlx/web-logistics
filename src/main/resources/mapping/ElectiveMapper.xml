@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzu.edu.dao.ElectiveMapper" >
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Elective" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, course_id, flag
+  </sql>
+  <select id="selectByUserId" parameterType="hashmap" resultMap="BaseResultMap">
+  SELECT  e.*
+  FROM  elective e
+  WHERE  e.flag=0 and e.user_id=#{user_id,jdbcType=INTEGER} and e.course_id=#{course_id,jdbcType=VARCHAR}
+</select>
+  <select id="getAllElectiveByUserId" parameterType="hashmap" resultType="java.util.HashMap">
+  SELECT  e.*,c.*,c.id as cid ,u.user_name
+  FROM  course c  LEFT JOIN elective e on c.id =e.course_id LEFT JOIN userinfo u on c.teacher_id=u.id and u.mark=2
+  WHERE  e.flag=0 and e.user_id=#{user_id,jdbcType=INTEGER}
+    <if test="mark==1 and keyWord != null and keyWord !='' ">
+      and  c.name LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="mark==2 and keyWord != null and keyWord !='' ">
+      and  c.code LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="mark==3 and keyWord != null and keyWord !='' ">
+      and  u.user_name LIKE '%'+#{keyWord}+'%'
+    </if>
+</select>
+
+  <select id="getAllElectiveByUserId"  parameterType="hashmap" resultType="java.util.HashMap">
+    select e.*
+    from elective e
+    where e.flag=0 and e.user_id=#{user_id,jdbcType=INTEGER}
+  </select>
+  <select id="getAllCourseForStudentFromElective" parameterType="hashmap"  resultType="java.util.HashMap">
+    SELECT c.*,e.*,u.user_name,e.id as eid
+    FROM   course c LEFT  JOIN elective e on c.id=e.course_id LEFT  JOIN userinfo u on c.teacher_id=u.id and u.mark=2
+    where e.flag=0 and e.user_id= #{user_id,jdbcType=INTEGER}
+    <if test="mark==1 and keyWord!=null and keyWord!=''">
+      and c.name LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="mark==2 and keyWord!=null and keyWord!=''">
+      and c.code LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="mark==3 and keyWord!=null and keyWord!=''">
+      and u.user_name LIKE '%'+#{keyWord}+'%'
+    </if>
+  </select>
+</mapper>
