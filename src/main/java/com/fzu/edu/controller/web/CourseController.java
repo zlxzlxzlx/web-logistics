@@ -148,4 +148,13 @@ public class CourseController {
         Page page = new Page(pageNo, pageSize, courseList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
     }
+    //老师获取班级（所教的课程）
+    @RequestMapping(value = "/getCourseForClass", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCourseForClass(
+            @RequestParam(value = "user_id") Integer user_id
+    ) {
+        List<Map<Object, Object>> courseList = courseService.getCourseForClass(user_id);
+        return JSON.toJSONString(courseList, SerializerFeature.DisableCircularReferenceDetect);
+    }
 }

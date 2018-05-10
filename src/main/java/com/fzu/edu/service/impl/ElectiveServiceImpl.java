@@ -6,6 +6,7 @@ import com.fzu.edu.model.Elective;
 import com.fzu.edu.service.ElectiveService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.security.x509.OIDMap;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -31,6 +32,10 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
             elective.setUserId(user_id);
             elective.setCourseId(course_id);
             elective.setFlag(0);
+            elective.setAbsenteeism(0);
+            elective.setLate(0);
+            elective.setSick_leave(0);
+            elective.setThink_leave(0);
             electiveMapper.insert(elective);
             return 1;
         }else{
@@ -50,6 +55,39 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
     public  void delSelectElective(Integer id){
       Elective elective=electiveMapper.selectById(id);
         elective.setFlag(1);
+        electiveMapper.updateById(elective);
+    }
+    //获取课程底下的所有学生
+    public  List<Map<Object,Object>>getAllStudentByCourseId(String course_id,String user_name){
+        Map<String ,Object> map=new HashMap<String, Object>();
+        map.put("course_id",course_id);
+        map.put("user_name",user_name);
+        return electiveMapper.getAllStudentByCourseId(map);
+    }
+    //获取课程底下的所有学生(课堂点名名单)
+    public  List<Map<Object,Object>>getAllStudentByCourseIdForClass(String course_id){
+        Map<String ,Object> map=new HashMap<String, Object>();
+        map.put("course_id",course_id);
+        return electiveMapper.getAllStudentByCourseIdForClass(map);
+    }
+    public void updateElectiveByClass(Integer elective_id,Integer mark){
+        Elective elective=electiveMapper.selectById(elective_id);
+        if(mark==1){
+            elective.setAbsenteeism(elective.getAbsenteeism()+1);
+            //旷课
+        }
+        if(mark==2){
+           elective.setLate(elective.getLate()+1);
+            //迟到
+        }
+        if(mark==3){
+            elective.setSick_leave(elective.getSick_leave()+1);
+            //病假
+        }
+        if(mark==4){
+            elective.setThink_leave(elective.getThink_leave()+1);
+            //事假
+        }
         electiveMapper.updateById(elective);
     }
 }

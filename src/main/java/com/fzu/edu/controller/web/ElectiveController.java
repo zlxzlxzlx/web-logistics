@@ -55,6 +55,36 @@ public class ElectiveController {
             return JSON.toJSONString(0);
         }
     }
+    //根据课程id获取所有学生
+    @RequestMapping(value = "/getAllStudentByCourseId", method = RequestMethod.POST)
+    @ResponseBody
+    public String getAllStudentByCourseId(
+            @RequestParam(value = "course_id",required = false) String course_id,
+            @RequestParam(value = "user_name",required = false) String user_name,
+            @RequestParam(value = "pageNo") int pageNo,
+            @RequestParam(value = "pageSize") int pageSize
+    ) {
+        try {
+            List<Map<Object,Object>> electiveList=electiveService.getAllStudentByCourseId(course_id,user_name);
+            Page page = new Page(pageNo, pageSize, electiveList);
+            return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+    }
+    //根据课程id获取所有学生(课堂点名名单)
+    @RequestMapping(value = "/getAllStudentByCourseIdForClass", method = RequestMethod.POST)
+    @ResponseBody
+    public String getAllStudentByCourseIdForClass(
+            @RequestParam(value = "course_id",required = false) String course_id
+    ) {
+        try {
+            List<Map<Object,Object>> electiveList=electiveService.getAllStudentByCourseIdForClass(course_id);
+            return JSON.toJSONString(electiveList, SerializerFeature.DisableCircularReferenceDetect);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+    }
     @RequestMapping(value = "/delSelectElective", method = RequestMethod.GET)
     @ResponseBody
     public String delSelectElective(
@@ -62,6 +92,19 @@ public class ElectiveController {
     ) {
         try {
             electiveService.delSelectElective(id);
+            return JSON.toJSONString(1);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+    }
+    @RequestMapping(value = "/updateElectiveByClass", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateElectiveByClass(
+            @RequestParam(value = "elective_id",required = false) Integer elective_id,
+            @RequestParam(value = "mark",required = false) Integer mark
+    ) {
+        try {
+            electiveService.updateElectiveByClass(elective_id,mark);
             return JSON.toJSONString(1);
         }catch (Exception e){
             return JSON.toJSONString(0);

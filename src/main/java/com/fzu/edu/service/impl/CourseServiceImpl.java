@@ -107,5 +107,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,Course> implemen
         list.add(list2);
         return list;
     }
-
+   public List<Map<Object, Object>> getCourseForClass(Integer user_id){
+       return courseMapper.getCourseForClass(user_id);
+   }
 }
