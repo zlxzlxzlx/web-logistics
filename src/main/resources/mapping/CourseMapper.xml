@@ -228,4 +228,9 @@
         and s.user_name LIKE '%'+#{keyWord}+'%'
       </if>
 </select>
+  <select id="getCourseForClass" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT c.*
+    from course c
+    WHERE c.teacher_id=#{user_id,jdbcType=INTEGER} AND c.flag=0
+  </select>
 </mapper>

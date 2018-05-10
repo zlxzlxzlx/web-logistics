@@ -6,9 +6,13 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="course_id" property="courseId" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="sick_leave" property="sick_leave" jdbcType="INTEGER" />
+    <result column="think_leave" property="think_leave" jdbcType="INTEGER" />
+    <result column="late" property="late" jdbcType="INTEGER" />
+    <result column="absenteeism" property="absenteeism" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, course_id, flag
+    id, user_id, course_id, flag,sick_leave,think_leave,late,absenteeism
   </sql>
   <select id="selectByUserId" parameterType="hashmap" resultMap="BaseResultMap">
   SELECT  e.*
@@ -48,5 +52,18 @@
     <if test="mark==3 and keyWord!=null and keyWord!=''">
       and u.user_name LIKE '%'+#{keyWord}+'%'
     </if>
+  </select>
+  <select id="getAllStudentByCourseId" parameterType="hashmap" resultType="java.util.HashMap">
+    select e.*,u.*,u.id as uid,c.*,c.id as cid
+    from elective e LEFT  JOIN userinfo u on e.user_id=u.id LEFT  JOIN course c on e.course_id=c.id
+    WHERE e.flag=0 and e.course_id=#{course_id,jdbcType=VARCHAR}
+    <if test="user_name !=null and user_name !=''">
+      and u.user_name LIKE '%'+#{user_name}+'%'
+    </if>
+  </select>
+  <select id="getAllStudentByCourseIdForClass" parameterType="hashmap" resultType="java.util.HashMap">
+    select e.*,u.*,u.id as uid
+    from elective e LEFT  JOIN userinfo u on e.user_id=u.id
+    WHERE e.flag=0 and e.course_id=#{course_id,jdbcType=VARCHAR}
   </select>
 </mapper>
