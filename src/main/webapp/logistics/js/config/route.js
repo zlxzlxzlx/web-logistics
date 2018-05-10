@@ -132,6 +132,22 @@ $stateProvider
         controller: 'scheduleQueryManageCtrl',
         params:{args:{}}
 
+    })  
+    //老师管理/班级管理
+    .state('manageClass', {
+        url: '/manageClass',
+        templateUrl: 'views/TeacherManage/manageClass.html',
+        controller: 'ClassManageCtrl',
+        params:{args:{}}
+
+    }) 
+    //老师管理/课堂点名
+    .state('ClassName', {
+        url: '/ClassName',
+        templateUrl: 'views/TeacherManage/ClassName.html',
+        controller: 'ClassNameManageCtrl',
+        params:{args:{}}
+
     })
     
     
