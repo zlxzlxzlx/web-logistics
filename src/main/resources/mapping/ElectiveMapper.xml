@@ -10,9 +10,14 @@
     <result column="think_leave" property="think_leave" jdbcType="INTEGER" />
     <result column="late" property="late" jdbcType="INTEGER" />
     <result column="absenteeism" property="absenteeism" jdbcType="INTEGER" />
+    <result column="ordinary_grade" property="ordinary_grade" jdbcType="FLOAT" />
+    <result column="final_exam_garde" property="final_exam_garde" jdbcType="FLOAT" />
+    <result column="final_grade" property="final_grade" jdbcType="FLOAT" />
+    <result column="normal_proportion" property="normal_proportion" jdbcType="VARCHAR" />
+    <result column="final_exam_proportion" property="final_exam_proportion" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, course_id, flag,sick_leave,think_leave,late,absenteeism
+    id, user_id, course_id, flag,sick_leave,think_leave,late,absenteeism,ordinary_grade,final_exam_garde,normal_proportion,final_exam_proportion
   </sql>
   <select id="selectByUserId" parameterType="hashmap" resultMap="BaseResultMap">
   SELECT  e.*
