@@ -149,6 +149,14 @@ $stateProvider
         params:{args:{}}
 
     })
+    //老师管理/生成期末成绩
+    .state('termGrade', {
+        url: '/termGrade',
+        templateUrl: 'views/TeacherManage/termGrade.html',
+        controller: 'termGradeManageCtrl',
+        params:{args:{}}
+
+    })
     
     
 })

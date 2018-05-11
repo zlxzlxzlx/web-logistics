@@ -64,7 +64,6 @@ app.controller('ClassNameManageCtrl',['$scope','$http','$filter','$state','$stat
              url : '../elective/updateElectiveByClass',
              data: params
          }).success(function(result, status, headers, config) {
-             console.log(111,result);
          }).error(function(data, status, headers, config) {
 
          });
