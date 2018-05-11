@@ -44,6 +44,52 @@ public class Elective {
     private Integer sick_leave;
     private Integer think_leave;
     private Integer late;
+
+    public float getOrdinary_grade() {
+        return ordinary_grade;
+    }
+
+    public float getFinal_exam_garde() {
+        return final_exam_garde;
+    }
+
+    public float getFinal_grade() {
+        return final_grade;
+    }
+
+    public String getFinal_exam_proportion() {
+        return final_exam_proportion;
+    }
+
+    public String getNormal_proportion() {
+        return normal_proportion;
+    }
+
+    public void setOrdinary_grade(float ordinary_grade) {
+        this.ordinary_grade = ordinary_grade;
+    }
+
+    public void setFinal_exam_garde(float final_exam_garde) {
+        this.final_exam_garde = final_exam_garde;
+    }
+
+    public void setFinal_grade(float final_grade) {
+        this.final_grade = final_grade;
+    }
+
+    public void setFinal_exam_proportion(String final_exam_proportion) {
+        this.final_exam_proportion = final_exam_proportion;
+    }
+
+    public void setNormal_proportion(String normal_proportion) {
+        this.normal_proportion = normal_proportion;
+    }
+
+    private float ordinary_grade;
+    private float final_exam_garde;
+    private float final_grade;
+    private String final_exam_proportion;
+    private String normal_proportion;
     private Integer absenteeism;
 
     public Integer getId() {

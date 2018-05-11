@@ -1,5 +1,7 @@
 package com.fzu.edu.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.fzu.edu.dao.ElectiveMapper;
 import com.fzu.edu.model.Elective;
@@ -36,6 +38,11 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
             elective.setLate(0);
             elective.setSick_leave(0);
             elective.setThink_leave(0);
+            elective.setOrdinary_grade(100);
+            elective.setFinal_grade(0);
+            elective.setFinal_exam_garde(0);
+            elective.setNormal_proportion(0+"%");
+            elective.setFinal_exam_proportion(0+"%");
             electiveMapper.insert(elective);
             return 1;
         }else{
@@ -90,4 +97,20 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
         }
         electiveMapper.updateById(elective);
     }
+
+    public void updateFinalGrade(String params){
+
+        JSONObject jsonObject=JSONObject.parseObject(params);
+        JSONArray jsonArray=jsonObject.getJSONArray("data");
+        for(int i=0;i<jsonArray.size();i++){
+            Elective elective= electiveMapper.selectById(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
+            elective.setNormal_proportion(jsonArray.getJSONObject(i).getString("normal_proportion"));
+            elective.setFinal_exam_proportion(jsonArray.getJSONObject(i).getString("final_exam_proportion"));
+            elective.setFinal_grade(Float.parseFloat(jsonArray.getJSONObject(i).getString("final_grade")));
+            elective.setFinal_exam_garde(Float.parseFloat(jsonArray.getJSONObject(i).getString("final_exam_garde")));
+            electiveMapper.updateById(elective);
+        }
+
+    }
+
 }

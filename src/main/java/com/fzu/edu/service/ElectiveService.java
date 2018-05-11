@@ -16,5 +16,5 @@ public interface ElectiveService extends IService<Elective> {
     List<Map<Object,Object>>getAllStudentByCourseId(String course_id,String user_name);
     List<Map<Object,Object>>getAllStudentByCourseIdForClass(String course_id);
     void updateElectiveByClass(Integer elective_id,Integer mark);
-
+    void updateFinalGrade(String params);
 }

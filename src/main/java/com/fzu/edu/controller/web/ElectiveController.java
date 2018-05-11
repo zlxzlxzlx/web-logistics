@@ -1,6 +1,7 @@
 package com.fzu.edu.controller.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fzu.edu.model.Elective;
 import com.fzu.edu.model.Userinfo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -107,6 +109,20 @@ public class ElectiveController {
             electiveService.updateElectiveByClass(elective_id,mark);
             return JSON.toJSONString(1);
         }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+    }
+
+    //批量删除用户
+    @RequestMapping(value = "/updateFinalGrade", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateFinalGrade(
+            @RequestParam String params, HttpServletRequest request
+    ) {
+        try {
+          electiveService.updateFinalGrade(params);
+            return JSON.toJSONString(1);
+        } catch (Exception e) {
             return JSON.toJSONString(0);
         }
     }
