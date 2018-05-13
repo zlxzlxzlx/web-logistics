@@ -42,6 +42,13 @@
         h1{
             text-align: center;
         }
+        p{
+            float:right;
+            margin: 7px auto auto 20px;
+            letter-spacing: 5px;
+            font-size: 1.5em;
+            font-family: Calibri;
+        }
     </style>
     <div class="panel-body ">
         <div class="btn-toolbar">
@@ -51,7 +58,13 @@
                     <div class="form-group">
                         <select ng-model="course_id" class="form-control" ng-options="course.id as course.name for course in Class" ng-change="queryList()"></select>
                     </div>
+                    <label class="control-label">考勤参数模版选择：</label>
+                    <div class="form-group">
+                        <select ng-model="params_id" class="form-control" ng-options="paramsters.id as paramsters.name for paramsters in AllParams" ng-change="detailParams()"></select>
+                    </div>
+                        <p ng-show="showMark==2">迟到{{lateNum}}次扣{{lateValue}}分 旷课{{absenteeismNum}}次扣{{absenteeismValue}}分 病假{{sickNum}}次扣{{sickValue}}分 事假{{thinkNum}}次扣{{thinkValue}}分 迟到{{late}}分钟算迟到</p>
                 </div>
+
             </div>
         </div>
         <div class="table-responsive">
