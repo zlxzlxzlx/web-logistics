@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzu.edu.dao.ParamstersMapper" >
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Paramsters" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="late_num" property="lateNum" jdbcType="INTEGER" />
+    <result column="late_value" property="lateValue" jdbcType="INTEGER" />
+    <result column="absenteeism_num" property="absenteeismNum" jdbcType="INTEGER" />
+    <result column="Absenteeism_value" property="absenteeismValue" jdbcType="INTEGER" />
+    <result column="sick_num" property="sickNum" jdbcType="INTEGER" />
+    <result column="sick_value" property="sickValue" jdbcType="INTEGER" />
+    <result column="think_num" property="thinkNum" jdbcType="INTEGER" />
+    <result column="think_value" property="thinkValue" jdbcType="INTEGER" />
+    <result column="late" property="late" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, late_num, late_value, absenteeism_num, Absenteeism_value, sick_num, sick_value, 
+    think_num, think_value, late, flag,name
+  </sql>
+<select id="getAllParams" resultMap="BaseResultMap">
+  select p.*
+  from paramsters p
+  where p.flag=0
+</select>
+</mapper>
