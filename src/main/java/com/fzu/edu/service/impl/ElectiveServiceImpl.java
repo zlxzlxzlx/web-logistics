@@ -77,10 +77,11 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
         map.put("course_id",course_id);
         return electiveMapper.getAllStudentByCourseIdForClass(map);
     }
-    public void updateElectiveByClass(Integer elective_id,Integer mark){
+    public void updateElectiveByClass(Integer elective_id,Integer mark,Float value){
         Elective elective=electiveMapper.selectById(elective_id);
         if(mark==1){
             elective.setAbsenteeism(elective.getAbsenteeism()+1);
+
             //旷课
         }
         if(mark==2){
@@ -95,6 +96,7 @@ public class ElectiveServiceImpl extends ServiceImpl<ElectiveMapper,Elective> im
             elective.setThink_leave(elective.getThink_leave()+1);
             //事假
         }
+        elective.setOrdinary_grade(elective.getOrdinary_grade()-value);
         electiveMapper.updateById(elective);
     }
 
