@@ -1,0 +1,63 @@
+<!-- Removing search and results count filter -->
+
+<div class="panel ">
+    <div class="panel-heading">
+        <h3 class="panel-title">设置考勤参数</h3>
+    </div>
+    <div class="panel-body ">
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+
+                // Replace checkboxes when they appear
+                var $state = $("#companygrid thead input[type='checkbox']");
+
+                $("#companygrid").on('draw.dt', function () {
+                    cbr_replace();
+                    $state.trigger('change');
+                });
+
+                // Script to select all checkboxes
+                $state.on('change', function (ev) {
+                    var $chcks = $("#companygrid tbody input[type='checkbox']");
+
+                    if ($state.is(':checked')) {
+                        $chcks.prop('checked', true).trigger('change');
+                    }
+                    else {
+                        $chcks.prop('checked', false).trigger('change');
+                    }
+                });
+            });
+        </script>
+
+        <div class="btn-toolbar" style=" margin-bottom: 5px">
+            <div class="btn-group focus-btn-group">
+               <button class="btn btn-default gridBtn" ng-click="add()"></span> 新增</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table  table-bordered table-striped" id="drivergrid">
+
+                <tbody class="middle-align">
+                <tr ng-repeat="row in root.data">
+
+                    <td>考勤参数模版{{$index+1}}</td>
+                    <td>迟到&nbsp &nbsp{{row.lateNum}}&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp{{row.lateValue}}&nbsp &nbsp分</td>
+                    <td>旷课&nbsp &nbsp{{row.absenteeismNum}}&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp{{row.absenteeismValue}}&nbsp &nbsp分</td>
+                    <td>病假&nbsp &nbsp{{row.sickNum}}&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp{{row.sickValue}}&nbsp &nbsp分</td>
+                    <td>事假&nbsp &nbsp{{row.thinkNum}}&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp{{row.thinkValue}}&nbsp &nbsp分</td>
+                    <td>迟到&nbsp &nbsp{{row.late}}&nbsp &nbsp分钟算旷课</td>
+                    <td style="white-space: nowrap;">
+                        <a href="" class="btn  btn-sm btn-icon icon-left" ng-click="delRow(row.id)">
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="root.data.length>0" ng-include="'views/common/pagination.html'"></div>
+    </div>
+</div>
+</div>
+<div ng-include=" 'views/userInfoManger/addSetParamstersForm.html'"></div>

@@ -76,6 +76,13 @@ $stateProvider
        controller: 'UserInfoController',
         params:{args:{}}
     })
+    //系统管理/设置考勤参数
+    .state('SetParameters', {
+        url: '/SetParameters',
+        templateUrl: 'views/userInfoManger/SetParameters.html',
+       controller: 'SetParametersController',
+        params:{args:{}}
+    })
 
     //课程管理页面
     .state('courseManage', {

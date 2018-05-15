@@ -103,10 +103,11 @@ public class ElectiveController {
     @ResponseBody
     public String updateElectiveByClass(
             @RequestParam(value = "elective_id",required = false) Integer elective_id,
-            @RequestParam(value = "mark",required = false) Integer mark
+            @RequestParam(value = "mark",required = false) Integer mark,
+            @RequestParam(value = "value",required = false) Float value
     ) {
         try {
-            electiveService.updateElectiveByClass(elective_id,mark);
+            electiveService.updateElectiveByClass(elective_id,mark,value);
             return JSON.toJSONString(1);
         }catch (Exception e){
             return JSON.toJSONString(0);

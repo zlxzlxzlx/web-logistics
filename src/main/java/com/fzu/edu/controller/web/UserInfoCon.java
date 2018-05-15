@@ -137,7 +137,7 @@ public class UserInfoCon {
         String sessionID = request.getRequestedSessionId();
         if (!MemoryData.getSessionIDMap().containsKey(user)) {
             return JSON.toJSONString(0);//不存在，首次登陆
-        }else {
+        } else {
             return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
         }
     }
@@ -157,6 +157,7 @@ public class UserInfoCon {
                 String sessionID = request.getSession().getId();//request.getRequestedSessionId();
                 String user = userinfo.getUserName() + "";
                 if (!MemoryData.getSessionIDMap().containsKey(user)) { //不存在，首次登陆，放入Map
+
                     if (mark!=null){
                         MemoryData.getSessionIDMap().put(user, "3");
                     }else {
