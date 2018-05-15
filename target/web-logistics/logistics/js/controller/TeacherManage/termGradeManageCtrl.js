@@ -69,11 +69,15 @@ app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stat
             var params={
                 data:$scope.root.data
             };
-            console.log(1111,params);
            httpService.postJson(params,'elective/updateFinalGrade').then(function (result) {
-               console.log(111,result);
-           },function () {
+              if(result==1){
+                  SweetAlert.swal("保存成功", "", "success");
+              }else{
+                  SweetAlert.swal("保存失败", "", "error");
+              }
 
+           },function () {
+               SweetAlert.swal("保存失败", "", "error");
            })
         
         };

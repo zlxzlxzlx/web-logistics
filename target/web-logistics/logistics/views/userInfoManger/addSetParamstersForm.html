@@ -1,0 +1,49 @@
+<style >
+    .setParamstersInput{
+        width: 20%;
+        text-align: center;
+    }
+    .row{
+        margin: auto auto 5px 0px;
+    }
+    </style>
+
+<script type="text/ng-template" id="addSetParamstersForm.html">
+    <form name="submit_form" novalidate ng-submit="submitForm()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;
+            </button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="row" >
+                        迟到&nbsp &nbsp <input required type="text" class="setParamstersInput" ng-model="late_num">&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp<input class="setParamstersInput" required type="text" ng-model="late_value">&nbsp &nbsp分
+                </div>
+            <div class="row" >
+                        旷课&nbsp &nbsp <input required type="text" class="setParamstersInput"  ng-model="absenteeism_num">&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp<input class="setParamstersInput" required type="text"  ng-model="absenteeism_value">&nbsp &nbsp分
+                </div>
+            <div class="row" >
+                        病假&nbsp &nbsp <input required type="text" class="setParamstersInput"  ng-model="sick_num">&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp<input class="setParamstersInput" required type="text"  ng-model="sick_value">&nbsp &nbsp分
+                </div>
+            <div class="row" >
+                        事假&nbsp &nbsp <input required type="text" class="setParamstersInput"  ng-model="think_num">&nbsp &nbsp次&nbsp &nbsp扣&nbsp &nbsp<input class="setParamstersInput" required type="text"  ng-model="think_value">&nbsp &nbsp分
+                </div>
+            <div class="row" >
+                        迟到&nbsp &nbsp <input required type="text" class="setParamstersInput"  ng-model="late">&nbsp &nbsp分钟算旷课
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+            <input class="btn btn-success" type="submit" value="提交" name="save" ng-disabled="submit_form.$invalid"/>
+
+            <span class="btn btn-warning" ng-click="cancel()">取消</span>
+
+        </div>
+    </form>
+</script>
+

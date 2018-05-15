@@ -13,7 +13,7 @@
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.1.102:1433;DatabaseName=db_logistics"
+                        connectionURL="jdbc:sqlserver://192.168.1.102:1433;DatabaseName=db_attendance"
                         userId="sa"
                         password="`1qazse4">
         </jdbcConnection>
@@ -47,7 +47,9 @@
         <!-- 指定数据库表 -->
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
-        <table tableName="purview_type" domainObjectName="purviewType"
+
+        <table tableName="paramsters" domainObjectName="Paramsters"
+
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
