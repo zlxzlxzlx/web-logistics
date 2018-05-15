@@ -120,69 +120,183 @@ loginModule.config(function($httpProvider,$stateProvider,$uiViewScrollProvider,$
 
 loginModule.controller('loginController',['$scope', '$http','localStorageService','$state','$rootScope','$location','$window','SweetAlert','$uibModal',
     function ($scope, $http, localStorageService,$state,$rootScope,$location,$window,SweetAlert,$uibModal) {
+        $scope.role=[
+            {id:'0',name:'超级管理员'},
+            {id:'1',name:'学校管理员'},
+            {id:'2',name:'个人用户'},
+            ];
+        $scope.selected='0';
         $scope.loginSys=function () {
-            var params = {
-                account: $scope.account,
-                pwd: $scope.pwd
-            };
-            $http.get('user/login',{params})
-                .success(function(data,status,headers,config){
-                    if (data !== -1) {
-                        console.log(111,data);
-                        SweetAlert.swal("登录成功", "", "success");
-                        localStorageService.set("userInfo", data);
-                        $rootScope.user = data;
-                       setTimeout(function () {
-                            $window.location.href = '/web-logistics/logistics/index.html';
-                        }, 1000);
-                    }
-                    else {
+
+            if($scope.selected=='0'){
+                var params = {
+                    account: $scope.account,
+                    pwd: $scope.pwd,
+                    mark:3
+                };
+                $http.get('user/login',{params:params})
+                    .success(function(data,status,headers,config){
+                        if (data !== -1) {
+                            console.log(111,data);
+                            SweetAlert.swal("登录成功", "", "success");
+                            localStorageService.set("userInfo", data);
+                            $rootScope.user = data;
+                            setTimeout(function () {
+                                $window.location.href = '/web-logistics/logistics/index.html';
+                            }, 1000);
+                        }
+                        else {
+                            SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
+                        }
+                    })
+                    .error(function(data,status,headers,config){
                         SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
-                    }
-                })
-                .error(function(data,status,headers,config){
-                    SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
-                })
+                    })
+            }else if ($scope.selected=='1'){
+                var params = {
+                    account: $scope.account,
+                    pwd: $scope.pwd,
+                };
+                $http.get('school/login',{params:params})
+                    .success(function(data,status,headers,config){
+                        if (data !== -1) {
+                            console.log(111,data);
+                            SweetAlert.swal("登录成功", "", "success");
+                            localStorageService.set("userInfo", data);
+                            $rootScope.user = data;
+                            setTimeout(function () {
+                                $window.location.href = '/web-logistics/logistics/index.html';
+                            }, 1000);
+                        }
+                        else {
+                            SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
+                        }
+                    })
+                    .error(function(data,status,headers,config){
+                        SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
+                    })
+            }else {
+                var params = {
+                    account: $scope.account,
+                    pwd: $scope.pwd,
+                    mark:null
+                };
+                $http.get('user/login',{params:params})
+                    .success(function(data,status,headers,config){
+                        if (data !== -1) {
+                            console.log(111,data);
+                            SweetAlert.swal("登录成功", "", "success");
+                            localStorageService.set("userInfo", data);
+                            $rootScope.user = data;
+                            setTimeout(function () {
+                                $window.location.href = '/web-logistics/logistics/index.html';
+                            }, 1000);
+                        }
+                        else {
+                            SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
+                        }
+                    })
+                    .error(function(data,status,headers,config){
+                        SweetAlert.swal("帐号或者密码输入错误请重新输入", "", "warning");
+                    })
+            }
+
+
         }
            $scope.loginSystem=function () {
                 if($scope.account!=""&&$scope.account!=null&&$scope.pwd!=""&&$scope.pwd!=null){
                     var params = {
                         account:$scope.account
                     };
-                    $http.get('user/loginCheck',{params})
-                        .success(function(data,status,headers,config){
-                            if(data===1){
-                                SweetAlert.swal(
-                                    {title:"该账号已经登陆在操作，是否继续？",
-                                        text:"本次登陆会造成之前的登录失效，请谨慎操作！",
-                                        type:"warning",
-                                        showCancelButton:true,
-                                        confirmButtonColor:"#DD6B55",
-                                        confirmButtonText:"是的，我要继续！",
-                                        cancelButtonText:"让我再考虑一下…",
-                                        closeOnConfirm:false,
-                                    },
-                                    function(isConfirm){
-                                        if (isConfirm) {
-                                            $scope.loginSys();
-                                        }
-                                    });
+                    if($scope.selected=='0') {
+                                    $http.get('user/loginCheck1',{params:params})
+                                        .success(function(data,status,headers,config){
+                                            if(data===1){
+                                                SweetAlert.swal(
+                                                    {title:"该账号已经登陆在操作，是否继续？",
+                                                        text:"本次登陆会造成之前的登录失效，请谨慎操作！",
+                                                        type:"warning",
+                                                        showCancelButton:true,
+                                                        confirmButtonColor:"#DD6B55",
+                                                        confirmButtonText:"是的，我要继续！",
+                                                        cancelButtonText:"让我再考虑一下…",
+                                                        closeOnConfirm:false,
+                                                    },
+                                                    function(isConfirm){
+                                                        if (isConfirm) {
+                                                            $scope.loginSys();
+                                                        }
+                                                    });
+                                            }else{
+                                                $scope.loginSys();
+                                            }
+                                        })
+                                        .error(function(data,status,headers,config){
+                                            SweetAlert.swal("登录失败", "", "error");
+                                        })
+                                }else if ($scope.selected=='2'){
+                                    $http.get('user/loginCheck',{params:params})
+                                        .success(function(data,status,headers,config){
+                                            if(data===1){
+                                                SweetAlert.swal(
+                                                    {title:"该账号已经登陆在操作，是否继续？",
+                                                        text:"本次登陆会造成之前的登录失效，请谨慎操作！",
+                                                        type:"warning",
+                                                        showCancelButton:true,
+                                                        confirmButtonColor:"#DD6B55",
+                                                        confirmButtonText:"是的，我要继续！",
+                                                        cancelButtonText:"让我再考虑一下…",
+                                                        closeOnConfirm:false,
+                                                    },
+                                                    function(isConfirm){
+                                                        if (isConfirm) {
+                                                            $scope.loginSys();
+                                                        }
+                                                    });
+                                            }else{
+                                                $scope.loginSys();
+                                            }
+                                        })
+                                        .error(function(data,status,headers,config){
+                                            SweetAlert.swal("登录失败", "", "error");
+                                        })
                             }else{
-                                $scope.loginSys();
-                            }
-                        })
-                        .error(function(data,status,headers,config){
-                            SweetAlert.swal("登录失败", "", "error");
-                        })
-                }else{
-                    swal({title:"提示信息！",
-                            text:"账号或密码不能为空。",
-                            type:"warning"
-                        },function(){
+                                    $http.get('school/loginCheck',{params:params})
+                                        .success(function(data,status,headers,config){
+                                            if(data===1){
+                                                SweetAlert.swal(
+                                                    {title:"该账号已经登陆在操作，是否继续？",
+                                                        text:"本次登陆会造成之前的登录失效，请谨慎操作！",
+                                                        type:"warning",
+                                                        showCancelButton:true,
+                                                        confirmButtonColor:"#DD6B55",
+                                                        confirmButtonText:"是的，我要继续！",
+                                                        cancelButtonText:"让我再考虑一下…",
+                                                        closeOnConfirm:false,
+                                                    },
+                                                    function(isConfirm){
+                                                        if (isConfirm) {
+                                                            $scope.loginSys();
+                                                        }
+                                                    });
+                                            }else{
+                                                $scope.loginSys();
+                                            }
+                                        })
+                                        .error(function(data,status,headers,config){
+                                            SweetAlert.swal("登录失败", "", "error");
+                                        })
+                                            }
+                    }else {
+                        swal({title:"提示信息！",
+                                text:"账号或密码不能为空。",
+                                type:"warning"
+                            },function(){
 
-                        }
-                    )
-                }
+                            }
+                        )
+                    }
+
 
             }
 
@@ -238,7 +352,7 @@ loginModule.controller('registerModalCtrl',['$scope', '$http','localStorageServi
         var params={
             school_id:$scope.school
         }
-        $http.get('college/getAllCollegeForSelect',{params})
+        $http.get('college/getAllCollegeForSelect',{params:params})
             .success(function(data,status,headers,config){
                 $scope.colleges=data;
             })

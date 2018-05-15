@@ -157,7 +157,14 @@ $stateProvider
         params:{args:{}}
 
     })
-    
+    //账户管理
+    .state('accountManage', {
+        url: '/accountManage',
+        templateUrl: 'views/AccountManage/accountManage.html',
+        controller: 'accountManageCtrl',
+        params:{args:{}}
+
+    })
     
 })
 

@@ -61,10 +61,7 @@
                 </div>
 
                 <div class="form-group mb-lg">
-                    <div class="clearfix">
-                        <label class="pull-left">密码</label>
-                        <a href="#recoverPassword" class="pull-right" >忘记密码?</a>
-                    </div>
+
                     <div class="input-group input-group-icon">
                         <input name="pwd" type="password" class="form-control input-lg" ng-model="pwd"/>
 									<span class="input-group-addon">
@@ -77,7 +74,12 @@
 
 
                 <div class="row" style="margin-top: auto">
-
+                    <div class="clearfix">
+                        <label>用户角色</label>
+                        <select select2 ng-model="selected" ng-options="x.id as x.name for x in role" >
+                        </select>
+                        <a href="#recoverPassword" class="pull-right" >忘记密码?</a>
+                    </div>
                     <div class="col-sm-6" >
                         <button type="submit" class="btn btn-primary hidden-xs" ng-click="register()">注册</button>
                     </div>

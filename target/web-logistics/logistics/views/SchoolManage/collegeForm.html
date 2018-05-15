@@ -1,0 +1,65 @@
+<script type="text/ng-template" id="collegeForm.html">
+    <form name="submit_form" novalidate ng-submit="submitForm()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;
+            </button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">学院编号</label>
+                        <input type="text" required name="college_code" ng-model="college_code"
+                               class="form-control"  placeholder="学院编号" unique_verify="/web-logistics/college/collegeCodeUnique">
+                    </div>
+                    <div ng-messages="submit_form.college_code.$error" ng-show="submit_form.college_code.$touched || submit_form.$submitted">
+                        <span class="ng-message" ng-message="required">请输入学院编号</span>
+                        <span class="ng-message" ng-message="uniqueVerify">编号已存在</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">学院名称</label>
+                        <input type="text" required name="college_name" ng-model="college_name"
+                               class="form-control"  placeholder="学院名称" >
+                    </div>
+                    <div ng-messages="submit_form.college_name.$error" ng-show="submit_form.college_name.$touched || submit_form.$submitted">
+                        <span class="ng-message" ng-message="required">请输入学院名称</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">所属学校</label>
+                      <select  class="form-control" ng-model="school_id" ng-options="school.id as school.school_name for school in schools"></select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div>
+                        <label class="control-label">学院简介</label>
+                        </div>
+                        <textarea ng-model="college_detail" style="width:  100%;height: 100px;"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <input class="btn btn-success" type="submit" value="提交" name="save" ng-disabled="submit_form.$invalid"/>
+
+            <span class="btn btn-warning" ng-click="cancel()">取消</span>
+
+        </div>
+    </form>
+</script>
+

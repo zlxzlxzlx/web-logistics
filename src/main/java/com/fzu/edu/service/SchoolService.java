@@ -17,4 +17,5 @@ public interface SchoolService extends IService<School> {
     void delSchools(List ids);
     int schoolCodeUnique(String school_code);
     School addSchool(String school_code, String school_name,String school_detail);
+    School login(String account,String pwd);
 }

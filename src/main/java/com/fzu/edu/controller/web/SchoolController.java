@@ -3,7 +3,9 @@ package com.fzu.edu.controller.web;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fzu.edu.model.School;
+import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.SchoolService;
+import com.fzu.edu.utils.MemoryData;
 import com.fzu.edu.utils.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +93,45 @@ public class SchoolController {
             return JSON.toJSONString(school,SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){
             return JSON.toJSONString(0);
+        }
+    }
+    //登录
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @ResponseBody
+    public String login(@RequestParam(value = "account") String account,
+                        @RequestParam(value = "pwd") String pwd,
+                        HttpServletRequest request) {
+        try {
+            School school = schoolService.login(account, pwd) ;
+            if (school == null) {
+                return JSON.toJSONString(-1);
+            } else {
+                request.getSession().setAttribute("loginAccount", school);
+                String sessionID = request.getSession().getId();//request.getRequestedSessionId();
+                String sch = school.getSchoolName() + "";
+                if (!MemoryData.getSessionIDMap().containsKey(sch)) { //不存在，首次登陆，放入Map
+                    MemoryData.getSessionIDMap().put(sch, sessionID);
+                } else{
+                    MemoryData.getSessionIDMap().remove(sch);
+                    MemoryData.getSessionIDMap().put(sch, sessionID);
+                }
+                return JSON.toJSONString(sch);
+            }
+        } catch (Exception e) {
+            return JSON.toJSONString(0);
+        }
+    }
+    @RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public String loginCheck(@RequestParam(value = "account") String account,
+                             HttpServletRequest request) {
+
+        String sch = account + "";
+        String sessionID = request.getRequestedSessionId();
+        if (!MemoryData.getSessionIDMap().containsKey(sch)) {
+            return JSON.toJSONString(0);//不存在，首次登陆
+        }else {
+            return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
         }
     }
 }

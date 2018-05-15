@@ -101,7 +101,6 @@ public class UserInfoCon {
 
         if(!file.isEmpty())
         {
-
             String location=session.getServletContext().getRealPath("logistics/upload/userImage");
             String originalFileName = file.getOriginalFilename();//获得当前文件的名称
             int i = originalFileName.lastIndexOf('.');
@@ -119,7 +118,22 @@ public class UserInfoCon {
     @ResponseBody
     public String loginCheck(@RequestParam(value = "account") String account,
                              HttpServletRequest request) {
-        String user = account + "";
+        String user = null;
+        user = account + "";
+
+        String sessionID = request.getRequestedSessionId();
+        if (!MemoryData.getSessionIDMap().containsKey(user)) {
+            return JSON.toJSONString(0);//不存在，首次登陆
+        }else {
+            return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
+        }
+    }
+    //登录检查
+    @RequestMapping(value = "/loginCheck1", method = RequestMethod.GET)
+    @ResponseBody
+    public String loginCheck1(@RequestParam(value = "account") String account,
+                             HttpServletRequest request) {
+        String user = "3";
         String sessionID = request.getRequestedSessionId();
         if (!MemoryData.getSessionIDMap().containsKey(user)) {
             return JSON.toJSONString(0);//不存在，首次登陆
@@ -132,9 +146,10 @@ public class UserInfoCon {
     @ResponseBody
     public String login(@RequestParam(value = "account") String account,
                         @RequestParam(value = "pwd") String pwd,
+                        @RequestParam(value = "mark",required = false) Integer mark,
                         HttpServletRequest request) {
         try {
-            Userinfo userinfo = userInfoService.login(account, pwd) ;
+            Userinfo userinfo = userInfoService.login(account, pwd,mark) ;
             if (userinfo == null) {
                 return JSON.toJSONString(-1);
             } else {
@@ -142,7 +157,12 @@ public class UserInfoCon {
                 String sessionID = request.getSession().getId();//request.getRequestedSessionId();
                 String user = userinfo.getUserName() + "";
                 if (!MemoryData.getSessionIDMap().containsKey(user)) { //不存在，首次登陆，放入Map
-                    MemoryData.getSessionIDMap().put(user, sessionID);
+                    if (mark!=null){
+                        MemoryData.getSessionIDMap().put(user, "3");
+                    }else {
+                        MemoryData.getSessionIDMap().put(user, sessionID);
+                    }
+
                 } else{
                     MemoryData.getSessionIDMap().remove(user);
                     MemoryData.getSessionIDMap().put(user, sessionID);

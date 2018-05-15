@@ -40,10 +40,16 @@
       where id = ${item}
     </foreach>
   </update>
-  <select id="selectByUsername"  parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByUsername"  parameterType="hashmap" resultMap="BaseResultMap">
     select u.*
     from userinfo u
     where u.flag=0  and u.user_name= #{account,jdbcType=VARCHAR}
+    <if test="mark!=null">
+      and mark = #{mark,jdbcType=INTEGER}
+    </if>
+    <if test="mark == null">
+      and  mark != 3
+    </if>
   </select>
 
 </mapper>

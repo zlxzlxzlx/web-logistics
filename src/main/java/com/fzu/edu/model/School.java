@@ -11,6 +11,16 @@ public class School {
 
     private String schoolDetail;
 
+    private String passwd;
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
     public Integer getId() {
         return id;
     }

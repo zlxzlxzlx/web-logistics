@@ -16,5 +16,5 @@ public interface UserInfoService extends IService<Userinfo> {
     void delUser(Integer id);
     void delUsers(List ids);
     void uploadImage(String url,Integer id);
-    Userinfo login(String account, String pwd)throws Exception;
+    Userinfo login(String account, String pwd,Integer mark)throws Exception;
 }

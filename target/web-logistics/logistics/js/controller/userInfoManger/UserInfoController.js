@@ -34,7 +34,7 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
             $scope.username="";
             $scope.queryList();
         };
-        //新增
+      /*  //新增
         $scope.addUserInfo=function () {
             var modalInstance=$uibModal.open({
                 backdrop:'static',
@@ -47,7 +47,7 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
             modalInstance.result.then(function (result) {},function (reason) {
                 $scope.reset();
             });
-        };
+        };*/
         //删除
         $scope.delRow=function (id) {
             var params = {

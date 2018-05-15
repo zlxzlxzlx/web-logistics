@@ -68,8 +68,11 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
         userinfo.setImageUrl(url);
         userInfoMapper.updateById(userinfo);
     }
-    public  Userinfo login(String account,String pwd)throws Exception{
-        Userinfo userinfo=userInfoMapper.selectByUsername(account);
+    public  Userinfo login(String account,String pwd,Integer mark)throws Exception{
+        Map map = new HashMap();
+        map.put("account",account);
+        map.put("mark",mark);
+        Userinfo userinfo=userInfoMapper.selectByUsername(map);
         String passwd="";
         passwd=MD5Util.md5Encrypt(pwd);
         if(userinfo!=null){

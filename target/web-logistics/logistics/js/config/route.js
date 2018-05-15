@@ -109,7 +109,62 @@ $stateProvider
          params:{args:{}}
 
     })
-    
+    //学生管理/课程信息
+    .state('manageGrade', {
+        url: '/manageGrade',
+        templateUrl: 'views/StudentManage/gradeManage.html',
+        controller: 'gradeManageCtrl',
+        params:{args:{}}
+
+    }) 
+    //学生管理/选课信息
+    .state('manageElective', {
+        url: '/manageElective',
+        templateUrl: 'views/StudentManage/electiveManage.html',
+        controller: 'electiveManageCtrl',
+        params:{args:{}}
+
+    })  
+    //学生管理/课表查询
+    .state('scheduleQuery', {
+        url: '/scheduleQuery',
+        templateUrl: 'views/StudentManage/scheduleQuery.html',
+        controller: 'scheduleQueryManageCtrl',
+        params:{args:{}}
+
+    })  
+    //老师管理/班级管理
+    .state('manageClass', {
+        url: '/manageClass',
+        templateUrl: 'views/TeacherManage/manageClass.html',
+        controller: 'ClassManageCtrl',
+        params:{args:{}}
+
+    }) 
+    //老师管理/课堂点名
+    .state('ClassName', {
+        url: '/ClassName',
+        templateUrl: 'views/TeacherManage/ClassName.html',
+        controller: 'ClassNameManageCtrl',
+        params:{args:{}}
+
+    })
+    //老师管理/生成期末成绩
+    .state('termGrade', {
+        url: '/termGrade',
+        templateUrl: 'views/TeacherManage/termGrade.html',
+        controller: 'termGradeManageCtrl',
+        params:{args:{}}
+
+    })
+    //账户管理
+    .state('accountManage', {
+        url: '/accountManage',
+        templateUrl: 'views/AccountManage/accountManage.html',
+        controller: 'accountManageCtrl',
+        params:{args:{}}
+
+    })
     
 })
 

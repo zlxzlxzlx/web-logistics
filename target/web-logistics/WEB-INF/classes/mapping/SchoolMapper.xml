@@ -6,12 +6,13 @@
     <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
     <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fzu.edu.model.School">
     <result column="school_detail" jdbcType="LONGVARCHAR" property="schoolDetail" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, school_code, school_name, flag
+    id, school_code, school_name, flag,passwd
   </sql>
   <sql id="Blob_Column_List">
     school_detail
@@ -28,6 +29,11 @@
       and s.school_name LIKE '%'+#{school_name}+'%'
     </if>
   </select>
+  <select id="getAllSchoolForSelect"   resultType="java.util.HashMap">
+    select s.*
+    from school s
+    where s.flag=0
+  </select>
   <update id="delSchools" parameterType="java.util.List">
     <foreach close="" collection="list" index="index" item="item" open="" separator=";">
       update school
@@ -42,5 +48,9 @@
     select s.*
     from school s
     where s.flag=0  and s.school_code= #{school_code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * FROM school WHERE school_code = #{account,jdbcType=VARCHAR} AND flag = 0
   </select>
 </mapper>
