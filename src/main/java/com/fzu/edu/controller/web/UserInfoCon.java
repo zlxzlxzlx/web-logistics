@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.lang.StringUtils;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -123,8 +125,10 @@ public class UserInfoCon {
         String sessionID = request.getRequestedSessionId();
         if (!MemoryData.getSessionIDMap().containsKey(user)) {
             return JSON.toJSONString(0);//不存在，首次登陆
-        }else {
+        } else if (MemoryData.getSessionIDMap().containsKey(user) && !StringUtils.equals(sessionID, MemoryData.getSessionIDMap().get(user))) {
             return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
+        } else {//非首次登陆，并且是本次登陆
+            return JSON.toJSONString(2);
         }
     }
     //登录
@@ -143,7 +147,7 @@ public class UserInfoCon {
                 String user = userinfo.getUserName() + "";
                 if (!MemoryData.getSessionIDMap().containsKey(user)) { //不存在，首次登陆，放入Map
                     MemoryData.getSessionIDMap().put(user, sessionID);
-                } else{
+                } else if (MemoryData.getSessionIDMap().containsKey(user) && !StringUtils.equals(sessionID, MemoryData.getSessionIDMap().get(user))) {
                     MemoryData.getSessionIDMap().remove(user);
                     MemoryData.getSessionIDMap().put(user, sessionID);
                 }
