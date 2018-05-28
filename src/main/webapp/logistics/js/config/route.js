@@ -83,6 +83,13 @@ $stateProvider
        controller: 'SetParametersController',
         params:{args:{}}
     })
+    //系统管理/教室管理
+    .state('ClassRoom', {
+        url: '/ClassRoom',
+        templateUrl: 'views/ClassRoomManage/ClassRoom.html',
+       controller: 'ClassRoomController',
+        params:{args:{}}
+    })
 
     //课程管理页面
     .state('courseManage', {
@@ -137,6 +144,14 @@ $stateProvider
         url: '/scheduleQuery',
         templateUrl: 'views/StudentManage/scheduleQuery.html',
         controller: 'scheduleQueryManageCtrl',
+        params:{args:{}}
+
+    })  
+    //老师管理/班级管理
+    .state('teachingArrangements', {
+        url: '/teachingArrangements',
+        templateUrl: 'views/TeacherManage/teachingArrangements.html',
+        controller: 'teachingArrangementsCtrl',
         params:{args:{}}
 
     })  
