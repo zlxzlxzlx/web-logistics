@@ -5,7 +5,7 @@
 app.controller('indexController',['$scope', '$rootScope','$http','httpService','localStorageService','$interval','SweetAlert','$window','baseService',
     function($scope, $rootScope,$http,httpService,localStorageService,$interval,SweetAlert,$window,baseService){
 
-       $rootScope.user=localStorageService.get("userInfo");
+   /*    $rootScope.user=localStorageService.get("userInfo");
         var checkLogin = function(){
             $http.get('/web-logistics/user/loginCheck',{params:{
                 account:$rootScope.user.user_name,
@@ -28,5 +28,5 @@ app.controller('indexController',['$scope', '$rootScope','$http','httpService','
             SweetAlert.swal("退出成功", "", "success");
             $window.location.href ='/web-logistics';
         };
-
+*/
     }]);

@@ -7,18 +7,14 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
     $scope.title='编辑课程信息';
     $scope.code = data.code?data.code:"";
     $scope.name = data.name?data.name:"";
-  //  $scope.teacher_name = data.teacherName?data.teacherName:"";
     $scope.class_hour = data.class_hour?data.class_hour:"";
-    $scope.type = data.type?data.type:"";
-    $scope.start_time = data.start_time?data.start_time:"";
-    $scope.end_time = data.end_time?data.end_time:"";
-    $scope.class_time = data.class_time?data.class_time:"";
+    $scope.school_id= data.school_id?data.school_id:"";
+    $scope.element_id=data.college_id?data.college_id:"";
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
     try {
         $scope.school_id= data.school_id?data.school_id:"";
-        $scope.teacher_id=data.teacher_id?data.teacher_id:"";
         $scope.element_id=data.college_id?data.college_id:"";
     }catch (e){}
 
@@ -48,7 +44,7 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
                     }
                 }
             },function () {
-                console.log("获取教师(开课单位)失败");
+
             }
         );
     };
@@ -91,15 +87,9 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
                 code:$scope.code,
                 name:$scope.name,
                 class_hour:$scope.class_hour,
-                type:$scope.type,
-                teacher_id:$scope.teacher_id,
                 major_id:$scope.element_id,
                 school_id:$scope.school_id,
-                class_time:$scope.class_time,
-                start_time:$scope.start_time,
-                end_time:$scope.end_time,
-            };
-            console.log("params:",params);
+        };
             httpService.updateRow(params,'course/updateCourse').then(
                 function (result) {
                     $scope.result = result;

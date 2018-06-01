@@ -17,7 +17,8 @@ app.controller('ClassManageCtrl',['$scope','$http','$filter','$state','$statePar
           var params={
               user_id:$rootScope.user.id
           }
-            httpService.getAll(params,'course/getCourseForClass').then(function (result) {
+            httpService.getAll(params,'arrange/getCourseForClass').then(function (result) {
+                console.log(111,result);
                $scope.Class=result;
             },function () {
 
@@ -29,12 +30,13 @@ app.controller('ClassManageCtrl',['$scope','$http','$filter','$state','$statePar
             var params={
                 course_id:$scope.course_id,
                 user_name:$scope.user_name,
+                teacher_id:$scope.user.id,
                 pageNo: 1,
                 pageSize:10
             };
             $http({
                 method : 'POST',
-                url : '../elective/getAllStudentByCourseId',
+                url : '../studentCourse/getAllStudentByCourseId',
                 data: params
             }).success(function(result, status, headers, config) {
                 $scope.pagination.totalCount=result.totalCount;

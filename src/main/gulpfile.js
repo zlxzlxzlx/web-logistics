@@ -99,6 +99,7 @@ gulp.task('logistics_services', function() {
 gulp.task('logistics_directive', function() {
     gulp.src([
         './webapp/logistics/js/directive/*.js', //加载angular模块
+        './webapp/logistics/js/directive/tree/tree.directive.js', //加载angular模块
     ])
         .pipe(ngAnnotate())
         .pipe(uglify())//压缩

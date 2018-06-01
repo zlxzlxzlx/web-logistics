@@ -128,11 +128,10 @@ public class UserInfoCon {
     //登录检查
     @RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
     @ResponseBody
-    public String loginCheck(@RequestParam(value = "account") String account,
+    public String loginCheck(@RequestParam(value = "account",required = false) String account,
                              HttpServletRequest request) {
         String user = null;
         user = account + "";
-
         String sessionID = request.getRequestedSessionId();
         if (!MemoryData.getSessionIDMap().containsKey(user)) {
             return JSON.toJSONString(0);//不存在，首次登陆
@@ -143,7 +142,7 @@ public class UserInfoCon {
     //登录检查
     @RequestMapping(value = "/loginCheck1", method = RequestMethod.GET)
     @ResponseBody
-    public String loginCheck1(@RequestParam(value = "account") String account,
+    public String loginCheck1(@RequestParam(value = "account",required = false) String account,
                              HttpServletRequest request) {
         String user = "3";
         String sessionID = request.getRequestedSessionId();

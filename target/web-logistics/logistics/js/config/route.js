@@ -83,6 +83,13 @@ $stateProvider
        controller: 'SetParametersController',
         params:{args:{}}
     })
+    //系统管理/教室管理
+    .state('ClassRoom', {
+        url: '/ClassRoom',
+        templateUrl: 'views/ClassRoomManage/ClassRoom.html',
+       controller: 'ClassRoomController',
+        params:{args:{}}
+    })
 
     //课程管理页面
     .state('courseManage', {
@@ -141,6 +148,14 @@ $stateProvider
 
     })  
     //老师管理/班级管理
+    .state('teachingArrangements', {
+        url: '/teachingArrangements',
+        templateUrl: 'views/TeacherManage/teachingArrangements.html',
+        controller: 'teachingArrangementsCtrl',
+        params:{args:{}}
+
+    })  
+    //老师管理/班级管理
     .state('manageClass', {
         url: '/manageClass',
         templateUrl: 'views/TeacherManage/manageClass.html',
@@ -169,6 +184,30 @@ $stateProvider
         url: '/accountManage',
         templateUrl: 'views/AccountManage/accountManage.html',
         controller: 'accountManageCtrl',
+        params:{args:{}}
+
+    })
+    //权限管理
+    .state('powerManage', {
+        url: '/powerManage',
+        templateUrl: 'views/powerManage/powerManage.html',
+        controller: 'powerManageCtrl',
+        params:{args:{}}
+
+    })
+    //数据字典
+    .state('dataManage', {
+        url: '/dataManage',
+        templateUrl: 'views/dataManage/dataManage.html',
+        controller: 'dataManageCtrl',
+        params:{args:{}}
+
+    })
+    //菜单管理
+    .state('menuManage', {
+        url: '/menuManage',
+        templateUrl: 'views/menuManage/menuManage.html',
+        controller: 'menuManageCtrl',
         params:{args:{}}
 
     })

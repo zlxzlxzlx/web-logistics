@@ -1,0 +1,38 @@
+<script type="text/ng-template" id="classRoomForm.html">
+    <form name="submit_form" novalidate ng-submit="submitForm()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;
+            </button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">教室</label>
+                        <input type="text" required name="className" ng-model="className"
+                               class="form-control"  >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">所属学校</label>
+                        <select   required class="form-control" ng-model="school" ng-options="school.id as school.school_name for  school in class" >
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <input class="btn btn-success" type="submit" value="提交" name="save" ng-disabled="submit_form.$invalid"/>
+
+            <span class="btn btn-warning" ng-click="cancel()">取消</span>
+
+        </div>
+    </form>
+</script>
+

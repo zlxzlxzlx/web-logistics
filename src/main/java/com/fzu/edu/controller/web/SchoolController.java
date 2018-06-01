@@ -123,7 +123,7 @@ public class SchoolController {
     }
     @RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
     @ResponseBody
-    public String loginCheck(@RequestParam(value = "account") String account,
+    public String loginCheck(@RequestParam(value = "account",required = false) String account,
                              HttpServletRequest request) {
 
         String sch = account + "";

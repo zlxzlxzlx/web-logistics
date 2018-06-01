@@ -52,4 +52,9 @@
     </if>
   </select>
 
+  <select id="getAllUerForImport" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+     select u.*,s.school_name,c.college_name
+     FROM  userinfo u LEFT  JOIN school s on u.school_id=s.id LEFT JOIN college c ON u.college_id=c.id
+     where u.school_id=#{school_id} and u.mark=1 and u.flag=0
+  </select>
 </mapper>

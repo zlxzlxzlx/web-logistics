@@ -187,6 +187,30 @@ $stateProvider
         params:{args:{}}
 
     })
+    //权限管理
+    .state('powerManage', {
+        url: '/powerManage',
+        templateUrl: 'views/powerManage/powerManage.html',
+        controller: 'powerManageCtrl',
+        params:{args:{}}
+
+    })
+    //数据字典
+    .state('dataManage', {
+        url: '/dataManage',
+        templateUrl: 'views/dataManage/dataManage.html',
+        controller: 'dataManageCtrl',
+        params:{args:{}}
+
+    })
+    //菜单管理
+    .state('menuManage', {
+        url: '/menuManage',
+        templateUrl: 'views/menuManage/menuManage.html',
+        controller: 'menuManageCtrl',
+        params:{args:{}}
+
+    })
     
 })
 

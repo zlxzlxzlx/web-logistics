@@ -41,7 +41,6 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
         //添加课程
         $scope.addCourse = function () {
             var modalInstance = $uibModal.open({
-                size:'lg',
                 backdrop:'static',
                 keyboard:false,
                 animation:true,

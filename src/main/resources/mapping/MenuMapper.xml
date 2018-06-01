@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzu.edu.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Menu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, code, flag, parent_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert1" parameterType="com.fzu.edu.model.Menu">
+    insert into menu (name, code,
+      flag, parent_code)
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+      #{flag,jdbcType=INTEGER}, #{parentCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fzu.edu.model.Menu">
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="parentCode != null">
+        parent_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzu.edu.model.Menu">
+    update menu
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null">
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzu.edu.model.Menu">
+    update menu
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      parent_code = #{parentCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" parameterType="hashmap" resultType="hashmap">
+      SELECT * FROM menu WHERE flag = 0
+      <if test="name != null">
+         AND name LIKE #{name,jdbcType=VARCHAR}+'%'
+      </if>
+      <if test="code != null">
+         AND code LIKE #{code,jdbcType=VARCHAR}+'%'
+      </if>
+  </select>
+
+  <select id="isDelete" parameterType="java.lang.String" resultType="hashmap">
+        SELECT * FROM menu WHERE flag = 0 and code LIKE #{code,jdbcType=VARCHAR}+'%'
+  </select>
+  <select id="codeUnique" parameterType="java.lang.String" resultType="hashmap">
+      SELECT * FROM menu WHERE flag = 0 and code = #{code,jdbcType=VARCHAR}
+  </select>
+</mapper>
