@@ -25,49 +25,37 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,Course> implemen
     private CourseMapper courseMapper;
     @Resource
     private ElectiveMapper electiveMapper;
-    public void addCourseRow(String code,String name,String class_hour,Integer type,Integer teacher_id,Integer major_id,Integer school_id,String class_time,String start_time,String end_time){
+    public void addCourseRow(String code,String name,String class_hour,Integer major_id,Integer school_id){
            Course course = new Course();
            course.setCode(code);
            course.setName(name);
            course.setClassHour(class_hour);
-           course.setType(type);
-           course.setTeacherId(teacher_id);
            course.setCollegeId(major_id);
            course.setSchoolId(school_id);
-           course.setClassTime(class_time);
-           course.setStartTime(start_time);
-           course.setEndTime(end_time);
            course.setFlag(0);
-           courseMapper.insert1(course);
+           courseMapper.insert(course);
     }
     public List<HashMap> getAllCourse(String name, String code){
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("code",code);
         map.put("name",name);
-        List<HashMap> list = courseMapper.getAllCourse(map);
-        return list;
+        return courseMapper.getAllCourse(map);
+
     }
-    public void updateCourseRow(Integer id,String code,String name,String class_hour,Integer type,Integer teacher_id,Integer major_id,Integer school_id,String class_time,String start_time,String end_time){
-        Course course = new Course();
-        course.setId(id);
+  public void updateCourseRow(Integer id,String code,String name,Integer major_id,Integer school_id, String class_hour){
+        Course course = courseMapper.selectById(id);
         course.setCode(code);
         course.setName(name);
         course.setClassHour(class_hour);
-        course.setType(type);
-        course.setTeacherId(teacher_id);
         course.setCollegeId(major_id);
         course.setSchoolId(school_id);
-        course.setClassTime(class_time);
-        course.setStartTime(start_time);
-        course.setEndTime(end_time);
-        course.setFlag(0);
-        courseMapper.updateByPrimaryKeySelective(course);
+      courseMapper.updateById(course);
+
     }
     public void delCourse(Integer id){
-        Course course = new Course();
-        course.setId(id);
+         Course course=courseMapper.selectById(id);
         course.setFlag(1);
-        courseMapper.updateByPrimaryKeySelective(course);
+        courseMapper.updateById(course);
     }
     public void delCourses(List ids){
         courseMapper.delCourses(ids);

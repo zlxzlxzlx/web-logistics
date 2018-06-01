@@ -40,6 +40,18 @@ public class UserInfoCon {
         Page page = new Page(pageNo, pageSize, userList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
     }
+ @RequestMapping(value = "/getAllUerForImport", method = RequestMethod.GET)
+    @ResponseBody
+    public String getAllUerForImport(
+                        @RequestParam(value = "school_id", required = false) Integer school_id
+    ) {
+     try {
+         List<Map<Object, Object>> userList = userInfoService.getAllUerForImport(school_id);
+         return JSON.toJSONString(userList, SerializerFeature.DisableCircularReferenceDetect);
+     }catch(Exception e){
+         return  JSON.toJSONString(0);
+     }
+    }
 
     @RequestMapping(value = "/userNameUnique", method = RequestMethod.GET)
     @ResponseBody

@@ -114,17 +114,17 @@ public class ElectiveController {
         }
     }
 
-    //批量删除用户
     @RequestMapping(value = "/updateFinalGrade", method = RequestMethod.POST)
     @ResponseBody
     public String updateFinalGrade(
             @RequestParam String params, HttpServletRequest request
     ) {
         try {
-          electiveService.updateFinalGrade(params);
+            electiveService.updateFinalGrade(params);
             return JSON.toJSONString(1);
         } catch (Exception e) {
             return JSON.toJSONString(0);
         }
     }
+
 }

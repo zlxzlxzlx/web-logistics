@@ -9,17 +9,6 @@ public class Course {
 
     private String classHour;
 
-    private Integer type;
-
-    private Integer teacherId;
-
-
-    private String startTime;
-
-    private String endTime;
-
-    private String classTime;
-
     private Integer flag;
 
 
@@ -58,39 +47,6 @@ public class Course {
         this.classHour = classHour == null ? null : classHour.trim();
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime == null ? null : startTime.trim();
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime == null ? null : endTime.trim();
-    }
-
-    public String getClassTime() {
-        return classTime;
-    }
-
-    public void setClassTime(String classTime) {
-        this.classTime = classTime == null ? null : classTime.trim();
-    }
 
     public Integer getFlag() {
         return flag;
@@ -100,13 +56,6 @@ public class Course {
         this.flag = flag;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
 
     public Integer getCollegeId() {
         return collegeId;

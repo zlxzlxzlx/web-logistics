@@ -37,6 +37,20 @@ public class ClassRoomController {
             return  JSON.toJSONString(0);
         }
     }
+    @RequestMapping(value = "/updateClassRoom", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateClassRoom(
+                        @RequestParam(value = "class_name") String class_name,
+                        @RequestParam(value = "school_id") Integer school_id,
+                        @RequestParam(value = "id") Integer id
+    ) {
+        Classroom classRoom=classRoomService.updateClassRoom(class_name,school_id,id);
+        try {
+            return JSON.toJSONString(classRoom, SerializerFeature.DisableCircularReferenceDetect);
+        }catch(Exception e){
+            return  JSON.toJSONString(0);
+        }
+    }
     @RequestMapping(value = "/getAllClassRoom", method = RequestMethod.POST)
     @ResponseBody
     public String getAllClassRoom(
@@ -49,6 +63,22 @@ public class ClassRoomController {
         Page page = new Page(pageNo, pageSize, list);
         try {
             return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+        }catch(Exception e){
+            return  JSON.toJSONString(0);
+        }
+    }
+    @RequestMapping(value = "/getAllClassRoomBSchoolId", method = RequestMethod.POST)
+    @ResponseBody
+    public String getAllClassRoomBSchoolId(
+
+                        @RequestParam(value = "school_id",required = false) Integer school_id,
+                        @RequestParam(value = "week",required = false) String  week,
+                        @RequestParam(value = "classTimeStart",required = false) String  classTimeStart,
+                        @RequestParam(value = "classTimeEnd",required = false) String  classTimeEnd
+    ) {
+      List<Map<Object,Object>> list=classRoomService.getAllClassRoomBSchoolId(school_id,week,classTimeStart,classTimeEnd);
+        try {
+            return JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
         }catch(Exception e){
             return  JSON.toJSONString(0);
         }

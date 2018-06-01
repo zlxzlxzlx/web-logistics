@@ -86,4 +86,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
         }
 
     }
+    public  List<Map<Object, Object>> getAllUerForImport(Integer school_id){
+
+        return userInfoMapper.getAllUerForImport(school_id);
+    }
 }

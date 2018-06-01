@@ -39,46 +39,36 @@ public class CourseController {
         Page page = new Page(pageNo,pageSize,courseList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
     }
-    @RequestMapping(value = "/addCourse",method = RequestMethod.POST)
+   @RequestMapping(value = "/addCourse",method = RequestMethod.POST)
     @ResponseBody
     public String addCourse(
             @RequestParam(value = "code")String code,
             @RequestParam(value = "name")String name,
             @RequestParam(value = "class_hour")String class_hour,
-            @RequestParam(value = "type")Integer type,
-            @RequestParam(value = "teacher_id")Integer teacher_id,
             @RequestParam(value = "major_id")Integer major_id,
-            @RequestParam(value = "school_id")Integer school_id,
-            @RequestParam(value = "class_time")String class_time,
-            @RequestParam(value = "start_time")String start_time,
-            @RequestParam(value = "end_time")String end_time
+            @RequestParam(value = "school_id")Integer school_id
             ){
 
         try{
-            courseService.addCourseRow(code,name,class_hour,type,teacher_id,major_id,school_id,class_time,start_time,end_time);
+            courseService.addCourseRow(code,name,class_hour,major_id,school_id);
             return JSON.toJSONString(1);
         }catch (Exception e){
             return JSON.toJSONString(0);
         }
     }
-    @RequestMapping(value = "/updateCourse",method = RequestMethod.POST)
+  @RequestMapping(value = "/updateCourse",method = RequestMethod.POST)
     @ResponseBody
     public String updateCourse(
             @RequestParam(value = "id")Integer id,
             @RequestParam(value = "code")String code,
             @RequestParam(value = "name")String name,
-            @RequestParam(value = "class_hour")String class_hour,
-            @RequestParam(value = "type")Integer type,
-            @RequestParam(value = "teacher_id")Integer teacher_id,
             @RequestParam(value = "major_id")Integer major_id,
             @RequestParam(value = "school_id")Integer school_id,
-            @RequestParam(value = "class_time")String class_time,
-            @RequestParam(value = "start_time")String start_time,
-            @RequestParam(value = "end_time")String end_time
+            @RequestParam(value = "class_hour")String class_hour
             ){
 
         try{
-            courseService.updateCourseRow(id,code,name,class_hour,type,teacher_id,major_id,school_id,class_time,start_time,end_time);
+            courseService.updateCourseRow(id,code,name,major_id,school_id,class_hour);
             return JSON.toJSONString(1);
         }catch (Exception e){
             return JSON.toJSONString(0);
