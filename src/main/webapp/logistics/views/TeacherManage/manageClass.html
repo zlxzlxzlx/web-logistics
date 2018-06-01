@@ -35,7 +35,7 @@
                 <div  class="form-inline">
                     <label class="control-label">班级查询：</label>
                     <div class="form-group">
-                        <select ng-model="course_id" class="form-control" ng-options="course.id as course.name for course in Class" ng-change="queryList()"></select>
+                        <select ng-model="course_id" class="form-control" ng-options="course.course_id as course.name for course in Class" ng-change="queryList()"></select>
                     </div>
                     <label class="control-label">关键字：</label>
                     <div class="form-group">
@@ -57,7 +57,6 @@
                     <th >序号</th>
                     <th >课程编号</th>
                     <th >课程名称</th>
-                    <th >开课时间</th>
                     <th >学生姓名</th>
                     <th >迟到次数</th>
                     <th >旷课次数</th>
@@ -72,7 +71,6 @@
                     <td>{{$index}}</td>
                     <td>{{row.code}}</td>
                     <td>{{row.name}}</td>
-                    <td>{{row.start_time}}—{{row.end_time}}<br>{{row.class_time}}</td>
                     <td>{{row.user_name}}</td>
                     <td>{{row.late}}</td>
                     <td>{{row.absenteeism}}</td>

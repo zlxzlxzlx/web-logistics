@@ -1,0 +1,73 @@
+
+<script type="text/ng-template" id="viewTeachArrangeForm.html">
+    <form name="submit_form" novalidate ng-submit="submitForm()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;
+            </button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">课程名称</label>
+                        <input type="text" required readonly name="className" ng-model="className"
+                               class="form-control"  >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">所属学院</label>
+                        <input type="text" required readonly name="college" ng-model="college"
+                               class="form-control"  >
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">课程负责人</label>
+                        <input type="text" required readonly name="userName" ng-model="userName"
+                               class="form-control"  >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">起止周</label>
+                        <input type="text" required readonly name="week" ng-model="week"
+                               class="form-control"  >
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">上课时间</label>
+                        <input type="text" required readonly name="classTime" ng-model="classTime"
+                               class="form-control"  >
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">上课地点</label>
+                        <input type="text" required readonly name="class_place" ng-model="class_place"
+                               class="form-control"  >
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+            <span class="btn btn-warning" ng-click="cancel()">取消</span>
+
+        </div>
+    </form>
+</script>
+

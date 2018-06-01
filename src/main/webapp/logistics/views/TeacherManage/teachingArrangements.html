@@ -51,6 +51,9 @@
                     <div class="form-group">
                         <button class="mb-xs mt-xs mr-xs btn btn-danger" ng-click="reset()">重置</button>
                     </div>
+                    <div class="form-group">
+                        <button class="mb-xs mt-xs mr-xs btn btn-info" ng-click="addCourse()">新增课程</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +61,6 @@
             <table class="table  table-bordered table-striped" id="drivergrid">
                 <thead>
                 <tr >
-                    <th >序号</th>
                     <th >课程编号</th>
                     <th >课程名称</th>
                     <th >总学时</th>
@@ -69,18 +71,21 @@
 
                 <tbody class="middle-align">
                 <tr ng-repeat="row in root.data">
-
-                    <td>{{$index}}</td>
                     <td>{{row.code}}</td>
                     <td>{{row.name}}</td>
                     <td>{{row.class_hour}}</td>
                     <td>{{row.college_name}}</td>
-                    <td style="white-space: nowrap;">
+                    <td style="white-space: nowrap;width: 300px">
                         <a href="" class="btn btn-sm btn-icon icon-left" ng-click="Arrangement(row)" ng-if="college==user.college_id">
                             授课安排
                         </a>
                         <a href="" class="btn btn-sm btn-icon icon-left" ng-if="college!=user.college_id">
                             不属于该学院
+                        </a> <a href="" class="btn btn-sm btn-icon icon-left"   ng-click="viewTeachManage(row)" ng-if="row.user_id">
+                          查看授课安排
+                        </a>
+                         <a href="" class="btn btn-sm btn-icon icon-left"   ng-click="importStudent(row)" ng-if="row.user_id">
+                          添加学生
                         </a>
                     </td>
                 </tr>
@@ -91,4 +96,7 @@
     </div>
 </div>
 </div>
-<div ng-include=" 'views/userInfoManger/userForm.html'"></div>
+<div ng-include=" 'views/TeacherManage/teachingArrangeForm.html'"></div>
+<div ng-include=" 'views/TeacherManage/viewTeachArrangeForm.html'"></div>
+<div ng-include=" 'views/courseManage/courseForm.html'"></div>
+<div ng-include=" 'views/TeacherManage/importStudentForm.html'"></div>

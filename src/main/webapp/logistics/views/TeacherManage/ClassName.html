@@ -56,7 +56,7 @@
                 <div  class="form-inline">
                     <label class="control-label">班级查询：</label>
                     <div class="form-group">
-                        <select ng-model="course_id" class="form-control" ng-options="course.id as course.name for course in Class" ng-change="queryList()"></select>
+                        <select ng-model="course_id" class="form-control" ng-options="course.course_id as course.name for course in Class" ng-change="queryList()"></select>
                     </div>
                     <label class="control-label">考勤参数模版选择：</label>
                     <div class="form-group">
