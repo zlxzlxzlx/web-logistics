@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzu.edu.dao.Student_courseMapper" >
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Student_course" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="sick_leave" property="sick_leave" jdbcType="INTEGER" />
+    <result column="think_leave" property="think_leave" jdbcType="INTEGER" />
+    <result column="late" property="late" jdbcType="INTEGER" />
+    <result column="absenteeism" property="absenteeism" jdbcType="INTEGER" />
+      <result column="ordinary_grade" property="ordinary_grade" jdbcType="FLOAT" />
+      <result column="final_exam_garde" property="final_exam_garde" jdbcType="FLOAT" />
+      <result column="final_grade" property="final_grade" jdbcType="FLOAT" />
+      <result column="normal_proportion" property="normal_proportion" jdbcType="VARCHAR" />
+      <result column="final_exam_proportion" property="final_exam_proportion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, teacher_id, user_id, flag,sick_leave,think_leave,late,absenteeism,ordinary_grade,final_exam_garde,normal_proportion,final_exam_proportion
+  </sql>
+  <select id="selectByCTU" parameterType="hashmap" resultType="java.util.HashMap">
+      SELECT sc.*
+      FROM student_course sc
+      WHERE course_id=#{course_id} and teacher_id=#{teacher_id} and user_id=#{user_id} and flag=0
+
+  </select>
+
+    <select id="getAllStudentByCourseId" parameterType="hashmap" resultType="java.util.HashMap">
+        select sc.*,u.user_name,c.code,c.name
+        from student_course sc LEFT JOIN userinfo u ON sc.user_id=u.id LEFT JOIN course c ON sc.course_id=c.id
+        WHERE sc.course_id=#{course_id} and sc.teacher_id=#{teacher_id} and sc.flag=0
+        <if test="user_name !=null and user_name !=''">
+            and u.user_name LIKE '%'+#{user_name}+'%'
+        </if>
+    </select>
+
+    <select id="getAllStudentByCourseIdForClass" parameterType="hashmap" resultType="java.util.HashMap">
+        select sc.*,u.*,u.id as uid
+        from student_course sc LEFT JOIN userinfo u ON sc.user_id=u.id
+        WHERE sc.course_id=#{course_id} AND sc.teacher_id=#{teacher_id} AND sc.flag=0
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzu.edu.dao.ArrangeMapper" >
+  <resultMap id="BaseResultMap" type="com.fzu.edu.model.Arrange" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="start_week" property="startWeek" jdbcType="INTEGER" />
+    <result column="end_week" property="endWeek" jdbcType="INTEGER" />
+    <result column="week" property="week" jdbcType="INTEGER" />
+    <result column="section_number" property="sectionNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, class_id, course_id, start_week, end_week, week, section_number, user_name, flag
+  </sql>
+<select id="getAllArrange" parameterType="hashmap" resultType="java.util.HashMap">
+    SELECT a.*,c.class_name
+    FROM arrange a LEFT  JOIN  classroom c on a.class_id=c.id
+    WHERE a.course_id=#{course_id} and a.user_id=#{user_id} and a.flag=0 and c.flag=0
+</select>
+  <select id="getCourseForClass" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT DISTINCT  a.course_id,c1.name
+    from arrange a LEFT  JOIN course c1 ON a.course_id=c1.id
+    WHERE a.user_id=#{user_id,jdbcType=INTEGER} AND a.flag=0
+  </select>
+</mapper>

@@ -18,4 +18,9 @@
       and cr.class_name LIKE '%'+#{keyWord}+'%'
     </if>
   </select>
+  <select id="getAllClassRoomBSchoolId"  parameterType="hashmap" resultType="java.util.HashMap">
+   SELECT cc.*,c.class_name
+   from classroom c LEFT JOIN classroom_course cc on c.id=cc.class_id
+   WHERE cc.week=#{week} AND #{strClassTime}>=cc.free_start and cc.free_end>= #{endClassTime} and c.school_id=#{school_id,jdbcType=INTEGER} and c.flag=0
+  </select>
 </mapper>
