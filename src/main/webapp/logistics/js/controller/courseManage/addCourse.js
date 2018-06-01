@@ -39,7 +39,6 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
                     }
                 }
             }catch (e){
-                console.log("e",e);
             }
         }
        $scope.changeCollege = function () {
@@ -52,27 +51,21 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
                            }
                        }
                    }
-                   console.log(1,$scope.teacherInfo)
+
                }catch (e){
-                   console.log("e",e);
                }
        }
 
         $scope.submitForm=function () {
            // LoadingService.show();
-            console.log(123);
+
             if ($scope.submit_form.$valid) {
                 var params = {
                     code:$scope.code,
                     name:$scope.name,
                     class_hour:$scope.class_hour,
-                    type:$scope.type,
-                    teacher_id:$scope.teacher_id,
                      major_id:$scope.element_id,
-                    school_id:$scope.school_id,
-                    class_time:$scope.class_time,
-                    start_time:$scope.start_time,
-                    end_time:$scope.end_time,
+                    school_id:$scope.school_id
                 };
                 console.log("op",params);
                 httpService.addRow(params,'course/addCourse').then(

@@ -49,6 +49,7 @@ app.controller('teachingArrangementsCtrl',['$scope','$http','$filter','$state','
            });
        };
         $scope.queryList();
+
         //选课
         $scope.elective=function (row) {
             SweetAlert.swal({
@@ -83,7 +84,17 @@ app.controller('teachingArrangementsCtrl',['$scope','$http','$filter','$state','
         };
 
         $scope.Arrangement=function (_row) {
-          console.log(112);
+            localStorageService.set("TRrow",_row);
+           var modalInstance=$uibModal.open({
+                backdrop:'static',
+                keyboard:false,
+                animation: true,
+                templateUrl:'teachingArrangeForm.html',
+                controller:'teachingArrangeModalCtrl'
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.reset();
+            });
         };
 
         //重置
@@ -92,5 +103,46 @@ app.controller('teachingArrangementsCtrl',['$scope','$http','$filter','$state','
           $scope.college= $rootScope.user.college_id;
             $scope.keyWord="";
             $scope.queryList();
+        };
+        //查看授课安排
+        $scope.viewTeachManage=function (_row) {
+            localStorageService.set("ViewTeachArrange",_row);
+            var modalInstance=$uibModal.open({
+                backdrop:'static',
+                keyboard:false,
+                animation: true,
+                templateUrl:'viewTeachArrangeForm.html',
+                controller:'ViewTeachArrangeModalCtrl'
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.reset();
+            });
+        };
+        //新增课程
+        $scope.addCourse=function () {
+            var modalInstance = $uibModal.open({
+                backdrop:'static',
+                keyboard:false,
+                animation:true,
+                templateUrl:'courseForm.html',
+                controller:'addCourseCtrl'
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.queryList();
+            });
+        };
+        //导入学生
+        $scope.importStudent=function (_row) {
+            localStorageService.set("importStudentRow",_row);
+            var modalInstance = $uibModal.open({
+                backdrop:'static',
+                keyboard:false,
+                animation:true,
+                templateUrl:'importStudentForm.html',
+                controller:'importStudentCtrl'
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.queryList();
+            });
         };
     }]);

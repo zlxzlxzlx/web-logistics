@@ -19,7 +19,7 @@ app.controller('ClassNameManageCtrl',['$scope','$http','$filter','$state','$stat
             var params={
                 user_id:$rootScope.user.id
             }
-            httpService.getAll(params,'course/getCourseForClass').then(function (result) {
+            httpService.getAll(params,'arrange/getCourseForClass').then(function (result) {
                 $scope.Class=result;
             },function () {
 
@@ -31,11 +31,12 @@ app.controller('ClassNameManageCtrl',['$scope','$http','$filter','$state','$stat
         $scope.queryList=function () {
 
             var params={
-                course_id:$scope.course_id
+                course_id:$scope.course_id,
+                teacher_id:$rootScope.user.id
             };
             $http({
                 method : 'POST',
-                url : '../elective/getAllStudentByCourseIdForClass',
+                url : '../studentCourse/getAllStudentByCourseIdForClass',
                 data: params
             }).success(function(result, status, headers, config) {
                if(result.length>0){
@@ -92,7 +93,7 @@ app.controller('ClassNameManageCtrl',['$scope','$http','$filter','$state','$stat
              }
              $http({
                  method : 'POST',
-                 url : '../elective/updateElectiveByClass',
+                 url : '../studentCourse/updateElectiveByClass',
                  data: params
              }).success(function(result, status, headers, config) {
                  if(result==1){

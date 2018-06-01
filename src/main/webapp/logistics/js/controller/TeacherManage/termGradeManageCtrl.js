@@ -79,6 +79,6 @@ app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stat
            },function () {
                SweetAlert.swal("保存失败", "", "error");
            })
-        
+
         };
     }]);

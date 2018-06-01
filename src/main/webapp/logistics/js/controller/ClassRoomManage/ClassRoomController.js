@@ -93,4 +93,18 @@ app.controller('ClassRoomController',['$scope','$http','$filter','$state','$stat
             });
 
         };
+        $scope.editRow=function (_row) {
+            localStorageService.set("classRoom",$scope.schools);
+            localStorageService.set("updateRow",_row);
+                var modalInstance=$uibModal.open({
+                    backdrop:'static',
+                    keyboard:false,
+                    animation: true,
+                    templateUrl:'classRoomForm.html',
+                    controller:'updateClassRoomModalCtrl'
+                });
+                modalInstance.result.then(function (result) {},function (reason) {
+                    $scope.reset();
+                });
+        };
     }]);
