@@ -40,4 +40,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
         List<Role> list = roleMapper.getAll();
         return list;
     }
+    public Role getOneRole(Integer roleId){
+        Role role = roleMapper.selectById(roleId);
+        return role;
+    }
 }

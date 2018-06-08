@@ -24,7 +24,7 @@ app.controller('powerManageCtrl',['$uibModal','$scope','httpService','SweetAlert
                 swal("查询失败","error");
             }
         )
-    }
+    };
     $scope.roleQueryList();
 
     $scope.delRow = function (id) {

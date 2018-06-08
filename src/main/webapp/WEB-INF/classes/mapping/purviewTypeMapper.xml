@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fzu.edu.dao.purviewTypeMapper" >
   <resultMap id="BaseResultMap" type="com.fzu.edu.model.purviewType" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="purview_name" property="purviewName" jdbcType="VARCHAR" />
     <result column="purview_code" property="purviewCode" jdbcType="VARCHAR" />
     <result column="parent_purview_code" property="parentPurviewCode" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
     select 
     <include refid="Base_Column_List" />
     from purview_type
-    where id = #{id,jdbcType=INTEGER}
+       where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from purview_type

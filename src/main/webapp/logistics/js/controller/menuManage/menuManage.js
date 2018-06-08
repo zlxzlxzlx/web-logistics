@@ -37,8 +37,13 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
         }
         httpService.getAll(param,'menu/getAll').then(
             function (result) {
-                $scope.root = result;
-                localStorageService.set("data",result.data);
+                console.log(11,result);
+                $scope.root = result[1];
+                $scope.pagination.totalCount=result[1].totalCount;
+                $scope.pagination.totalPage = result[1].totalPage;
+                $scope.pagination.pageSize = result[1].pageSize;
+                $scope.pagination.currentPage = result[1].pageNo;
+                localStorageService.set("data",result[0]);
             },function () {
                 SweetAlert.swal("查询失败","","error");
             }
@@ -59,6 +64,7 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
             pageNo:$scope.pagination.currentPage,
             pageSize:$scope.pagination.pageSize
         };
+        console.log(1212,param1);
         httpService.getAll(param1,'menu/isDelete').then(
             function (result) {
                 $scope.root = result;

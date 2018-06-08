@@ -1,6 +1,0 @@
-<i ng-click="itemExpended(item, $event);" ng-class="getItemIcon(item)" style="font-size: 30%;margin: 10px;"></i>
-
-<a href="" class='text-field'  ng-click="warpCallback('itemClicked', item, $event);" style="font-size: 115%;cursor:pointer;color: #0a001f" >{{item.name}}</a>
-<ul ng-if="!isLeaf(item)" ng-show="item.$$isExpend" style="list-style-type: none;padding-left: 14px;">
-  <li ng-repeat="item in item.childItems" ng-include="'js/directive/tree/onlyTreeItem.html'"  ></li><!--style="margin-left: 30px;margin-top: 20px" -->
-</ul>

@@ -41,7 +41,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="school_id">开课学校：</label>
-                            <select select2 class="form-control" id="school_id" name="school_id"   ng-options="i.id as i.school_name for i in schoolInfo" ng-model="school_id" required ng-change="change()" >
+                            <select  class="form-control" id="school_id" name="school_id"   ng-options="i.id as i.school_name for i in schoolInfo" ng-model="school_id" required ng-change="change()" >
                             </select>
                         <div ng-messages="submit_form.school_id.$error" ng-show="submit_form.school_id.$touched || submit_form.$submitted">
                             <span class="ng-message" ng-message="required">请选择学校</span>
@@ -51,7 +51,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="element_id">开课学院：</label>
-                            <select select2 class="form-control" id="element_id" name="element_id"  ng-options="i.id as i.college_name for i in majorInfo" ng-model="element_id" required ng-change="changeCollege()">
+                            <select  class="form-control" id="element_id" name="element_id"  ng-options="i.id as i.college_name for i in majorInfo" ng-model="element_id" required ng-change="changeCollege()">
                             </select>
                         <div ng-messages="submit_form.element_id.$error" ng-show="submit_form.element_id.$touched || submit_form.$submitted">
                             <span class="ng-message" ng-message="required">请选择学院</span>

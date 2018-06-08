@@ -211,6 +211,14 @@ $stateProvider
         params:{args:{}}
 
     })
+    //学生管理
+    .state('studentManage', {
+        url: '/studentManage',
+        templateUrl: 'views/StudentManage/studentManage.html',
+        controller: 'studentManageCtrl',
+        params:{args:{}}
+
+    })
     
 })
 

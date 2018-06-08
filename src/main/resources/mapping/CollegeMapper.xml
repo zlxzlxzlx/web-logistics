@@ -27,6 +27,7 @@
     <if test="college_name!=null and college_name!=''">
       and c.college_name LIKE '%'+#{college_name}+'%'
     </if>
+    ORDER BY c.id DESC
   </select>
 
   <update id="delColleges" parameterType="java.util.List">

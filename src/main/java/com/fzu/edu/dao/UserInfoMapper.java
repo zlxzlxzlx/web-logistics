@@ -11,7 +11,7 @@ import java.util.Map;
 public interface UserInfoMapper extends BaseMapper<Userinfo>{
 
     List<Map<Object, Object>> getAllUser(Map<String,  Object> params);
-    Userinfo queryObjByUsername(String username);
+    Userinfo queryObjByCode(String code);
     void delUsers(List ids);
     Userinfo selectByUsername(Map map);
     List<Map<Object, Object>> getAllUerForImport(Integer school_id);

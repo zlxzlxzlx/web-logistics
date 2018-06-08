@@ -1,19 +1,21 @@
 <ul class="nav nav-main">
-    <li>
+    <li ng-show = "managerUserInfo">
         <a href="#managerUserInfo">
-         <!--   <i class="fa fa-envelope" aria-hidden="true"></i>-->
+            <i class="fa fa-copy" aria-hidden="true"></i>
             <span>用户管理</span>
         </a>
     </li>
 
-    <li>
+    <li ng-show = "school">
         <a href="#managerSchool">
+            <i class="fa fa-copy" aria-hidden="true"></i>
             学校管理
         </a>
     </li>
 
-        <li>
+        <li ng-show = "college">
             <a href="#managerCollege">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 学院管理
             </a>
         </li>
@@ -22,13 +24,15 @@
                 专业管理
             </a>
         </li>-->
-        <li>
+        <li ng-show = "course">
             <a href="#courseManage">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 <span>课程管理</span>
             </a>
         </li>
-        <li>
+        <li ng-show = "grade">
             <a href="#manageGrade">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 课程信息
             </a>
         </li>
@@ -39,61 +43,76 @@
             </a>
         </li>-->
 
-        <li>
+        <li ng-show = "schedule">
             <a href="#scheduleQuery">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 课表查询
             </a>
         </li>
 
-    <!--    <li>
+        <li ng-show = "class">
             <a href="#manageClass">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 班级管理
             </a>
         </li>
--->
-        <li>
+        <li ng-show = "teach">
             <a href="#teachingArrangements">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 授课安排
             </a>
         </li>
 
+        <li ng-show = "student">
+            <a href="#studentManage">
+                <i class="fa fa-copy" aria-hidden="true"></i>
+             学生管理
+            </a>
+        </li>
 
-        <li>
+        <li ng-show = "ClassName">
             <a href="#ClassName">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 课堂点名
             </a>
         </li>
 
-        <li>
+        <li ng-show = "termGrade">
             <a href="#termGrade">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 期末成绩
             </a>
         </li>
 
-        <li  class="nav nav-children">
+        <li  ng-show = "SetParameters">
             <a href="#SetParameters">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 考勤参数
             </a>
         </li>
 
-        <li class="nav nav-children">
+        <li  ng-show = "ClassRoom">
             <a href="#ClassRoom">
+                <i class="fa fa-copy" aria-hidden="true"></i>
                 教室管理
             </a>
         </li>
 
-    <li>
+    <li ng-show = "powerManage">
         <a href="#powerManage">
+            <i class="fa fa-copy" aria-hidden="true"></i>
             <span>角色权限管理</span>
         </a>
     </li>
-    <li>
+    <li ng-show = "dataManage">
         <a href="#dataManage">
+            <i class="fa fa-copy" aria-hidden="true"></i>
             <span>数据字典</span>
         </a>
     </li>
-    <li>
+    <li ng-show = "menuManage">
         <a href="#menuManage">
+            <i class="fa fa-copy" aria-hidden="true"></i>
             <span>菜单管理</span>
         </a>
     </li>

@@ -10,24 +10,54 @@
             <div class="row" style="margin-top: auto">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="control-label">用户名</label>
-                        <input type="text" required name="username" ng-model="username"
-                               class="form-control"  placeholder="用户名" unique_verify="/web-logistics/user/userNameUnique">
-                    </div>
-                    <div ng-messages="submit_form.username.$error" ng-show="submit_form.username.$touched || submit_form.$submitted">
-                        <span class="ng-message" ng-message="required">请输入用户名</span>
-                        <span class="ng-message" ng-message="uniqueVerify">用户名已存在</span>
+                        <label class="control-label" for="mark">用户角色</label>
+                        <select  class="form-control" id="mark" name="mark"  ng-options="i.id as i.name for i in role" ng-model="mark" required>
+                            <option value="">请选择用户角色</option>
+                        </select>
+                        <div ng-messages="submit_form.mark.$error" ng-show="submit_form.mark.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择用户角色</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="control-label">用户角色</label>
-                        <select   class="form-control" ng-model="mark" ng-options="mark.id as mark.name for mark in Marks" >
-                        </select>
+                        <label class="control-label">编号</label>
+                        <input type="text" required name="code" ng-model="code"
+                               class="form-control"  placeholder="编号" unique_verify="/web-logistics/user/userCodeUnique">
+                    </div>
+                    <div ng-messages="submit_form.code.$error" ng-show="submit_form.code.$touched || submit_form.$submitted">
+                        <span class="ng-message" ng-message="required">请输入编号</span>
+                        <span class="ng-message" ng-message="uniqueVerify">该编号已存在</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: auto">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">用户名</label>
+                        <input type="text" required name="username" ng-model="username"
+                               class="form-control"  placeholder="用户名">
+                    </div>
+                    <div ng-messages="submit_form.username.$error" ng-show="submit_form.username.$touched || submit_form.$submitted">
+                        <span class="ng-message" ng-message="required">请输入用户名</span>
                     </div>
 
                 </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">联系方式</label>
+                        <input type="text" required name="phone" ng-model="phone"
+                               class="form-control"  placeholder="联系方式" ng-pattern="/^1[34578]\d{9}$/">
+                    </div>
+                    <div ng-messages="submit_form.phone.$error" ng-show="submit_form.phone.$touched || submit_form.$submitted">
+                        <span class="ng-message" ng-message="required">请输入联系方式</span>
+                        <span class="ng-message" ng-message="pattern">格式错误</span>
+                    </div>
+                </div>
+
             </div>
+
             <div class="row">
                 <div class="col-sm-12" >
                     <div class="form-group">

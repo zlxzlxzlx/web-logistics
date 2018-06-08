@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,9 +40,12 @@ public class MenuController {
             @RequestParam(value = "name",required = false) String name,
             @RequestParam(value = "code",required = false) String code
     ){
+        ArrayList returnList = new ArrayList();
         List<HashMap> list = menuService.getAll(name,code);
         Page page = new Page(pageNo,pageSize,list);
-        return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
+        returnList.add(list);
+        returnList.add(page);
+        return JSON.toJSONString(returnList, SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping(value="/addMenu", method = RequestMethod.POST)
     @ResponseBody
@@ -68,7 +72,7 @@ public class MenuController {
             @RequestParam(value = "pageSize") int pageSize
     ){
         try {
-             List<HashMap> list = menuService.isDelete(code);
+            List<HashMap> list = menuService.isDelete(code);
             Page page = new Page(pageNo,pageSize,list);
             return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){

@@ -4,7 +4,72 @@
 //首页控制器
 app.controller('indexController',['$scope', '$rootScope','$http','httpService','localStorageService','$interval','SweetAlert','$window','baseService',
     function($scope, $rootScope,$http,httpService,localStorageService,$interval,SweetAlert,$window,baseService){
+     $scope.userInfo = localStorageService.get("userInfo");
+     var param =
+        {
+            roleId:$scope.userInfo.mark
+        }
+        var menu = [];
 
+    httpService.getOneRow(param,'role/getOneRole').then(
+        function (result) {
+            $scope.roleName = result.name;
+            menu = result.powerId.split('/')
+            for(var i=0;i<menu.length;i++){
+                if(menu[i]=="用户管理"){
+                    $scope.managerUserInfo = true;
+                }
+                if(menu[i]=="学校管理"){
+                    $scope.school = true;
+                }
+                if(menu[i]=="学院管理"){
+                    $scope.college = true;
+                }
+                if(menu[i]=="课程管理"){
+                    $scope.course = true;
+                }
+                if(menu[i]=="课程信息"){
+                    $scope.grade = true;
+                }
+                if(menu[i]=="课表查询"){
+                    $scope.schedule = true;
+                }
+                if(menu[i]=="班级管理"){
+                    $scope.manageClass = true;
+                }
+                if(menu[i]=="授课安排"){
+                    $scope.teach = true;
+                }
+                if(menu[i]=="学生管理"){
+                    $scope.student = true;
+                }
+                if(menu[i]=="课堂点名"){
+                    $scope.ClassName = true;
+                }
+                if(menu[i]=="期末成绩"){
+                    $scope.termGrade = true;
+                }
+                if(menu[i]=="考勤参数"){
+                    $scope.SetParameters = true;
+                }
+                if(menu[i]=="教室管理"){
+                    $scope.ClassRoom = true;
+                }
+                if(menu[i]=="角色权限管理"){
+                    $scope.powerManage = true;
+                }
+                if(menu[i]=="数据字典"){
+                    $scope.dataManage = true;
+                }
+                if(menu[i]=="菜单管理"){
+                    $scope.menuManage = true;
+                }
+            }
+
+        },function () {
+
+        }
+    )
    /*    $rootScope.user=localStorageService.get("userInfo");
         var checkLogin = function(){
             $http.get('/web-logistics/user/loginCheck',{params:{

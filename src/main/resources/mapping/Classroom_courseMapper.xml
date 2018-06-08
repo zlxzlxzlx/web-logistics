@@ -9,6 +9,7 @@
     <result column="free_end" property="freeEnd" jdbcType="INTEGER" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, class_id, week, free_start, free_end, flag
   </sql>

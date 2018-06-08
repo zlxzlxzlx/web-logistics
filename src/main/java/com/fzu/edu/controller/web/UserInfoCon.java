@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.UserInfoService;
+
 import com.fzu.edu.utils.MemoryData;
 import com.fzu.edu.utils.Page;
 import org.springframework.stereotype.Controller;
@@ -53,12 +54,12 @@ public class UserInfoCon {
      }
     }
 
-    @RequestMapping(value = "/userNameUnique", method = RequestMethod.GET)
+    @RequestMapping(value = "/userCodeUnique", method = RequestMethod.GET)
     @ResponseBody
-    public String userNameUnique(
-            @RequestParam(value = "parameter") String username
+    public String userCodeUnique(
+            @RequestParam(value = "parameter") String code
     ) {
-        return JSON.toJSONString(userInfoService.userNameUnique(username), SerializerFeature.DisableCircularReferenceDetect);
+        return JSON.toJSONString(userInfoService.userCodeUnique(code), SerializerFeature.DisableCircularReferenceDetect);
     }
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
@@ -67,10 +68,13 @@ public class UserInfoCon {
             @RequestParam(value = "mark",required = false) Integer mark,
             @RequestParam(value = "passwd",required = false) String passwd,
             @RequestParam(value = "school",required = false) Integer school,
-            @RequestParam(value = "college",required = false) Integer college
+            @RequestParam(value = "college",required = false) Integer college,
+            @RequestParam(value = "phone",required = false) String phone,
+            @RequestParam(value = "code",required = false) String code,
+            @RequestParam(value = "id",required = false) Integer id
     ) {
         try {
-            Userinfo userinfo=userInfoService.addUser(username, mark,passwd,school,college);
+            Userinfo userinfo=userInfoService.addUser(username, mark,passwd,school,college,phone,code,id);
             return JSON.toJSONString(userinfo,SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){
             return JSON.toJSONString(0);
@@ -139,19 +143,6 @@ public class UserInfoCon {
             return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
         }
     }
-    //登录检查
-    @RequestMapping(value = "/loginCheck1", method = RequestMethod.GET)
-    @ResponseBody
-    public String loginCheck1(@RequestParam(value = "account",required = false) String account,
-                             HttpServletRequest request) {
-        String user = "3";
-        String sessionID = request.getRequestedSessionId();
-        if (!MemoryData.getSessionIDMap().containsKey(user)) {
-            return JSON.toJSONString(0);//不存在，首次登陆
-        } else {
-            return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
-        }
-    }
     //登录
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
@@ -166,15 +157,9 @@ public class UserInfoCon {
             } else {
                 request.getSession().setAttribute("loginAccount", userinfo);
                 String sessionID = request.getSession().getId();//request.getRequestedSessionId();
-                String user = userinfo.getUserName() + "";
+                String user = userinfo.getCode() + "";
                 if (!MemoryData.getSessionIDMap().containsKey(user)) { //不存在，首次登陆，放入Map
-
-                    if (mark!=null){
-                        MemoryData.getSessionIDMap().put(user, "3");
-                    }else {
                         MemoryData.getSessionIDMap().put(user, sessionID);
-                    }
-
                 } else{
                     MemoryData.getSessionIDMap().remove(user);
                     MemoryData.getSessionIDMap().put(user, sessionID);

@@ -22,18 +22,6 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
     //递归遍历树
     $scope.checkedMenu=[];
     $scope.checkedMenuCode=[];
-   /* $scope.recursiveQuery = function (tree) {
-        if(tree!=null && tree!=undefined){
-            for(var i= 0;i<tree.length;i++){
-                if(tree[i].checked){//选中
-                    $scope.checkedMenuCode.push(tree[i].code);
-                    $scope.checkedMenu.push(tree[i]);
-                }
-                $scope.recursiveQuery(tree[i].childItems);
-            }
-        }
-        // $scope.selectAll();
-    };*/
     //点击tree复选框
     $scope.itemCheckedChanged = function (changeItem) {
         if(changeItem.code!=="0"){
@@ -41,14 +29,14 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
             if(changeItem.checked){//选中true
                 if(index===-1){
                     $scope.checkedMenuCode.push(changeItem.code);
-                    $scope.checkedMenu.push(changeItem);
-                    console.log("1",$scope.checkedMenuCode);
+                    $scope.checkedMenu.push(changeItem.name);
                     console.log(2,$scope.checkedMenu);
                 }
             }else{//取消选中false
                 if(index!==-1){
                     $scope.checkedMenuCode.splice(index,1);
                     $scope.checkedMenu.splice(index,1);
+                    console.log(222,$scope.checkedMenu);
                 }
             }
 
@@ -63,16 +51,14 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
                 if(checkedType){//选中true
                     if(index===-1){
                         $scope.checkedMenuCode.push(item[i].code);
-                        $scope.checkedMenu.push(item[i]);
-                        console.log("111",$scope.checkedMenuCode);
-                        console.log("222",$scope.checkedMenu);
+                        $scope.checkedMenu.push(item[i].name);
+                        console.log("选中",$scope.checkedMenu);
                     }
                 }else{//取消选中false
                     if(index!==-1){
                         $scope.checkedMenuCode.splice(index,1);
                         $scope.checkedMenu.splice(index,1);
-                        console.log("1111",$scope.checkedMenuCode);
-                        console.log("2222",$scope.checkedMenu);
+                        console.log("取消",$scope.checkedMenu);
                     }
                 }
                 $scope.linkageCheckbox(item[i].childItems,checkedType);
@@ -86,14 +72,23 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
         $scope.MenuName="";
         $scope.MenuId="";
         $scope.menu="";
-        angular.forEach($scope.checkedMenu,function (data) {
+     /*   angular.forEach($scope.checkedMenu,function (data) {
             if(data.parent_code!='0'){
                 $scope.MenuName = $scope.MenuName + data.name+ "/";
                 $scope.MenuId = $scope.MenuId+data.id+ "/";
             }
-        });
-        $scope.menu = $scope.MenuName+"——"+$scope.MenuId;
-        console.log("me",$scope.menu);
+        });*/
+
+        for(var i = 0;i<$scope.checkedMenu.length;i++){
+            if($scope.checkedMenu[i].parent_code!='0'){
+                if(i == $scope.checkedMenu.length-1){
+                    $scope.MenuName = $scope.MenuName + $scope.checkedMenu[i];
+                }else {
+                    $scope.MenuName = $scope.MenuName + $scope.checkedMenu[i]+ "/";
+                }
+            }
+        }
+        //$scope.menu = $scope.MenuName+"——"+$scope.MenuId;
     };
     $scope.submitForm = function () {
         var params = {

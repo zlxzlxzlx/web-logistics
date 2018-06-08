@@ -12,4 +12,5 @@ public interface RoleService extends IService<Role> {
     void addRole(String roleName,Integer id,Integer flag,String menu,String remarks);
 
     List<Role> getAll();
+    Role getOneRole(Integer roleId);
 }

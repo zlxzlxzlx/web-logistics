@@ -10,6 +10,33 @@ public class Userinfo {
     private String imageUrl;
     private String passwd;
 
+    private String phone;
+    private Long registDate;
+
+    private Long lastLoginDate;
+
+    private Integer flag;
+    private Integer login_method;
+    private Integer school_id;
+    private Integer college_id;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
@@ -17,13 +44,6 @@ public class Userinfo {
     public String getPasswd() {
         return passwd;
     }
-
-    private Long registDate;
-
-    private Long lastLoginDate;
-
-    private Integer flag;
-    private Integer login_method;
 
     public Integer getCollege_id() {
         return college_id;
@@ -41,8 +61,6 @@ public class Userinfo {
         this.college_id = college_id;
     }
 
-    private Integer school_id;
-    private Integer college_id;
 
     public void setLogin_method(Integer login_method) {
         this.login_method = login_method;

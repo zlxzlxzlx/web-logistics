@@ -76,16 +76,17 @@
                 <div class="row" style="margin-top: auto">
                     <div class="clearfix">
                         <label>用户角色</label>
-                        <select select2 ng-model="selected" ng-options="x.id as x.name for x in role" >
+                        <select  ng-model="mark" ng-options="x.id as x.name for x in role" >
+                            <option value="">请选择用户角色</option>
                         </select>
                         <a href="#recoverPassword" class="pull-right" >忘记密码?</a>
                     </div>
-                    <div class="col-sm-6" >
+                  <!--  <div class="col-sm-6" >
                         <button type="submit" class="btn btn-primary hidden-xs" ng-click="register()">注册</button>
-                    </div>
-                    <div class="col-sm-6 text-right" >
+                    </div>-->
+                    <div class="col-sm-6" style="position: relative;  left: 345px">
                         <button type="submit" class="btn btn-primary hidden-xs" ng-click="loginSystem()">登录</button>
-                        </div>
+                    </div>
                 </div>
 
                 <!--		<span class="mt-lg mb-lg line-thru text-center text-uppercase">

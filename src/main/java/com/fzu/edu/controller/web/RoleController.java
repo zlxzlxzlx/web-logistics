@@ -52,4 +52,18 @@ public class RoleController {
         }
 
     }
+    @RequestMapping(value = "/getOneRole", method = RequestMethod.POST)
+    @ResponseBody
+    public String getOneRole(
+            @RequestParam("roleId") Integer roleId
+    ) {
+
+        try {
+             Role role = roleService.getOneRole(roleId);
+            return JSON.toJSONString(role);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+
+    }
 }

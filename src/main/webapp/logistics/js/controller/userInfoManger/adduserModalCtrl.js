@@ -1,17 +1,26 @@
 /**
  * Created by Administrator on 2018/5/2.
  */
-
-app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService','Upload',
-    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService,Upload) {
+app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService','Upload','localStorageService',
+    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService,Upload,localStorageService) {
 
         $scope.title="添加用户";
-        $scope.Marks = [{ id: 1, name: '学生' }, { id: 2, name: '教师' }];
+        //$scope.Marks = [{ id: 1, name: '学生' }, { id: 2, name: '教师' }];
         $scope.mark=1;
         $scope.cancel=function () {
          $uibModalInstance.dismiss("cancel");
         };
-
+        $scope.getRole = function () {
+            httpService.getAll(null,'role/getAll').then(
+                function (result) {
+                    console.log(123,result);
+                    $scope.role = result;
+                },function () {
+                    swal("查询失败","error");
+                }
+            )
+        };
+        $scope.getRole();
         //图片预览
         $scope.reader = new FileReader();   //创建一个FileReader接口
         $scope.img_upload = function(files) {       //单次提交图片的函数
@@ -26,7 +35,9 @@ app.controller('adduserModalCtrl',['$scope','$http','$filter','$state','$statePa
             if ($scope.submit_form.$valid) {
                 var params={
                   username:$scope.username,
-                  mark:$scope.mark
+                  mark:$scope.mark,
+                  phone:$scope.phone,
+                  code:$scope.code
                 };
                 httpService.addRow(params,'user/addUser').then(function (result) {
                     Upload.upload({

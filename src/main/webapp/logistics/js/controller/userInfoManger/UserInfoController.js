@@ -25,6 +25,7 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
                 $scope.pagination.pageSize = result.pageSize;
                 $scope.pagination.currentPage = result.pageNo;
                 $scope.root.data=result.data;
+                console.log(11111,result);
             },function () {
                 
             })
@@ -34,7 +35,7 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
             $scope.username="";
             $scope.queryList();
         };
-      /*  //新增
+        //新增
         $scope.addUserInfo=function () {
             var modalInstance=$uibModal.open({
                 backdrop:'static',
@@ -47,7 +48,7 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
             modalInstance.result.then(function (result) {},function (reason) {
                 $scope.reset();
             });
-        };*/
+        };
         //删除
         $scope.delRow=function (id) {
             var params = {
@@ -143,5 +144,23 @@ app.controller('UserInfoController',['$scope','$http','$filter','$state','$state
                     }
                 });
             }
+        };
+
+        /*编辑用户信息*/
+        $scope.editRow = function (row) {
+            var modalInstance = $uibModal.open({
+                size:'lg',
+                backdrop:'static',
+                keyboard:false,
+                animation:true,
+                templateUrl:'userForm.html',
+                controller:'updateUserInfoCtrl',
+                resolve:{
+                    data:row
+                }
+            });
+            modalInstance.result.then(function (result) {},function (reason) {
+                $scope.queryList();
+            });
         };
     }]);
