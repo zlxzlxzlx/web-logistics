@@ -23,7 +23,7 @@ app.controller('SetParametersController',['$scope','$http','$filter','$state','$
 
             });
             modalInstance.result.then(function (result) {},function (reason) {
-               
+                $scope.queryList();
             });
         };
 

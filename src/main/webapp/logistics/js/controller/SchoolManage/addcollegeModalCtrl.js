@@ -2,9 +2,9 @@
  * Created by Administrator on 2018/5/2.
  */
 
-app.controller('addcollegeModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService','Upload',
-    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService,Upload) {
-
+app.controller('addcollegeModalCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','$uibModalInstance','httpService','SweetAlert','LoadingService','Upload','localStorageService',
+    function($scope, $http,$filter,$state,$stateParams,$uibModal,$uibModalInstance,httpService,SweetAlert,LoadingService,Upload,localStorageService) {
+        $scope.userInfo = localStorageService.get("userInfo");
         $scope.title="添加学院";
         $scope.cancel=function () {
          $uibModalInstance.dismiss("cancel");
@@ -20,7 +20,8 @@ app.controller('addcollegeModalCtrl',['$scope','$http','$filter','$state','$stat
                   college_code:$scope.college_code,
                   college_name:$scope.college_name,
                   college_detail:$scope.college_detail,
-                    school_id:$scope.school_id
+                  user_code:$scope.userInfo.code,
+                  school_id:$scope.school_id
                     
                 };
          httpService.addRow(params,'college/addCollege').then(function (result) {
@@ -32,7 +33,7 @@ app.controller('addcollegeModalCtrl',['$scope','$http','$filter','$state','$stat
                    }
                 },function () {
                   SweetAlert.swal("操作失败", "", "error");
-                })
+                });
             }
 
         };

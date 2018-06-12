@@ -185,6 +185,12 @@ $stateProvider
         templateUrl: 'views/AccountManage/accountManage.html',
         controller: 'accountManageCtrl',
         params:{args:{}}
+    })
+    //退出登录
+    .state('loginout', {
+        url: '/loginout',
+        controller: 'loginoutController',
+        params:{args:{}}
 
     })
     //权限管理

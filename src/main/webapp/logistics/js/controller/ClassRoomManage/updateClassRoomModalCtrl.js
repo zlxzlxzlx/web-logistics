@@ -10,7 +10,7 @@ app.controller('updateClassRoomModalCtrl',['$scope','$http','$filter','$state','
         $scope.class=localStorageService.get("classRoom");
         $scope.updateRow=localStorageService.get("updateRow");
         $scope.className=$scope.updateRow.class_name;
-        $scope.school=$scope.updateRow.school_id;
+        $scope.school_id=$scope.updateRow.school_id;
         $scope.submitForm=function () {
             if ($scope.submit_form.$valid) {
                 var params={
@@ -27,7 +27,7 @@ app.controller('updateClassRoomModalCtrl',['$scope','$http','$filter','$state','
                     }
                 },function () {
                     SweetAlert.swal("操作失败", "", "error");
-                })
+                });
             }
         };
 

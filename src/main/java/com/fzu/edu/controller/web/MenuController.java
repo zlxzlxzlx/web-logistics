@@ -29,8 +29,13 @@ public class MenuController {
     public String getAllTree(
             @RequestParam(value = "menu",required = false) String menu
     ){
-        List<HashMap> list = menuService.getAllTree(menu);
-        return JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+        try{
+            List<HashMap> list = menuService.getAllTree(menu);
+            return JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
+        }
+
     }
     @RequestMapping(value="/getAll", method = RequestMethod.GET)
     @ResponseBody

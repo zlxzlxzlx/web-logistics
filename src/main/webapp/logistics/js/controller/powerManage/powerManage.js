@@ -23,7 +23,7 @@ app.controller('powerManageCtrl',['$uibModal','$scope','httpService','SweetAlert
             },function () {
                 swal("查询失败","error");
             }
-        )
+        );
     };
     $scope.roleQueryList();
 

@@ -15,4 +15,5 @@ public interface StudentCourseService extends IService<Student_course> {
     List<Map<Object,Object>>  getAllStudentByCourseId(Integer course_id,String user_name,Integer teacher_id);
     List<Map<Object,Object>> getAllStudentByCourseIdForClass(Integer course_id,Integer teacher_id);
     void updateElectiveByClass(Integer elective_id,Integer mark,Float value);
+    void updateFinalGrade(String params);
 }

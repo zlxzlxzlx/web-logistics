@@ -6,6 +6,7 @@ import com.fzu.edu.dao.SchoolMapper;
 import com.fzu.edu.dao.UserInfoMapper;
 import com.fzu.edu.model.Role;
 import com.fzu.edu.model.School;
+import com.fzu.edu.model.Student;
 import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.UserInfoService;
 import com.fzu.edu.utils.MD5Util;
@@ -136,5 +137,25 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,Userinfo> im
     public  List<Map<Object, Object>> getAllUerForImport(Integer school_id){
 
         return userInfoMapper.getAllUerForImport(school_id);
+    }
+    public     Userinfo applogin(String useranme, String passwd)throws Exception{
+
+        Userinfo userinfo=userInfoMapper.selectByUsernameForApp(useranme);
+        String pwd="";
+        pwd=MD5Util.md5Encrypt(passwd);
+        if(userinfo!=null){
+            if(userinfo.getPasswd().equals(pwd)){
+                return userinfo;
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+
+    }
+    public  HashMap getOneRow(Integer id){
+       HashMap userInfo = userInfoMapper.selectByUId(id);
+       return userInfo;
     }
 }

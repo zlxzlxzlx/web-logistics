@@ -5816,9 +5816,15 @@ button.close {
     width: 300px;
   }
 }
+
 @media (min-width: 992px) {
   .modal-lg {
     width: 900px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-slg {
+    width: 490px;
   }
 }
 .tooltip {

@@ -15,7 +15,7 @@ import java.util.Map;
 public interface CourseService extends IService<Course> {
    void addCourseRow(String code,String name,String class_hour,Integer major_id,Integer school_id);
    void updateCourseRow(Integer id,String code,String name,Integer major_id,Integer school_id, String class_hour);
-   List<HashMap> getAllCourse(String name, String code);
+   List<HashMap> getAllCourse(String name, String code,Integer college_id,Integer school_id);
    void delCourse(Integer id);
    void delCourses(List ids);
    List getAllTeacherAndMajor();

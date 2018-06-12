@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="control-label">专业编号</label>
                         <input type="text" required name="major_code" ng-model="major_code"
-                               class="form-control"  placeholder="专业编号" unique_verify="/web-logistics/major/majorCodeUnique">
+                               class="form-control"  placeholder="专业编号" unique_verify="/web-attendance/major/majorCodeUnique">
                     </div>
                     <div ng-messages="submit_form.major_code.$error" ng-show="submit_form.major_code.$touched || submit_form.$submitted">
                         <span class="ng-message" ng-message="required">请输入专业编号</span>

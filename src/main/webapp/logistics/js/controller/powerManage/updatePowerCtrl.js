@@ -14,7 +14,7 @@ app.controller('updatePowerCtrl',['$scope','data','$uibModalInstance','httpServi
     $scope.getTree = function () {
         var params = {
             menu:$scope.MenuName
-        }
+        };
         httpService.getAll(params,'menu/getAllTree').then(
             function (result) {
                 console.log(1,result);
@@ -22,7 +22,7 @@ app.controller('updatePowerCtrl',['$scope','data','$uibModalInstance','httpServi
             },function () {
                 SweetAlert.swal("查询失败","error");
             }
-        )
+        );
     };
     $scope.getTree();
     //递归遍历树
@@ -103,7 +103,7 @@ app.controller('updatePowerCtrl',['$scope','data','$uibModalInstance','httpServi
             menu:$scope.MenuName,
             flag:0,
             id:data.id
-        }
+        };
         httpService.addRow(params,'role/addRole').then(
             function (result) {
                 swal("修改成功","","success");
@@ -111,6 +111,6 @@ app.controller('updatePowerCtrl',['$scope','data','$uibModalInstance','httpServi
             },function () {
                 swal("修改失败","","error");
             }
-        )
-    }
+        );
+    };
 }]);

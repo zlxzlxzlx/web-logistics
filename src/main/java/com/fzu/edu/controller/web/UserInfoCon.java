@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -166,6 +167,42 @@ public class UserInfoCon {
                 }
                 return JSON.toJSONString(userinfo);
             }
+        } catch (Exception e) {
+            return JSON.toJSONString(0);
+        }
+    }
+    @RequestMapping(value = "/loginout", method = RequestMethod.GET)
+    @ResponseBody
+    public Object loginout(HttpServletRequest request) {
+        Userinfo userinfo = (Userinfo) request.getSession().getAttribute("loginAccount");
+        if(userinfo!=null){
+            request.getSession().setAttribute("loginAccount", null);
+            String user = userinfo.getCode()+"";
+            MemoryData.getSessionIDMap().remove(user);
+        }
+        return JSON.toJSONString(1);
+    }
+    //登录
+    @RequestMapping(value = "/applogin", method = RequestMethod.POST)
+    @ResponseBody
+    public String applogin(@RequestParam(value = "useranme") String useranme,
+                        @RequestParam(value = "passwd") String passwd
+                       ) {
+        try {
+            Userinfo userinfo = userInfoService.applogin(useranme, passwd) ;
+            return JSON.toJSONString(userinfo);
+        } catch (Exception e) {
+            return JSON.toJSONString(0);
+        }
+    }
+
+    @RequestMapping(value = "/getOneRow", method = RequestMethod.POST)
+    @ResponseBody
+    public String getOneRow(@RequestParam(value = "id") Integer id
+    ) {
+        try {
+            HashMap userinfo = userInfoService.getOneRow(id) ;
+            return JSON.toJSONString(userinfo);
         } catch (Exception e) {
             return JSON.toJSONString(0);
         }

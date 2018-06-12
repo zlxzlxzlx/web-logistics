@@ -11,12 +11,13 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
         httpService.getAll(null,'menu/getAllTree').then(
             function (result) {
                 $scope.treeData = result;
+                console.log(1111,$scope.treeData);
                 //$scope.recursiveQuery(result);
             },function () {
                 SweetAlert.swal("查询失败","error");
             }
-        )
-    }
+        );
+    };
     $scope.getTree();
 
     //递归遍历树
@@ -96,7 +97,7 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
             remarks:$scope.remarks,
             menu:$scope.MenuName,
             flag:0
-        }
+        };
         httpService.addRow(params,'role/addRole').then(
             function (result) {
                 swal("添加成功","","success");
@@ -104,6 +105,6 @@ app.controller('addPowerCtrl',['$scope','httpService','$uibModalInstance','local
             },function () {
                 swal("添加失败","","error");
             }
-        )
-    }
+        );
+    };
 }]);

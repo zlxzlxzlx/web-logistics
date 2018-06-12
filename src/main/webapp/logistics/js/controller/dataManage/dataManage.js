@@ -19,7 +19,7 @@ app.controller('dataManageCtrl',['$scope','SweetAlert','httpService',function ($
 
                if (inputValue === "") {
                    swal.showInputError("请输入角色名");
-                   return false
+                   return false;
                }
                var  params={
                    roleName:inputValue,
@@ -32,7 +32,7 @@ app.controller('dataManageCtrl',['$scope','SweetAlert','httpService',function ($
                    },function () {
                        swal("添加失败","error");
                    }
-               )
+               );
 
            });
    };
@@ -45,8 +45,8 @@ app.controller('dataManageCtrl',['$scope','SweetAlert','httpService',function ($
            },function () {
                swal("查询失败","error");
            }
-       )
-   }
+       );
+   };
    $scope.queryList();
     /*编辑人员信息*/
     $scope.editRow = function (i) {
@@ -66,7 +66,7 @@ app.controller('dataManageCtrl',['$scope','SweetAlert','httpService',function ($
 
                 if (inputValue === "") {
                     swal.showInputError("请输入角色名");
-                    return false
+                    return false;
                 }
                 var  params={
                     roleName:inputValue,
@@ -81,7 +81,7 @@ app.controller('dataManageCtrl',['$scope','SweetAlert','httpService',function ($
                     },function () {
                         swal("修改失败","error");
                     }
-                )
+                );
 
             });
     };

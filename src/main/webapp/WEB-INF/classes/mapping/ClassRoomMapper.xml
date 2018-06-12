@@ -13,9 +13,12 @@
   <select id="getAllClassRoom"  parameterType="hashmap" resultType="java.util.HashMap">
     select cr.*,s.school_name
     from classroom cr LEFT JOIN school s on cr.school_id=s.id
-    where cr.flag=0 and cr.school_id= #{school_id,jdbcType=INTEGER}
+    where cr.flag=0
     <if test="keyWord!=null and keyWord!=''">
       and cr.class_name LIKE '%'+#{keyWord}+'%'
+    </if>
+    <if test="school_id!=null and school_id!=''">
+      and cr.school_id= #{school_id,jdbcType=INTEGER}
     </if>
   </select>
   <select id="getAllClassRoomBSchoolId"  parameterType="hashmap" resultType="java.util.HashMap">

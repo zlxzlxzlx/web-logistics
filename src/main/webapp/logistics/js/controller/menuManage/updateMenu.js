@@ -30,5 +30,5 @@ app.controller('updateMenuCtrl',['$scope','data','httpService','SweetAlert','$ui
         );
 
         $scope.cancel();
-    }
+    };
 }]);

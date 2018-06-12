@@ -7,13 +7,33 @@ public class Student {
 
     private String code;
 
+    private Integer sex;
+
     private String phone;
 
     private String email;
 
     private Integer flag;
 
-    private Integer teacherId;
+    private String passwd;
+    private  Integer schoolId;
+    private  Integer collegeId;
+
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public Integer getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(Integer collegeId) {
+        this.collegeId = collegeId;
+    }
 
     public Integer getId() {
         return id;
@@ -39,6 +59,13 @@ public class Student {
         this.code = code == null ? null : code.trim();
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
     public String getPhone() {
         return phone;
@@ -64,11 +91,12 @@ public class Student {
         this.flag = flag;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
+
+    public String getPasswd() {
+        return passwd;
     }
 
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd == null ? null : passwd.trim();
     }
 }

@@ -1,8 +1,10 @@
 /**
  * Created by acer on 2018/5/22.
  */
-app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','SweetAlert','$rootScope',
-    function ($http,httpService,$scope,$uibModal,SweetAlert,$rootScope) {
+app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','SweetAlert','$rootScope','localStorageService',
+    function ($http,httpService,$scope,$uibModal,SweetAlert,$rootScope,localStorageService) {
+        $scope.userInfo = localStorageService.get("userInfo");
+        console.log($scope.userInfo);
         /*初始化数据*/
         $scope.root={};
         $scope.rowlist=[];
@@ -24,7 +26,10 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
                 code:$scope.code,
                 name:$scope.name,
                 pageNo:$scope.pagination.currentPage,
-                pageSize:$scope.pagination.pageSize
+                pageSize:$scope.pagination.pageSize,
+                //user_code:$scope.userInfo.code
+                college_id:$scope.userInfo.college_id,
+                school_id:$scope.userInfo.school_id
             };
             httpService.getAll(params,'course/showCourse').then(
                 function (result) {
@@ -181,10 +186,6 @@ app.controller('courseManageCtrl',['$http','httpService','$scope','$uibModal','S
 
         };
        /*
-
-
-
-
 
         /!*导入文件*!/
         $scope.importExcel = function () {

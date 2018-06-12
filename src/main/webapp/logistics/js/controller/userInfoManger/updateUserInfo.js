@@ -6,12 +6,15 @@ app.controller('updateUserInfoCtrl',['$scope','data','$uibModalInstance','httpSe
       $scope.cancel=function () {
         $uibModalInstance.dismiss("cancel");
       };
+      console.log(11,data);
       $scope.mark = data.mark;
       $scope.username = data.user_name;
       $scope.phone = data.phone;
       $scope.code = data.code;
       $scope.path = data.image_url;
-    $scope.getRole = function () {
+      $scope.school_id = data.school_id;
+      $scope.element_id = data.college_id;
+      $scope.getRole = function () {
         httpService.getAll(null,'role/getAll').then(
             function (result) {
                 console.log(123,result);
@@ -32,6 +35,58 @@ app.controller('updateUserInfoCtrl',['$scope','data','$uibModalInstance','httpSe
             });
         };
     };
+
+    $scope.getTeacherAndMajor = function () {
+        $scope.majorInfo=[];
+        httpService.getAll(null,'course/getAllTeacherAndMajor').then(
+            function (result) {
+                $scope.re = result;
+                $scope.schoolInfo = result[2];
+                if ($scope.school_id!=null){
+                    for(var i in $scope.re[1]){
+                        if($scope.school_id ==$scope.re[1][i].school_id){
+                            $scope.majorInfo.push($scope.re[1][i]);
+                        }
+                    }
+                }
+            },function () {
+                console.log("获取教师(开课单位)失败");
+            }
+        );
+    };
+    $scope.getTeacherAndMajor();//同时获取教师和开课单位
+    $scope.change=function () {
+        $scope.majorInfo=[];
+        // $scope.teacherInfo=[];
+        try {
+            if ($scope.school_id!=null){
+                for(var i in $scope.re[1]){
+                    if($scope.school_id ==$scope.re[1][i].school_id){
+                        $scope.majorInfo.push($scope.re[1][i]);
+                    }
+                }
+            }
+        }catch (e){
+        }
+    };
+    $scope.changeShow = function () {
+        var param =
+            {
+                roleId:$scope.mark
+            }
+        httpService.getOneRow(param,'role/getOneRole').then(
+            function (result) {
+                if(result.name.toString()=="教师"){
+                    $scope.show = true;
+                    console.log("ss",$scope.show)
+                }else{
+                    $scope.show = false;
+                }
+            },function () {
+
+            })
+    };
+    $scope.changeShow();
     $scope.submitForm=function () {
         if ($scope.submit_form.$valid) {
             var params={

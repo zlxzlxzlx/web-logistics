@@ -3,6 +3,7 @@ package com.fzu.edu.service;
 import com.baomidou.mybatisplus.service.IService;
 import com.fzu.edu.model.Userinfo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,6 @@ public interface UserInfoService extends IService<Userinfo> {
     void uploadImage(String url,Integer id);
     Userinfo login(String account, String pwd,Integer mark)throws Exception;
     List<Map<Object, Object>> getAllUerForImport(Integer school_id);
+    Userinfo applogin(String useranme, String passwd)throws Exception;
+    HashMap getOneRow(Integer id);
 }

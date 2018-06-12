@@ -27,6 +27,9 @@
     <if test="college_name!=null and college_name!=''">
       and c.college_name LIKE '%'+#{college_name}+'%'
     </if>
+    <if test="school_id!=null and school_id!=''">
+      and s.id = #{school_id}
+    </if>
     ORDER BY c.id DESC
   </select>
 

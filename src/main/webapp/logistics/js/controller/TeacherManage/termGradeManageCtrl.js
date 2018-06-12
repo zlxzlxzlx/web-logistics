@@ -3,7 +3,6 @@
  */
 app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','httpService','SweetAlert','LoadingService','localStorageService','$rootScope','httpService','$interval',
     function($scope, $http,$filter,$state,$stateParams,$uibModal,httpService,SweetAlert,LoadingService,localStorageService,$rootScope,httpService,$interval) {
-
         $rootScope.user=localStorageService.get("userInfo");
         $scope.root=[];
         $scope.pagination = {
@@ -17,10 +16,9 @@ app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stat
             var params={
                 user_id:$rootScope.user.id
             }
-            httpService.getAll(params,'course/getCourseForClass').then(function (result) {
+            httpService.getAll(params,'arrange/getCourseForClass').then(function (result) {
                 $scope.Class=result;
             },function () {
-
             })
         };
         $scope.getCourseForClass();
@@ -29,19 +27,21 @@ app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stat
         $scope.queryList=function () {
             var params={
                 course_id:$scope.course_id,
+                teacher_id:$rootScope.user.id,
                 user_name:$scope.user_name,
                 pageNo: 1,
                 pageSize:10
             };
             $http({
                 method : 'POST',
-                url : '../elective/getAllStudentByCourseId',
+                url : '../studentCourse/getAllStudentByCourseId',
                 data: params
             }).success(function(result, status, headers, config) {
                 $scope.pagination.totalCount=result.totalCount;
                 $scope.pagination.totalPage = result.totalPage;
                 $scope.pagination.pageSize = result.pageSize;
                 $scope.pagination.currentPage = result.pageNo;
+                console.log(111,result);
                 $scope.root.data=result.data;
                 $scope.normal_proportion=result.data[0].normal_proportion;
             }).error(function(data, status, headers, config) {
@@ -69,7 +69,7 @@ app.controller('termGradeManageCtrl',['$scope','$http','$filter','$state','$stat
             var params={
                 data:$scope.root.data
             };
-           httpService.postJson(params,'elective/updateFinalGrade').then(function (result) {
+           httpService.postJson(params,'studentCourse/updateFinalGrade').then(function (result) {
               if(result==1){
                   SweetAlert.swal("保存成功", "", "success");
               }else{

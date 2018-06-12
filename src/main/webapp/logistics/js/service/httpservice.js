@@ -3,7 +3,7 @@
  */
 service.service('httpService', ['$rootScope','$q','$http', 'Upload','LoadingService','$timeout','SweetAlert',function($rootScope,$q,$http,Upload,LoadingService,$timeout,SweetAlert) {
     //请求参数处理------------------
-    this.webroot = "/web-logistics/";
+    this.webroot = "/web-attendance/";
     this.handleParams = function(params) {
         params = params ? params : {};
         return params;

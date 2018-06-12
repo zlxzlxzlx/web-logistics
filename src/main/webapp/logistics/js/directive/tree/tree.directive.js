@@ -83,7 +83,7 @@ app.directive('treeViewLeaf', function () {
         };
 
         $scope.warpCallback = function(callback, item, $event){
-
+             console.log("warp",item);
           $scope.linkageCheckbox(item.childItems,item.checked);
 
           ($scope[callback] || angular.noop)({
@@ -94,6 +94,7 @@ app.directive('treeViewLeaf', function () {
 
        //选择框联动效果
         $scope.linkageCheckbox = function (item,checkedType) {
+            console.log("link",item);
           if(item!=null && item!=undefined){
             for(var i= 0;i<item.length;i++){
               item[i].checked=checkedType;

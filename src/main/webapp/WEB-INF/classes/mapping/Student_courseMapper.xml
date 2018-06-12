@@ -28,17 +28,17 @@
   </select>
 
     <select id="getAllStudentByCourseId" parameterType="hashmap" resultType="java.util.HashMap">
-        select sc.*,u.user_name,c.code,c.name
-        from student_course sc LEFT JOIN userinfo u ON sc.user_id=u.id LEFT JOIN course c ON sc.course_id=c.id
+        select sc.*,st.name as stname,c.code,c.name as cname
+        from student_course sc LEFT JOIN student st ON sc.user_id=st.id LEFT JOIN course c ON sc.course_id=c.id
         WHERE sc.course_id=#{course_id} and sc.teacher_id=#{teacher_id} and sc.flag=0
         <if test="user_name !=null and user_name !=''">
-            and u.user_name LIKE '%'+#{user_name}+'%'
+            and st.name LIKE '%'+#{user_name}+'%'
         </if>
     </select>
 
     <select id="getAllStudentByCourseIdForClass" parameterType="hashmap" resultType="java.util.HashMap">
-        select sc.*,u.*,u.id as uid
-        from student_course sc LEFT JOIN userinfo u ON sc.user_id=u.id
+        select sc.*,s.*,s.id as sid
+        from student_course sc LEFT  JOIN student s ON sc.user_id=s.id
         WHERE sc.course_id=#{course_id} AND sc.teacher_id=#{teacher_id} AND sc.flag=0
     </select>
 </mapper>

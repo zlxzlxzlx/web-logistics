@@ -4,8 +4,8 @@
 app.controller('ClassRoomController',['$scope','$http','$filter','$state','$stateParams','$uibModal','httpService','SweetAlert','LoadingService','localStorageService','$rootScope',
     function($scope, $http,$filter,$state,$stateParams,$uibModal,httpService,SweetAlert,LoadingService,localStorageService,$rootScope) {
 
-        $rootScope.user=localStorageService.get("userInfo");
-        $scope.school=$rootScope.user.school_id;
+        $scope.userInfo=localStorageService.get("userInfo");
+
         $scope.schools=[];
         $scope.root=[];
         $scope.pagination = {
@@ -16,12 +16,12 @@ app.controller('ClassRoomController',['$scope','$http','$filter','$state','$stat
             PageSizeList: [5, 10, 30]
         };
         $scope.getAllSchool=function (){
-        $http.get('../school/getAllSchoolForSelect')
-            .success(function(data,status,headers,config){
-               $scope.schools=data;
-            }).error(function(data,status,headers,config){
+            $http.get('../school/getAllSchoolForSelect')
+                .success(function(data,status,headers,config){
+                   $scope.schools=data;
+                }).error(function(data,status,headers,config){
 
-            })
+                });
         };
         $scope.getAllSchool();
         $scope.add=function () {
@@ -38,18 +38,40 @@ app.controller('ClassRoomController',['$scope','$http','$filter','$state','$stat
                 $scope.reset();
             });
         };
+      $scope.getSchoolId=function () {
+            var param ={
+                code:$scope.userInfo.code
+            };
+            httpService.getAll(param,'school/getSchoolId').then(
+                function (result) {
+                    console.log(result);
+                    try {
+                        if (result.school_name=="学校"){
+                            $scope.school_id=result.id;
+                            $scope.queryList();
+                        }
+                    }catch (e){
+                        console.log(e);
+                    }
+                },function () {
+                }
+            );
+        };
+        $scope.getSchoolId();
         $scope.queryList=function () {
           var params={
-              school_id:$scope.school,
+              school_id:$scope.school_id,
               keyWord:$scope.keyWord,
               pageNo: $scope.pagination.currentPage,
               pageSize: $scope.pagination.pageSize
-          }
+          };
+
             $http({
                 method : 'POST',
                 url : '../classroom/getAllClassRoom',
                 data: params
             }).success(function(result, status, headers, config) {
+                console.log(111,result);
                 $scope.pagination.totalCount=result.totalCount;
                 $scope.pagination.totalPage = result.totalPage;
                 $scope.pagination.pageSize = result.pageSize;
@@ -62,13 +84,12 @@ app.controller('ClassRoomController',['$scope','$http','$filter','$state','$stat
         $scope.queryList();
         $scope.reset=function () {
           $scope.keyWord="";
-          $scope.school=$rootScope.user.school_id;
-          $scope.queryList();
+            $scope.queryList();
         };
         $scope.delRow=function (id) {
           var params={
               id:id
-          }
+          };
             SweetAlert.swal({
                 title: "是否确认删除？",
                 type: "warning",

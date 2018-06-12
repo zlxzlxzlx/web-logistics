@@ -86,7 +86,7 @@ public class SchoolController {
     public String addSchool(
             @RequestParam(value = "school_code") String school_code,
             @RequestParam(value = "school_name") String school_name,
-            @RequestParam(value = "school_detail") String school_detail
+            @RequestParam(value = "school_detail",required = false) String school_detail
     ) {
         try {
             School school=schoolService.addSchool(school_code, school_name,school_detail);
@@ -132,6 +132,20 @@ public class SchoolController {
             return JSON.toJSONString(0);//不存在，首次登陆
         }else {
             return JSON.toJSONString(1);//非首次登陆，并且不是本次登陆
+        }
+    }
+
+    //取学校的id
+    @RequestMapping(value = "/getSchoolId", method = RequestMethod.GET)
+    @ResponseBody
+    public String getSchoolId(
+            @RequestParam(value = "code") String code
+    ) {
+        try {
+            School school=schoolService.getSchoolId(code);
+            return JSON.toJSONString(school,SerializerFeature.DisableCircularReferenceDetect);
+        }catch (Exception e){
+            return JSON.toJSONString(0);
         }
     }
 }

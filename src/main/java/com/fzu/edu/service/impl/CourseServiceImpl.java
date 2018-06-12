@@ -2,8 +2,11 @@ package com.fzu.edu.service.impl;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.fzu.edu.dao.CourseMapper;
 import com.fzu.edu.dao.ElectiveMapper;
+import com.fzu.edu.dao.SchoolMapper;
+import com.fzu.edu.dao.UserInfoMapper;
 import com.fzu.edu.model.Course;
 import com.fzu.edu.model.Major;
+import com.fzu.edu.model.School;
 import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.CourseService;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,10 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,Course> implemen
     private CourseMapper courseMapper;
     @Resource
     private ElectiveMapper electiveMapper;
+    @Resource
+    private SchoolMapper schoolMapper;
+    @Resource
+    private UserInfoMapper userInfoMapper;
     public void addCourseRow(String code,String name,String class_hour,Integer major_id,Integer school_id){
            Course course = new Course();
            course.setCode(code);
@@ -35,10 +42,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,Course> implemen
            course.setFlag(0);
            courseMapper.insert(course);
     }
-    public List<HashMap> getAllCourse(String name, String code){
+    public List<HashMap> getAllCourse(String name, String code,Integer college_id,Integer school_id){
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("code",code);
         map.put("name",name);
+        map.put("college_id",college_id);
+        map.put("school_id",school_id);
         return courseMapper.getAllCourse(map);
 
     }

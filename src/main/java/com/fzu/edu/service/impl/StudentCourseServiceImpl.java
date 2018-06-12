@@ -46,7 +46,7 @@ public class StudentCourseServiceImpl extends ServiceImpl<Student_courseMapper,S
                 student_course.setSick_leave(0);
                 student_course.setThink_leave(0);
                 student_course.setAbsenteeism(0);
-                student_course.setOrdinary_grade(0);
+                student_course.setOrdinary_grade(100);
                 student_courseMapper.insert(student_course);
             }
 
@@ -88,6 +88,22 @@ public class StudentCourseServiceImpl extends ServiceImpl<Student_courseMapper,S
         }
         student_course.setOrdinary_grade(student_course.getOrdinary_grade()-value);
         student_courseMapper.updateById(student_course);
+    }
+
+
+    public void updateFinalGrade(String params){
+
+        JSONObject jsonObject=JSONObject.parseObject(params);
+        JSONArray jsonArray=jsonObject.getJSONArray("data");
+        for(int i=0;i<jsonArray.size();i++){
+            Student_course student_course= student_courseMapper.selectById(Integer.parseInt(jsonArray.getJSONObject(i).getString("id")));
+            student_course.setNormal_proportion(jsonArray.getJSONObject(i).getString("normal_proportion"));
+            student_course.setFinal_exam_proportion(jsonArray.getJSONObject(i).getString("final_exam_proportion"));
+            student_course.setFinal_grade(Float.parseFloat(jsonArray.getJSONObject(i).getString("final_grade")));
+            student_course.setFinal_exam_garde(Float.parseFloat(jsonArray.getJSONObject(i).getString("final_exam_garde")));
+            student_courseMapper.updateById(student_course);
+        }
+
     }
 
 }

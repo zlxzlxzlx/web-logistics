@@ -27,10 +27,13 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeMapper,College> imple
   private CollegeMapper collegeMapper;
     @Resource
   private CourseMapper courseMapper;
-  public List<Map<Object,Object>> getAllCollege(String college_code , String college_name){
+    @Resource
+    private SchoolMapper schoolMapper;
+  public List<Map<Object,Object>> getAllCollege(String college_code , String college_name,Integer school_id){
       Map<String ,Object> map =new HashMap<String, Object>();
       map.put("college_code",college_code);
       map.put("college_name",college_name);
+      map.put("school_id",school_id);
       return collegeMapper.getAllCollege(map);
   }
     public  void delCollege(Integer id){
@@ -41,13 +44,19 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeMapper,College> imple
     public  void delColleges(List ids){
         collegeMapper.delColleges(ids);
     }
-    public    College addCollege(String college_code, String college_name,String college_detail,String  school_id){
+    public    College addCollege(String college_code, String college_name,String college_detail,String user_code,String school_id){
+        School school = schoolMapper.selectByAccount(user_code);
         College college=new College();
         college.setFlag(0);
         college.setCollegeCode(college_code);
         college.setCollegeName(college_name);
         college.setCollegeDetail(college_detail);
-        college.setSchool_id(school_id);
+        if (school!=null){
+            college.setSchool_id(school.getId().toString());
+        }else {
+            college.setSchool_id(school_id);
+        }
+
         collegeMapper.insert(college);
         return college;
     }

@@ -136,6 +136,7 @@ loginModule.controller('loginController',['$scope', '$http','localStorageService
                     pwd: $scope.pwd,
                     mark:$scope.mark
                 };
+                console.log(111,params);
                 $http.get('user/login',{params:params})
                     .success(function(data,status,headers,config){
                         if (data !== -1) {
@@ -144,7 +145,7 @@ loginModule.controller('loginController',['$scope', '$http','localStorageService
                             localStorageService.set("userInfo", data);
                             $rootScope.user = data;
                             setTimeout(function () {
-                                $window.location.href = '/web-logistics/logistics/index.html';
+                                $window.location.href = '/web-attendance/logistics/index.html';
                             }, 1000);
                         }
                         else {

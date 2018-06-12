@@ -21,11 +21,12 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
         httpService.getAll(null,'menu/getAllTree').then(
             function (result) {
                 $scope.treeData = result;
+                console.log("tr",result);
             },function () {
                 SweetAlert.swal("查询失败","error");
             }
-        )
-    }
+        );
+    };
     $scope.getTree();
 
     $scope.queryList = function () {
@@ -34,7 +35,7 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
             code:$scope.code,
             pageNo:$scope.pagination.currentPage,
             pageSize:$scope.pagination.pageSize
-        }
+        };
         httpService.getAll(param,'menu/getAll').then(
             function (result) {
                 console.log(11,result);
@@ -47,8 +48,8 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
             },function () {
                 SweetAlert.swal("查询失败","","error");
             }
-        )
-    }
+        );
+    };
     $scope.queryList();
 
     $scope.reset = function () {
@@ -71,12 +72,12 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
             },function () {
                 SweetAlert.swal("查询失败","","error");
             }
-        )
+        );
     };
     //添加菜单
     $scope.addRow = function () {
         if (node_value==null){
-            SweetAlert.swal("请选择一个节点进行添加")
+            SweetAlert.swal("请选择一个节点进行添加");
         }else {
             var modalInstance = $uibModal.open({
                 size:'medium',
@@ -112,7 +113,7 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
        httpService.getAll(param1,'menu/isDelete').then(
          function (result) {
               if (result.data.length>1){
-                  SweetAlert.swal("存在子节点，请先删除子节点")
+                  SweetAlert.swal("存在子节点，请先删除子节点");
               }else {
                   SweetAlert.swal({
                       title:"是否确认删除？",
@@ -127,17 +128,17 @@ app.controller('menuManageCtrl',['$scope','httpService','SweetAlert','$uibModal'
                           httpService.delRow(param, 'menu/addMenu').then(
                               function (result) {
                                   if (result == 1) {
-                                      SweetAlert.swal("删除成功", "", "success")
+                                      SweetAlert.swal("删除成功", "", "success");
                                   } else {
-                                      SweetAlert.swal("删除失败", "", "error")
+                                      SweetAlert.swal("删除失败", "", "error");
                                   }
                                   $scope.queryList();
                                   $scope.getTree();
                               }, function () {
-                                  SweetAlert.swal("删除失败", "", "error")
+                                  SweetAlert.swal("删除失败", "", "error");
                               }
-                          )}
-                  })
+                          );}
+                  });
               }
          },function () {
                

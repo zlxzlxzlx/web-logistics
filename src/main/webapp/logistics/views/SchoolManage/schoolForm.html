@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="control-label">学校编号</label>
                         <input type="text" required name="school_code" ng-model="school_code"
-                               class="form-control"  placeholder="学校编号" unique_verify="/web-logistics/school/schoolCodeUnique">
+                               class="form-control"  placeholder="学校编号" unique_verify="/web-attendance/school/schoolCodeUnique">
                     </div>
                     <div ng-messages="submit_form.school_code.$error" ng-show="submit_form.school_code.$touched || submit_form.$submitted">
                         <span class="ng-message" ng-message="required">请输入学校编号</span>

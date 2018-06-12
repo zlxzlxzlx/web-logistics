@@ -29,7 +29,7 @@ app.controller('addmajorModalCtrl',['$scope','$http','$filter','$state','$stateP
                    }
                 },function () {
                   SweetAlert.swal("操作成功", "", "error");
-                })
+                });
             }
 
         };

@@ -39,7 +39,7 @@
                 <div  class="form-inline">
                     <label class="control-label">所属学校：</label>
                     <div class="form-group">
-                        <select ng-model="school" class="form-control" ng-options="school.id as school.school_name for  school in schools" ng-change="queryList()"></select>
+                        <select ng-model="school_id" class="form-control" ng-options="school.id as school.school_name for  school in schools" ng-change="queryList()"></select>
                     </div>
                     <label class="control-label">教室名称：</label>
                     <div class="form-group">
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table  table-bordered table-striped" id="drivergrid">
+            <table class="table  table-bordered table-striped" >
                 <thead>
                 <tr >
                     <th >教室名称</th>

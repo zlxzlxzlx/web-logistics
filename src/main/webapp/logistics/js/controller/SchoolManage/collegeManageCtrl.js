@@ -5,6 +5,7 @@
 app.controller('collegeManageCtrl',['$scope','$http','$filter','$state','$stateParams','$uibModal','httpService','SweetAlert','LoadingService','localStorageService',
     function($scope, $http,$filter,$state,$stateParams,$uibModal,httpService,SweetAlert,LoadingService,localStorageService) {
         $scope.root=[];
+        $scope.userInfo = localStorageService.get("userInfo");
         $scope.pagination = {
             totalCount: 0,
             totalPage: 0,
@@ -17,7 +18,8 @@ app.controller('collegeManageCtrl',['$scope','$http','$filter','$state','$stateP
                 college_code:$scope.college_code,
                 college_name:$scope.college_name,
                 pageNo: $scope.pagination.currentPage,
-                pageSize: $scope.pagination.pageSize
+                pageSize: $scope.pagination.pageSize,
+                user_code:$scope.userInfo.code
             };
             httpService.getAll(params,'college/showCollege').then(function (result) {
                 $scope.pagination.totalCount=result.totalCount;

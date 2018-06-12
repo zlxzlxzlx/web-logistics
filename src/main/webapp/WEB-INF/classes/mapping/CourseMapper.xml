@@ -168,7 +168,7 @@
   </update>
   <select id="getAllCourse" parameterType="hashmap" resultType="hashmap">
     SELECT c.*,s.school_name,col.college_name FROM course c,school s,college col WHERE c.flag=0
-    AND c.school_id = s.id AND c.college_id = col.id
+    AND c.school_id = s.id AND c.college_id = col.id AND s.id = #{school_id,jdbcType=INTEGER} AND c.college_id = #{college_id,jdbcType=INTEGER}
     <if test="name != null and name !='' ">
       and  c.name LIKE '%'+#{name}+'%'
     </if>

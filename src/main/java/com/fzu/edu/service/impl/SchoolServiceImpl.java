@@ -86,4 +86,8 @@ public class SchoolServiceImpl extends ServiceImpl<SchoolMapper,School> implemen
              return null;
         }
     }
+    public School getSchoolId(String code){
+        School school = schoolMapper.selectByAccount(code);
+        return school;
+    }
 }

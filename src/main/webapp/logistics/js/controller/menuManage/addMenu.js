@@ -20,7 +20,7 @@ app.controller('addMenuCtrl',['$scope','node','$uibModalInstance','httpService',
         httpService.addRow(params,'menu/codeUnique').then(
             function (result) {
                 if(result==1){
-                    SweetAlert.swal("已存在该编码")
+                    SweetAlert.swal("已存在该编码");
                 }else{
                     var param = {
                         parentCode:node.code,

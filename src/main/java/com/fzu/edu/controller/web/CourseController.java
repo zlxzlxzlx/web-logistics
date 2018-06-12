@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fzu.edu.model.Course;
 import com.fzu.edu.model.Major;
+import com.fzu.edu.model.School;
 import com.fzu.edu.model.Userinfo;
 import com.fzu.edu.service.CourseService;
 import com.fzu.edu.service.UserInfoService;
@@ -33,9 +34,11 @@ public class CourseController {
     public String query(@RequestParam(value = "pageNo") int pageNo,
                         @RequestParam(value = "name",required = false) String name,
                         @RequestParam(value = "code",required = false) String code,
-                        @RequestParam(value = "pageSize") int pageSize
+                        @RequestParam(value = "pageSize") int pageSize,
+                        @RequestParam(value = "college_id") Integer college_id,
+                        @RequestParam(value = "school_id") Integer school_id
     ){
-        List<HashMap> courseList = courseService.getAllCourse(name,code);
+        List<HashMap> courseList = courseService.getAllCourse(name,code,college_id,school_id);
         Page page = new Page(pageNo,pageSize,courseList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
     }

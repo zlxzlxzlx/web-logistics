@@ -1,22 +1,33 @@
 /**
  * Created by Administrator on 2018/5/2.
  */
-app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstance','SweetAlert','$rootScope',
-    function ($scope,$http,httpService,$uibModalInstance,SweetAlert,$rootScope) {
+app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstance','SweetAlert','$rootScope','localStorageService',
+    function ($scope,$http,httpService,$uibModalInstance,SweetAlert,$rootScope,localStorageService) {
+        $scope.userInfo = localStorageService.get("userInfo");
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
+
         $scope.title='添加课程信息';
         $scope.type=0;
         $scope.disabled = true;
         $scope.teacherInfo = [];
         $scope.majorInfo = [];
-        //var re = "";
         $scope.school_id="";
         $scope.teacher_id="";
         $scope.element_id="";
-       // $scope.re = [];
-        $scope.getTeacherAndMajor = function () {
+      /*  var param ={
+            school_id:$scope.userInfo.school_id,
+        };
+        httpService.getAll(param,'college/showAllCollege').then(
+            function (result) {
+                $scope.majorInfo=result;
+            },function () {
+                console.log("获取学院失败");
+            }
+        );*/
+
+       /* $scope.getTeacherAndMajor = function () {
             httpService.getAll(null,'course/getAllTeacherAndMajor').then(
                 function (result) {
                     $scope.re = result;
@@ -55,7 +66,7 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
                }catch (e){
                }
        }
-
+*/
         $scope.submitForm=function () {
            // LoadingService.show();
 
@@ -64,8 +75,9 @@ app.controller('addCourseCtrl',['$scope','$http','httpService','$uibModalInstanc
                     code:$scope.code,
                     name:$scope.name,
                     class_hour:$scope.class_hour,
-                     major_id:$scope.element_id,
-                    school_id:$scope.school_id
+                    major_id:$scope.userInfo.college_id,
+                    school_id:$scope.userInfo.school_id
+                   // user_code:$scope.userInfo.code
                 };
                 console.log("op",params);
                 httpService.addRow(params,'course/addCourse').then(

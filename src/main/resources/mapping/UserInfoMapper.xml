@@ -46,10 +46,8 @@
   <select id="selectByUsername"  parameterType="hashmap" resultMap="BaseResultMap">
     select u.*
     from userinfo u
-    where u.flag=0  and u.code= #{account,jdbcType=VARCHAR}
-    <if test="mark!=null">
-      and mark = #{mark,jdbcType=INTEGER}
-    </if>
+    where u.flag=0  and u.code= #{account,jdbcType=VARCHAR} and mark = #{mark,jdbcType=INTEGER}
+
 
   </select>
 
@@ -57,5 +55,9 @@
      select u.*,s.school_name,c.college_name
      FROM  userinfo u LEFT  JOIN school s on u.school_id=s.id LEFT JOIN college c ON u.college_id=c.id
      where u.school_id=#{school_id} and u.mark=1 and u.flag=0
+  </select>
+  <select id="selectByUId" parameterType="java.lang.Integer" resultType="hashmap">
+    SELECT u.*,s.school_name AS sname,c.college_name as cname FROM userinfo u LEFT JOIN school s ON u.school_id=s.id LEFT JOIN college c ON u.college_id=c.id
+    WHERE u.id = #{id}
   </select>
 </mapper>

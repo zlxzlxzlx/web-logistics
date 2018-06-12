@@ -8,13 +8,12 @@ app.controller('indexController',['$scope', '$rootScope','$http','httpService','
      var param =
         {
             roleId:$scope.userInfo.mark
-        }
-        var menu = [];
-
+        };
+     var menu = [];
     httpService.getOneRow(param,'role/getOneRole').then(
         function (result) {
             $scope.roleName = result.name;
-            menu = result.powerId.split('/')
+            menu = result.powerId.split('/');
             for(var i=0;i<menu.length;i++){
                 if(menu[i]=="用户管理"){
                     $scope.managerUserInfo = true;
@@ -69,7 +68,20 @@ app.controller('indexController',['$scope', '$rootScope','$http','httpService','
         },function () {
 
         }
-    )
+    );
+        var param1 = {
+                id:$scope.userInfo.id
+            };
+        httpService.getOneRow(param1,"user/getOneRow").then(
+            function (result) {
+                 console.log(result);
+                 $scope.cname = result.cname;
+                 $scope.sname = result.sname;
+            },function () {
+
+           }
+        )
+
    /*    $rootScope.user=localStorageService.get("userInfo");
         var checkLogin = function(){
             $http.get('/web-logistics/user/loginCheck',{params:{

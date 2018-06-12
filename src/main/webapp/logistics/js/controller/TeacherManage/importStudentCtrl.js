@@ -16,7 +16,7 @@ app.controller('importStudentCtrl',['$scope','$http','$filter','$state','$stateP
             var params={
                 school_id:$scope.user.school_id
             }
-            httpService.getAll(params,'user/getAllUerForImport').then(function (result) {
+            httpService.getAll(params,'student/getAllStudentForImport').then(function (result) {
                $scope.root=result;
             },function () {
 

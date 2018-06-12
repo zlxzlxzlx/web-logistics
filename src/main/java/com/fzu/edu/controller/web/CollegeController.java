@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,12 +29,13 @@ public class CollegeController {
     private CollegeService collegeService;
     @RequestMapping(value = "/showCollege", method = RequestMethod.GET)
     @ResponseBody
-    public String query(@RequestParam(value = "pageNo") int pageNo,
+    public String query(@RequestParam(value = "pageNo",required = false) int pageNo,
                         @RequestParam(value = "college_code", required = false) String college_code,
                         @RequestParam(value = "colege_name", required = false) String colege_name,
-                        @RequestParam(value = "pageSize") int pageSize
+                        @RequestParam(value = "pageSize",required = false) int pageSize,
+                        @RequestParam(value = "school_id",required = false) Integer school_id
     ) {
-        List<Map<Object, Object>> collegeList = collegeService.getAllCollege(college_code,colege_name);
+        List<Map<Object, Object>> collegeList = collegeService.getAllCollege(college_code,colege_name,school_id);
         Page page = new Page(pageNo, pageSize, collegeList);
         return JSON.toJSONString(page, SerializerFeature.DisableCircularReferenceDetect);
     }
@@ -79,11 +81,12 @@ public class CollegeController {
     public String addCollege(
             @RequestParam(value = "college_code") String college_code,
             @RequestParam(value = "college_name") String college_name,
-            @RequestParam(value = "college_detail") String college_detail,
-            @RequestParam(value = "school_id") String school_id
+            @RequestParam(value = "college_detail",required = false) String college_detail,
+            @RequestParam(value = "user_code") String user_code,
+            @RequestParam(value = "school_id",required = false) String school_id
     ) {
         try {
-            College college=collegeService.addCollege(college_code, college_name,college_detail,school_id);
+            College college=collegeService.addCollege(college_code, college_name,college_detail,user_code,school_id);
             return JSON.toJSONString(college,SerializerFeature.DisableCircularReferenceDetect);
         }catch (Exception e){
             return JSON.toJSONString(0);
@@ -99,5 +102,14 @@ public class CollegeController {
         return JSON.toJSONString(collegeList, SerializerFeature.DisableCircularReferenceDetect);
     }
 
-
+    @RequestMapping(value = "/showAllCollege", method = RequestMethod.GET)
+    @ResponseBody
+    public String showAllCollege(
+                        @RequestParam(value = "college_code", required = false) String college_code,
+                        @RequestParam(value = "colege_name", required = false) String colege_name,
+                        @RequestParam(value = "school_id",required = false) Integer school_id
+    ) {
+        List<Map<Object, Object>> collegeList = collegeService.getAllCollege(college_code,colege_name,school_id);
+        return JSON.toJSONString(collegeList, SerializerFeature.DisableCircularReferenceDetect);
+    }
 }

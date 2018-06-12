@@ -37,9 +37,9 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
                     }
                 }
                 if ($scope.element_id!=null){
-                    for(var i in $scope.re[0]){
-                        if($scope.element_id ==$scope.re[0][i].college_id){
-                            $scope.teacherInfo.push($scope.re[0][i]);
+                    for(var j in $scope.re[0]){
+                        if($scope.element_id ==$scope.re[0][j].college_id){
+                            $scope.teacherInfo.push($scope.re[0][j]);
                         }
                     }
                 }
@@ -54,9 +54,9 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
         $scope.teacherInfo=[];
         try {
             if ($scope.school_id!=null){
-                for(var i in $scope.re[1]){
-                    if($scope.school_id ==$scope.re[1][i].school_id){
-                        $scope.majorInfo.push($scope.re[1][i]);
+                for(var j in $scope.re[1]){
+                    if($scope.school_id ==$scope.re[1][j].school_id){
+                        $scope.majorInfo.push($scope.re[1][j]);
                     }
                 }
             }
@@ -64,22 +64,22 @@ app.controller('updateCourseCtrl',['$scope','data','$uibModalInstance','SweetAle
         }catch (e){
             console.log("e",e);
         }
-    }
+    };
     $scope.changeCollege = function () {
         $scope.teacherInfo=[];
         try {
             if ($scope.element_id!=null){
-                for(var i in $scope.re[0]){
-                    if($scope.element_id ==$scope.re[0][i].college_id){
-                        $scope.teacherInfo.push($scope.re[0][i]);
+                for(var z in $scope.re[0]){
+                    if($scope.element_id ==$scope.re[0][z].college_id){
+                        $scope.teacherInfo.push($scope.re[0][z]);
                     }
                 }
             }
-            console.log(1,$scope.teacherInfo)
+            console.log(1,$scope.teacherInfo);
         }catch (e){
             console.log("e",e);
         }
-    }
+    };
     $scope.submitForm = function () {
         if ($scope.submit_form.$valid){
             var params = {

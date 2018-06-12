@@ -27,7 +27,7 @@ app.controller('addschoolModalCtrl',['$scope','$http','$filter','$state','$state
                    }
                 },function () {
                   SweetAlert.swal("操作成功", "", "error");
-                })
+                });
             }
 
         };

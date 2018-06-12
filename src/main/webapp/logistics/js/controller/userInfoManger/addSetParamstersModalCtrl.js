@@ -29,11 +29,14 @@ app.controller('addSetParamstersModalCtrl',['$scope','$http','$filter','$state',
                     data:params
                 }).success(function(result, status, headers, config) {
                    if(result&&result!=null){
+                       $uibModalInstance.dismiss('ok');
                        SweetAlert.swal("操作成功", "", "success");
                    }else{
+                       $uibModalInstance.dismiss('ok');
                        SweetAlert.swal("操作失败", "", "error");
                    }
                 }).error(function(data, status, headers, config) {
+                    $uibModalInstance.dismiss('ok');
                     SweetAlert.swal("操作失败", "", "error");
                 });
             }

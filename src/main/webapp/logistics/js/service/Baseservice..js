@@ -9,14 +9,5 @@ service.factory('baseService', ['serviceIp'
         
         
         service.serviceIp = serviceIp;
-        
-
-        
-        
-        
-
-
-
-
         return service;
 }]);

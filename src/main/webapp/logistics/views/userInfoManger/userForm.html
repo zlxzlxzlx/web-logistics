@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="mark">用户角色</label>
-                        <select  class="form-control" id="mark" name="mark"  ng-options="i.id as i.name for i in role" ng-model="mark" required>
+                        <select  class="form-control" id="mark" name="mark"  ng-options="i.id as i.name for i in role" ng-model="mark" required ng-change="changeShow()">
                             <option value="">请选择用户角色</option>
                         </select>
                         <div ng-messages="submit_form.mark.$error" ng-show="submit_form.mark.$touched || submit_form.$submitted">
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label class="control-label">编号</label>
                         <input type="text" required name="code" ng-model="code"
-                               class="form-control"  placeholder="编号" unique_verify="/web-logistics/user/userCodeUnique">
+                               class="form-control"  placeholder="编号" unique_verify="/web-attendance/user/userCodeUnique">
                     </div>
                     <div ng-messages="submit_form.code.$error" ng-show="submit_form.code.$touched || submit_form.$submitted">
                         <span class="ng-message" ng-message="required">请输入编号</span>
@@ -31,6 +31,28 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="row" style="margin-top: auto" ng-show = "show">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="school_id">所属学校：</label>
+                        <select  class="form-control" id="school_id" name="school_id"   ng-options="i.id as i.school_name for i in schoolInfo" ng-model="school_id" required ng-change="change()" >
+                        </select>
+                        <div ng-messages="submit_form.school_id.$error" ng-show="submit_form.school_id.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择学校</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="element_id">所属学院：</label>
+                        <select  class="form-control" id="element_id" name="element_id"  ng-options="i.id as i.college_name for i in majorInfo" ng-model="element_id" required>
+                        </select>
+                        <div ng-messages="submit_form.element_id.$error" ng-show="submit_form.element_id.$touched || submit_form.$submitted">
+                            <span class="ng-message" ng-message="required">请选择学院</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row" style="margin-top: auto">
                 <div class="col-sm-6">
